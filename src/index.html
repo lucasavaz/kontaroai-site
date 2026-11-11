@@ -1,0 +1,1022 @@
+<title>Kontaro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Kontaro: AI customer service, campaigns and insights on the official WhatsApp Business Platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: open, airy page; one "live" device in the hero; sections alternate text + working demo panels. */
+:root{
+  --bg:#F3F5FA; --surface:#FFFFFF; --sunk:#E9EDF6; --ink:#0C1526; --muted:#566079; --line:#DCE1EC;
+  --accent:#2F52F5; --accent-soft:#E2E8FF; --on-accent:#FFFFFF;
+  --signal:#F2672E; --signal-soft:#FFE9DF; --ok:#0F9B68; --ok-soft:#DDF5EB;
+  --bubble-in:#FFFFFF; --bubble-out:#D9E2FF; --chat-bg:#E4E9F3;
+  --shadow:0 1px 2px rgba(12,21,38,.06),0 12px 32px -12px rgba(12,21,38,.18);
+  --device:#0C1526;
+  --f-display:"Bricolage Grotesque","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --r:14px; --maxw:1180px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#090E1A; --surface:#111929; --sunk:#0D1422; --ink:#EDF1F9; --muted:#9CA6BD; --line:#222D45;
+  --accent:#7088FF; --accent-soft:#1A2450; --on-accent:#0A0F1C;
+  --signal:#FF8A57; --signal-soft:#3A1E12; --ok:#3CCB94; --ok-soft:#0F2E22;
+  --bubble-in:#18223A; --bubble-out:#22326E; --chat-bg:#0D1424;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -16px rgba(0,0,0,.7); --device:#2A3550; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#090E1A; --surface:#111929; --sunk:#0D1422; --ink:#EDF1F9; --muted:#9CA6BD; --line:#222D45;
+  --accent:#7088FF; --accent-soft:#1A2450; --on-accent:#0A0F1C;
+  --signal:#FF8A57; --signal-soft:#3A1E12; --ok:#3CCB94; --ok-soft:#0F2E22;
+  --bubble-in:#18223A; --bubble-out:#22326E; --chat-bg:#0D1424;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -16px rgba(0,0,0,.7); --device:#2A3550; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px var(--signal-soft)}
+.lead{font-size:clamp(17px,1.6vw,19px);color:var(--muted);max-width:60ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1 var(--f-body);padding:14px 20px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s ease,background .15s ease,border-color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink)}
+section{padding-block:clamp(64px,9vw,112px)}
+.sec-head{display:grid;gap:16px;max-width:760px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(32px,4.6vw,54px);font-weight:800}
+
+/* NAV */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 22px/1 var(--f-display);letter-spacing:-.03em}
+.logo svg{width:30px;height:30px}
+.nav-links{display:flex;gap:26px;margin-left:18px}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
+.nav-links a:hover{color:var(--ink)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.lang button{font:600 12px/1 var(--f-mono);letter-spacing:.04em;border:0;background:transparent;color:var(--muted);padding:8px 10px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.nav .btn{padding:11px 16px;font-size:14px;white-space:nowrap}
+@media (max-width:900px){.nav-links{display:none}}
+@media (max-width:520px){.nav .btn-ghost{display:none}.nav .btn{padding:10px 13px;font-size:13px}.lang button{padding:7px 8px}.nav .wrap{gap:10px}.logo span{font-size:20px}}
+
+/* HERO */
+.hero{padding-block:clamp(40px,6vw,80px) clamp(56px,8vw,96px);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--line) 1.2px,transparent 1.2px);background-size:26px 26px;mask-image:radial-gradient(ellipse 70% 60% at 70% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 70% 40%,#000 20%,transparent 75%);opacity:.9;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;position:relative}
+.hero h1{font-size:clamp(42px,6.6vw,84px);font-weight:800;margin:18px 0 22px}
+.hero h1 em{font-style:normal;color:var(--accent);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.12em;background:var(--signal);border-radius:4px;transform-origin:left;animation:underline 1.1s .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes underline{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:28px;color:var(--muted);font-size:14px}
+.hero-proof span{display:inline-flex;align-items:center;gap:7px}
+.hero-proof svg{width:16px;height:16px;color:var(--ok)}
+@media (max-width:960px){.hero .wrap{grid-template-columns:1fr}.stage{margin-top:8px}}
+
+/* PHONE STAGE */
+.stage{position:relative;display:flex;justify-content:center;min-height:560px;padding-block:18px}
+.phone{width:min(330px,100%);height:560px;border-radius:40px;background:var(--device);padding:10px;box-shadow:var(--shadow),0 40px 80px -30px rgba(47,82,245,.35);position:relative;z-index:2}
+.screen{height:100%;border-radius:31px;background:var(--chat-bg);overflow:hidden;display:flex;flex-direction:column}
+.chat-top{display:flex;align-items:center;gap:10px;padding:16px 14px 12px;background:var(--surface);border-bottom:1px solid var(--line)}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 14px var(--f-display);flex:none}
+.chat-top b{font-size:14px;display:block;line-height:1.2}
+.chat-top small{font-size:11.5px;color:var(--ok);display:flex;align-items:center;gap:5px}
+.chat-top small::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.chat-body{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;justify-content:flex-end}
+.msg{max-width:84%;padding:9px 12px 7px;border-radius:14px;font-size:13.5px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.06);animation:pop .35s cubic-bezier(.2,.9,.3,1.2) both;color:var(--ink)}
+.msg.in{background:var(--bubble-in);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.out{background:var(--bubble-out);align-self:flex-end;border-bottom-right-radius:4px}
+.msg .meta{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px;font-family:var(--f-mono)}
+.msg.out .ai{font:600 10px var(--f-mono);letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:2px}
+.msg.sys{align-self:center;background:var(--surface);color:var(--muted);font-size:11.5px;border-radius:999px;padding:5px 12px;box-shadow:none;border:1px solid var(--line)}
+.typing{align-self:flex-end;background:var(--bubble-out);border-radius:14px;padding:11px 14px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.5;animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-2px)}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.chat-input{display:flex;align-items:center;gap:8px;padding:10px 12px 14px;background:var(--surface);border-top:1px solid var(--line)}
+.chat-input div{flex:1;height:34px;border-radius:999px;background:var(--sunk);font-size:12.5px;color:var(--muted);display:flex;align-items:center;padding:0 14px}
+.chat-input span{width:34px;height:34px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.chat-input svg{width:16px;height:16px;color:var(--on-accent)}
+.float{position:absolute;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;box-shadow:var(--shadow);font-size:12.5px;display:flex;align-items:center;gap:10px;transition:opacity .4s,transform .4s;min-width:0}
+.float .k{font:500 10.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block}
+.float b{font-size:13.5px}
+.float .dot{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex:none}
+.float .dot svg{width:15px;height:15px}
+.f1{top:-14px;left:calc(50% - 255px)}.f2{top:44%;right:calc(50% - 265px)}.f3{bottom:-16px;left:calc(50% - 235px)}
+.f1 .dot{background:var(--signal-soft);color:var(--signal)}.f2 .dot{background:var(--accent-soft);color:var(--accent)}.f3 .dot{background:var(--ok-soft);color:var(--ok)}
+.float.dim{opacity:0;transform:translateY(6px)}
+@media (max-width:1100px) and (min-width:961px){.f1{left:0}.f2{right:0}.f3{left:0}}
+@media (max-width:520px){.stage{min-height:540px}.float{display:none}}
+
+/* CHANNEL STRIP */
+.strip{border-block:1px solid var(--line);background:var(--surface);padding-block:22px}
+.strip .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;justify-content:space-between}
+.strip p{font:500 13px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:8px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--line)}
+.chip svg{width:16px;height:16px;color:var(--accent)}
+
+/* ASK YOUR INBOX */
+.ask{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
+@media (max-width:960px){.ask{grid-template-columns:1fr}}
+.qlist{display:grid;gap:10px;margin-top:28px}
+.q{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;font:500 15px/1.45 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s}
+.q:hover{border-color:var(--accent)}
+.q[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.q svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--accent)}
+.console{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.console-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.console-top b{font:700 15px var(--f-display);display:flex;align-items:center;gap:8px}
+.console-top b i{width:9px;height:9px;border-radius:50%;background:var(--signal);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--signal) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+.tag{font:500 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--sunk);border:1px solid var(--line);border-radius:999px;padding:4px 9px}
+.console-body{padding:22px 20px 24px;display:grid;gap:18px;min-height:390px}
+.asked{justify-self:end;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:14.5px;max-width:88%}
+.answer{font-size:15.5px;line-height:1.6;min-height:3em}
+.answer strong{color:var(--accent)}
+.caret{display:inline-block;width:8px;height:1.05em;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:blink 1s infinite}
+.viz{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.viz.show{opacity:1;transform:none}
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(0,170px) 1fr 44px;gap:12px;align-items:center;font-size:13.5px}
+.bar .track{display:block;height:12px;border-radius:6px;background:var(--sunk);overflow:hidden}
+.bar .fill{display:block;height:100%;border-radius:6px;background:var(--accent);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.bar:first-child .fill{background:var(--signal)}
+.bar .v{font:500 13px var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.person{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:13px;min-width:0}
+.person i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--f-display);font-style:normal;background:var(--accent-soft);color:var(--accent);flex:none}
+.person small{display:block;color:var(--muted);font-size:11.5px}
+.suggest{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--signal-soft);font-size:14px}
+.suggest .btn{padding:9px 14px;font-size:13px;background:var(--signal);color:#fff}
+.spark{width:100%;height:120px;display:block}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi .k{font:500 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.kpi b{display:block;font:700 26px var(--f-display);font-variant-numeric:tabular-nums;margin-top:2px}
+.note{font-size:12.5px;color:var(--muted)}
+
+/* MANAGE BY MESSAGE */
+.manage{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media (max-width:960px){.manage{grid-template-columns:1fr}}
+.admin-chat{background:var(--chat-bg);border-radius:20px;padding:22px 18px;display:flex;flex-direction:column;gap:9px;min-height:420px;justify-content:flex-end;border:1px solid var(--line)}
+.admin-chat .msg{font-size:14.5px;max-width:86%}
+.admin-chat .msg.in{background:var(--bubble-out);align-self:flex-end;border-radius:14px 14px 4px 14px}
+.admin-chat .msg.out{background:var(--bubble-in);align-self:flex-start;border-radius:14px 14px 14px 4px}
+.admin-chat .typing{align-self:flex-start;background:var(--bubble-in)}
+.ticks{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:14px}
+.ticks li{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start}
+.ticks svg{width:22px;height:22px;color:var(--accent);margin-top:2px}
+.ticks b{display:block}
+.ticks span{color:var(--muted);font-size:15px}
+
+/* DATA → MESSAGES */
+.flow{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-top:8px}
+@media (max-width:860px){.flow{grid-template-columns:1fr}.flow .arrow{transform:rotate(90deg);justify-self:center}}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.sheet-top{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font:600 13px var(--f-body)}
+.sheet-top svg{width:16px;height:16px;color:var(--ok)}
+.table-scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:500 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+tr.hl td{background:var(--accent-soft)}
+td.num{text-align:right;font-family:var(--f-mono)}
+.arrow{width:64px;height:64px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--on-accent);box-shadow:0 0 0 10px var(--accent-soft)}
+.arrow svg{width:26px;height:26px}
+.outbox{display:grid;gap:10px}
+.out-msg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px;transition:border-color .3s,box-shadow .3s;min-width:0}
+.out-msg.hl{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.out-msg .to{font:500 11.5px var(--f-mono);color:var(--muted);display:flex;justify-content:space-between;gap:8px;margin-bottom:4px}
+.out-msg .to em{font-style:normal;color:var(--ok)}
+
+/* FEATURES */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+@media (max-width:900px){.grid3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid3{grid-template-columns:1fr}}
+.feat{background:var(--surface);padding:28px 26px;display:grid;gap:10px;align-content:start}
+.feat .ic{width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.feat .ic svg{width:20px;height:20px}
+.feat h3{font-size:21px;font-weight:700;letter-spacing:-.01em}
+.feat p{color:var(--muted);font-size:15px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{border-top:2px solid var(--ink);padding-top:18px;display:grid;gap:8px;align-content:start}
+.step::before{counter-increment:s;content:"0" counter(s);font:500 13px var(--f-mono);color:var(--signal)}
+.step h3{font-size:20px;font-weight:700}
+.step p{color:var(--muted);font-size:15px}
+.step .time{font:500 12px var(--f-mono);color:var(--muted)}
+
+/* AUDIENCE TABS */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tab{font:600 14px var(--f-body);padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,40px)}
+@media (max-width:860px){.panel{grid-template-columns:1fr}}
+.panel h3{font-size:clamp(24px,3vw,34px);font-weight:800;margin-bottom:12px}
+.panel p{color:var(--muted)}
+.panel ul{margin:18px 0 0;padding-left:18px;display:grid;gap:6px}
+pre{margin:0;background:#0B1222;color:#D6DEF2;border-radius:14px;padding:18px;font:13px/1.65 var(--f-mono);overflow-x:auto;min-width:0}
+pre .c{color:#7C8AA8}pre .s{color:#8FE3B8}pre .k{color:#9DB1FF}
+.mini-dash{display:grid;gap:10px}
+.store{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px}
+.store .ok{color:var(--ok);font:500 12px var(--f-mono)}
+.store .num{font:500 13px var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* TRUST */
+.trust{background:var(--ink);color:var(--bg);border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1fr 1.3fr;gap:40px}
+@media (max-width:900px){.trust{grid-template-columns:1fr}}
+.trust h2{font-size:clamp(30px,4vw,46px);font-weight:800}
+.trust p{opacity:.75;margin-top:14px}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:560px){.trust-grid{grid-template-columns:1fr}}
+.trust-grid div{border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);padding-top:14px}
+.trust-grid b{display:block;font:700 17px var(--f-display);margin-bottom:4px}
+.trust-grid span{opacity:.72;font-size:14.5px}
+
+/* FAQ */
+.faq{max-width:820px}
+details{border-bottom:1px solid var(--line);padding-block:18px}
+summary{cursor:pointer;list-style:none;font:700 19px/1.3 var(--f-display);display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 26px/1 var(--f-body);color:var(--accent);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin-top:10px;max-width:68ch}
+
+/* CTA */
+.cta{background:var(--accent);color:var(--on-accent);border-radius:28px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;border:56px solid color-mix(in srgb,var(--on-accent) 10%,transparent);pointer-events:none}
+@media (max-width:860px){.cta{grid-template-columns:1fr}}
+.cta h2{font-size:clamp(34px,5vw,60px);font-weight:800}
+.cta p{opacity:.85;margin-top:14px;font-size:18px}
+form.lead-form{display:grid;gap:12px;position:relative;z-index:1}
+.lead-form label{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.lead-form input{width:100%;font:500 16px var(--f-body);padding:14px 16px;border-radius:12px;border:1px solid transparent;background:var(--surface);color:var(--ink)}
+.lead-form .btn{background:var(--ink);color:var(--bg);padding:16px 20px;margin-top:6px}
+.form-msg{font-size:14px;min-height:1.4em}
+.fld{display:grid;gap:6px}
+
+footer{padding-block:48px 56px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Kontaro">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="9" fill="var(--accent)"/><path d="M10 8v16M10 16l8-8M13.5 13.5 21 24" stroke="var(--on-accent)" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="23.5" cy="9.5" r="3" fill="var(--signal)"/></svg>
+      <span>kontaro</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#ask" data-i18n="nav.ai">IA</a>
+      <a href="#manage" data-i18n="nav.manage">Gestão</a>
+      <a href="#features" data-i18n="nav.features">Recursos</a>
+      <a href="#how" data-i18n="nav.how">Como funciona</a>
+      <a href="#faq" data-i18n="nav.faq">Dúvidas</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <a class="btn btn-ghost" href="https://relay.kontaro.ai" data-i18n="nav.login">Entrar</a>
+      <a class="btn btn-primary" href="#start" data-i18n="nav.cta">Começar grátis</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" data-i18n="hero.eyebrow">IA no WhatsApp oficial</span>
+      <h1 data-i18n-html="hero.h1">Seu negócio responde no WhatsApp. <em>A qualquer hora</em>, em qualquer idioma.</h1>
+      <p class="lead" data-i18n="hero.sub">Kontaro atende seus clientes, envia campanhas a partir das suas planilhas e mostra o que as conversas estão dizendo. Tudo pela API oficial do WhatsApp, sem precisar de técnico.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#start" data-i18n="hero.cta1">Começar grátis</a>
+        <a class="btn btn-ghost" href="#ask" data-i18n="hero.cta2">Ver a IA em ação</a>
+      </div>
+      <div class="hero-proof">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p1">API oficial do WhatsApp Business</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p2">WhatsApp e Instagram juntos</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p3">Sem cartão para testar</span></span>
+      </div>
+    </div>
+
+    <div class="stage" aria-label="Animated example of a Kontaro conversation">
+      <div class="float f1" id="f1"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span><span><span class="k" data-i18n="float.intent">Intenção</span><b id="f1v">Recompra</b></span></div>
+      <div class="float f2" id="f2"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span><span class="k" data-i18n="float.lang">Idioma detectado</span><b id="f2v">Português</b></span></div>
+      <div class="float f3" id="f3"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="k" data-i18n="float.result">Resultado</span><b id="f3v">Pedido criado</b></span></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="chat-top"><span class="avatar">L</span><span><b id="bizName">Loja Lumi</b><small data-i18n="chat.online">IA ativa · responde na hora</small></span></div>
+          <div class="chat-body" id="heroChat" aria-live="off"></div>
+          <div class="chat-input"><div data-i18n="chat.input">Mensagem</div><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <p data-i18n="strip.label">Um só lugar para</p>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg>WhatsApp</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>Instagram</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3 2 11l7 3 2 7 4-5 5 4z"/></svg>Telegram</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Google Drive</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>API</span>
+    </div>
+  </div>
+</div>
+
+<section id="ask">
+  <div class="wrap ask">
+    <div>
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow" data-i18n="ask.eyebrow">Inteligência de conversas</span>
+        <h2 data-i18n="ask.h2">Pergunte para a sua caixa de entrada.</h2>
+        <p class="lead" data-i18n="ask.sub">A IA lê as conversas recentes e responde com números, em segundos. Você descobre o que vender, o que corrigir e quem chamar de volta.</p>
+      </div>
+      <div class="qlist" role="group" aria-label="Example questions">
+        <button type="button" class="q" data-q="0" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span data-i18n="ask.q0">Do que os clientes mais reclamaram esta semana?</span></button>
+        <button type="button" class="q" data-q="1" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg><span data-i18n="ask.q1">Quem está pronto para comprar de novo?</span></button>
+        <button type="button" class="q" data-q="2" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="ask.q2">Como está o tempo de resposta da equipe?</span></button>
+      </div>
+    </div>
+    <div class="console" aria-live="polite">
+      <div class="console-top"><b><i></i>Kontaro AI</b><span class="tag" data-i18n="ask.sample">Exemplo · dados fictícios</span></div>
+      <div class="console-body">
+        <div class="asked" id="asked"></div>
+        <div class="answer" id="answer"></div>
+        <div class="viz" id="viz"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="manage" style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap manage">
+    <div class="admin-chat" id="adminChat" aria-label="Example: managing Kontaro by WhatsApp"></div>
+    <div>
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow" data-i18n="manage.eyebrow">Gestão por mensagem</span>
+        <h2 data-i18n="manage.h2">Administre tudo mandando uma mensagem.</h2>
+        <p class="lead" data-i18n="manage.sub">Peça em linguagem normal, pelo WhatsApp ou Telegram. O Kontaro monta a campanha, mostra para quem vai e só envia quando você confirmar.</p>
+      </div>
+      <ul class="ticks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b data-i18n="manage.t1">Sem painel para aprender</b><span data-i18n="manage.t1d">Quem sabe usar o WhatsApp já sabe usar o Kontaro.</span></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b data-i18n="manage.t2">Você confirma antes de enviar</b><span data-i18n="manage.t2d">Nenhuma campanha sai sem o seu "pode enviar".</span></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b data-i18n="manage.t3">Cada pessoa recebe os próprios números</b><span data-i18n="manage.t3d">Uma linha da planilha vira uma mensagem personalizada.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="data.eyebrow">Campanhas a partir dos seus dados</span>
+      <h2 data-i18n="data.h2">Sua planilha vira mensagens personalizadas.</h2>
+      <p class="lead" data-i18n="data.sub">Conecte um arquivo do Google Drive. A cada atualização, cada contato recebe só o que é dele, pelo WhatsApp.</p>
+    </div>
+    <div class="flow">
+      <div class="sheet">
+        <div class="sheet-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg><span data-i18n="data.file">vendas-diarias.xlsx</span></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th data-i18n="data.c1">Loja</th><th data-i18n="data.c2">Gerente</th><th class="num" data-i18n="data.c3">Vendas</th><th class="num" data-i18n="data.c4">Meta</th></tr></thead>
+            <tbody id="sheetRows">
+              <tr><td>Centro</td><td>Marina</td><td class="num">R$ 18.420</td><td class="num">104%</td></tr>
+              <tr><td>Rodovia</td><td>Carlos</td><td class="num">R$ 26.910</td><td class="num">97%</td></tr>
+              <tr><td>Porto</td><td>Juliana</td><td class="num">R$ 12.305</td><td class="num">88%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="outbox" id="outbox"></div>
+    </div>
+  </div>
+</section>
+
+<section id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="feat.eyebrow">Recursos</span>
+      <h2 data-i18n="feat.h2">Tudo o que o atendimento precisa, sem complicação.</h2>
+    </div>
+    <div class="grid3">
+      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/><path d="M9 11h.01M15 11h.01"/></svg></span><h3 data-i18n="feat.f1">IA que conhece o seu negócio</h3><p data-i18n="feat.f1d">Ensine com seu site, PDFs e planilhas. Ela responde como a sua melhor atendente, no idioma do cliente.</p></div>
+      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><h3 data-i18n="feat.f2">Passa para a equipe na hora certa</h3><p data-i18n="feat.f2d">Quando o assunto pede uma pessoa, a conversa vai para o atendente com o resumo pronto.</p></div>
+      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span><h3 data-i18n="feat.f3">Campanhas que as pessoas leem</h3><p data-i18n="feat.f3d">Listas, agendamento e mensagens personalizadas com modelos aprovados pelo WhatsApp.</p></div>
+      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/></svg></span><h3 data-i18n="feat.f4">WhatsApp e Instagram numa só caixa</h3><p data-i18n="feat.f4d">Toda a equipe responde do mesmo lugar, com histórico completo de cada contato.</p></div>
+      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><h3 data-i18n="feat.f5">Equipes e idiomas</h3><p data-i18n="feat.f5d">Várias equipes, permissões por pessoa e painel em português, inglês e espanhol.</p></div>
+      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><h3 data-i18n="feat.f6">API para qualquer sistema</h3><p data-i18n="feat.f6d">Seu ERP, loja virtual ou painel envia mensagens pelo Kontaro com poucas linhas de código.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="how.eyebrow">Como funciona</span>
+      <h2 data-i18n="how.h2">Do cadastro ao primeiro atendimento em uma tarde.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3 data-i18n="how.s1">Conecte seu número</h3><p data-i18n="how.s1d">Entre com sua conta do Facebook e escolha o número. Nós guiamos cada tela.</p><span class="time" data-i18n="how.s1t">~5 min</span></div>
+      <div class="step"><h3 data-i18n="how.s2">Ensine a IA</h3><p data-i18n="how.s2d">Cole o endereço do seu site ou envie seus arquivos: cardápio, tabela de preços, políticas.</p><span class="time" data-i18n="how.s2t">~10 min</span></div>
+      <div class="step"><h3 data-i18n="how.s3">Teste e ligue</h3><p data-i18n="how.s3d">Converse com a IA antes dos clientes. Ajuste o tom e quando chamar a equipe.</p><span class="time" data-i18n="how.s3t">~15 min</span></div>
+      <div class="step"><h3 data-i18n="how.s4">Acompanhe e melhore</h3><p data-i18n="how.s4d">Veja o que os clientes pedem e transforme isso em campanhas e respostas melhores.</p><span class="time" data-i18n="how.s4t">todo dia</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="who.eyebrow">Para quem é</span>
+      <h2 data-i18n="who.h2">Feito para quem vive no WhatsApp.</h2>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Audiences">
+      <button type="button" class="tab" role="tab" id="tab-smb" aria-controls="panel-smb" aria-selected="true" data-i18n="who.t1">Pequenas empresas</button>
+      <button type="button" class="tab" role="tab" id="tab-net" aria-controls="panel-net" aria-selected="false" data-i18n="who.t2">Frotas e redes de lojas</button>
+      <button type="button" class="tab" role="tab" id="tab-dev" aria-controls="panel-dev" aria-selected="false" data-i18n="who.t3">Agências e desenvolvedores</button>
+    </div>
+    <div class="panel" role="tabpanel" id="panel-smb" aria-labelledby="tab-smb">
+      <div><h3 data-i18n="who.p1h">Atenda como uma empresa grande, com a equipe que você já tem.</h3><p data-i18n="who.p1d">A IA responde dúvidas, envia preços e fecha pedidos simples. Você só entra quando faz diferença.</p>
+        <ul><li data-i18n="who.p1a">Respostas em segundos, até de madrugada</li><li data-i18n="who.p1b">Clientes que somem recebem um lembrete na hora certa</li><li data-i18n="who.p1c">Relatório semanal no seu WhatsApp</li></ul></div>
+      <div class="kpis">
+        <div class="kpi"><span class="k" data-i18n="who.k1">Respondidas pela IA</span><b>78%</b></div>
+        <div class="kpi"><span class="k" data-i18n="who.k2">Tempo médio</span><b>9 s</b></div>
+        <div class="kpi"><span class="k" data-i18n="who.k3">Passadas à equipe</span><b>22%</b></div>
+        <p class="note" style="grid-column:1/-1" data-i18n="who.knote">Painel de exemplo com dados fictícios.</p>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="panel-net" aria-labelledby="tab-net" hidden>
+      <div><h3 data-i18n="who.p2h">Cada gerente, motorista ou unidade recebe o que precisa, todo dia.</h3><p data-i18n="who.p2d">Envie metas, vendas e avisos de operação direto dos seus relatórios. Sem aplicativo novo para instalar.</p>
+        <ul><li data-i18n="who.p2a">Mensagens personalizadas por unidade</li><li data-i18n="who.p2b">Confirmação de leitura por pessoa</li><li data-i18n="who.p2c">Respostas da ponta voltam organizadas</li></ul></div>
+      <div class="mini-dash">
+        <div class="store"><span data-i18n="who.s1">Unidade Centro</span><span class="num">104%</span><span class="ok" data-i18n="who.read">lido</span></div>
+        <div class="store"><span data-i18n="who.s2">Unidade Rodovia</span><span class="num">97%</span><span class="ok" data-i18n="who.read">lido</span></div>
+        <div class="store"><span data-i18n="who.s3">Unidade Porto</span><span class="num">88%</span><span class="ok" data-i18n="who.read">lido</span></div>
+        <p class="note" data-i18n="who.knote">Painel de exemplo com dados fictícios.</p>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="panel-dev" aria-labelledby="tab-dev" hidden>
+      <div><h3 data-i18n="who.p3h">Uma API simples para o WhatsApp oficial.</h3><p data-i18n="who.p3d">Gerencie vários clientes numa conta, envie mensagens de qualquer sistema e receba eventos por webhook.</p>
+        <ul><li data-i18n="who.p3a">Chaves de API por cliente</li><li data-i18n="who.p3b">Webhooks de entrega e resposta</li><li data-i18n="who.p3c">IA e caixa de entrada inclusas</li></ul></div>
+<pre><span class="c"># <span data-i18n="who.code">enviar uma mensagem</span></span>
+curl https://api.kontaro.ai/v1/messages \
+  -H <span class="s">"Authorization: Bearer $KONTARO_KEY"</span> \
+  -d <span class="s">'{
+    "to": "+5591999990000",
+    "template": "order_ready",
+    "vars": { "name": "Ana" }
+  }'</span></pre>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="trust">
+      <div><span class="eyebrow" style="color:inherit" data-i18n="trust.eyebrow">Confiança</span><h2 data-i18n="trust.h2">Seguro para o seu número e para os seus clientes.</h2><p data-i18n="trust.sub">Construído sobre a plataforma oficial do WhatsApp Business. Nada de aplicativos piratas que colocam seu número em risco.</p></div>
+      <div class="trust-grid">
+        <div><b data-i18n="trust.a">API oficial da Meta</b><span data-i18n="trust.ad">Seu número conectado do jeito que o WhatsApp permite.</span></div>
+        <div><b data-i18n="trust.b">Você no controle</b><span data-i18n="trust.bd">Assuma qualquer conversa da IA com um toque.</span></div>
+        <div><b data-i18n="trust.c">Respeito ao cliente</b><span data-i18n="trust.cd">Quem pede para sair da lista para de receber.</span></div>
+        <div><b data-i18n="trust.d">Seus dados são seus</b><span data-i18n="trust.dd">Exporte ou apague contatos e conversas quando quiser.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow" data-i18n="faq.eyebrow">Dúvidas</span><h2 data-i18n="faq.h2">Perguntas frequentes</h2></div>
+    <div class="faq">
+      <details><summary data-i18n="faq.q1">Preciso de um técnico para começar?</summary><p data-i18n="faq.a1">Não. A conexão é guiada, tela por tela, e a IA aprende com o que você já tem: site, arquivos e planilhas.</p></details>
+      <details><summary data-i18n="faq.q2">Posso usar o número que já tenho?</summary><p data-i18n="faq.a2">Na maioria dos casos, sim. Na hora de conectar, mostramos as opções para o seu número e o que muda em cada uma.</p></details>
+      <details><summary data-i18n="faq.q3">A IA pode responder algo errado?</summary><p data-i18n="faq.a3">Ela responde apenas com base no que você ensinou. Quando não sabe, avisa o cliente e passa a conversa para a sua equipe.</p></details>
+      <details><summary data-i18n="faq.q4">Em quais idiomas funciona?</summary><p data-i18n="faq.a4">A IA responde no idioma do cliente. O painel está em português, inglês e espanhol.</p></details>
+      <details><summary data-i18n="faq.q5">Tenho um sistema próprio. Dá para integrar?</summary><p data-i18n="faq.a5">Sim. A API do Kontaro envia mensagens e recebe respostas de qualquer sistema, e os webhooks avisam cada entrega.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="start" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta">
+      <div><h2 data-i18n="cta.h2">Coloque sua IA para atender ainda hoje.</h2><p data-i18n="cta.sub">Deixe seu WhatsApp. Um especialista do Kontaro conecta seu número com você.</p></div>
+      <form class="lead-form" id="leadForm" novalidate>
+        <div class="fld"><label for="leadName" data-i18n="cta.name">Seu nome</label><input id="leadName" name="name" autocomplete="name" required></div>
+        <div class="fld"><label for="leadPhone" data-i18n="cta.phone">WhatsApp com DDD</label><input id="leadPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+55 91 99999-0000" required></div>
+        <button class="btn" type="submit" data-i18n="cta.btn">Quero testar o Kontaro</button>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kontaro</span>
+    <nav aria-label="Footer"><a href="/privacy" data-i18n="foot.privacy">Privacidade</a><a href="/terms" data-i18n="foot.terms">Termos</a><a href="https://relay.kontaro.ai" data-i18n="nav.login">Entrar</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var I18N = {
+pt:{
+ "meta.title":"Kontaro · Atendimento com IA no WhatsApp oficial",
+ "meta.desc":"Kontaro atende clientes com IA, envia campanhas a partir das suas planilhas e mostra o que as conversas dizem. API oficial do WhatsApp Business.",
+ "nav.ai":"IA","nav.manage":"Gestão","nav.features":"Recursos","nav.how":"Como funciona","nav.faq":"Dúvidas","nav.login":"Entrar","nav.cta":"Começar grátis",
+ "hero.eyebrow":"IA no WhatsApp oficial",
+ "hero.h1":"Seu negócio responde no WhatsApp. <em>A qualquer hora</em>, em qualquer idioma.",
+ "hero.sub":"Kontaro atende seus clientes, envia campanhas a partir das suas planilhas e mostra o que as conversas estão dizendo. Tudo pela API oficial do WhatsApp, sem precisar de técnico.",
+ "hero.cta1":"Começar grátis","hero.cta2":"Ver a IA em ação",
+ "hero.p1":"API oficial do WhatsApp Business","hero.p2":"WhatsApp e Instagram juntos","hero.p3":"Sem cartão para testar",
+ "float.intent":"Intenção","float.lang":"Idioma detectado","float.result":"Resultado",
+ "chat.online":"IA ativa · responde na hora","chat.input":"Mensagem",
+ "strip.label":"Um só lugar para",
+ "ask.eyebrow":"Inteligência de conversas","ask.h2":"Pergunte para a sua caixa de entrada.",
+ "ask.sub":"A IA lê as conversas recentes e responde com números, em segundos. Você descobre o que vender, o que corrigir e quem chamar de volta.",
+ "ask.q0":"Do que os clientes mais reclamaram esta semana?","ask.q1":"Quem está pronto para comprar de novo?","ask.q2":"Como está o tempo de resposta da equipe?",
+ "ask.sample":"Exemplo · dados fictícios",
+ "manage.eyebrow":"Gestão por mensagem","manage.h2":"Administre tudo mandando uma mensagem.",
+ "manage.sub":"Peça em linguagem normal, pelo WhatsApp ou Telegram. O Kontaro monta a campanha, mostra para quem vai e só envia quando você confirmar.",
+ "manage.t1":"Sem painel para aprender","manage.t1d":"Quem sabe usar o WhatsApp já sabe usar o Kontaro.",
+ "manage.t2":"Você confirma antes de enviar","manage.t2d":"Nenhuma campanha sai sem o seu \"pode enviar\".",
+ "manage.t3":"Cada pessoa recebe os próprios números","manage.t3d":"Uma linha da planilha vira uma mensagem personalizada.",
+ "data.eyebrow":"Campanhas a partir dos seus dados","data.h2":"Sua planilha vira mensagens personalizadas.",
+ "data.sub":"Conecte um arquivo do Google Drive. A cada atualização, cada contato recebe só o que é dele, pelo WhatsApp.",
+ "data.file":"vendas-diarias.xlsx","data.c1":"Loja","data.c2":"Gerente","data.c3":"Vendas","data.c4":"Meta",
+ "feat.eyebrow":"Recursos","feat.h2":"Tudo o que o atendimento precisa, sem complicação.",
+ "feat.f1":"IA que conhece o seu negócio","feat.f1d":"Ensine com seu site, PDFs e planilhas. Ela responde como a sua melhor atendente, no idioma do cliente.",
+ "feat.f2":"Passa para a equipe na hora certa","feat.f2d":"Quando o assunto pede uma pessoa, a conversa vai para o atendente com o resumo pronto.",
+ "feat.f3":"Campanhas que as pessoas leem","feat.f3d":"Listas, agendamento e mensagens personalizadas com modelos aprovados pelo WhatsApp.",
+ "feat.f4":"WhatsApp e Instagram numa só caixa","feat.f4d":"Toda a equipe responde do mesmo lugar, com histórico completo de cada contato.",
+ "feat.f5":"Equipes e idiomas","feat.f5d":"Várias equipes, permissões por pessoa e painel em português, inglês e espanhol.",
+ "feat.f6":"API para qualquer sistema","feat.f6d":"Seu ERP, loja virtual ou painel envia mensagens pelo Kontaro com poucas linhas de código.",
+ "how.eyebrow":"Como funciona","how.h2":"Do cadastro ao primeiro atendimento em uma tarde.",
+ "how.s1":"Conecte seu número","how.s1d":"Entre com sua conta do Facebook e escolha o número. Nós guiamos cada tela.","how.s1t":"~5 min",
+ "how.s2":"Ensine a IA","how.s2d":"Cole o endereço do seu site ou envie seus arquivos: cardápio, tabela de preços, políticas.","how.s2t":"~10 min",
+ "how.s3":"Teste e ligue","how.s3d":"Converse com a IA antes dos clientes. Ajuste o tom e quando chamar a equipe.","how.s3t":"~15 min",
+ "how.s4":"Acompanhe e melhore","how.s4d":"Veja o que os clientes pedem e transforme isso em campanhas e respostas melhores.","how.s4t":"todo dia",
+ "who.eyebrow":"Para quem é","who.h2":"Feito para quem vive no WhatsApp.",
+ "who.t1":"Pequenas empresas","who.t2":"Frotas e redes de lojas","who.t3":"Agências e desenvolvedores",
+ "who.p1h":"Atenda como uma empresa grande, com a equipe que você já tem.","who.p1d":"A IA responde dúvidas, envia preços e fecha pedidos simples. Você só entra quando faz diferença.",
+ "who.p1a":"Respostas em segundos, até de madrugada","who.p1b":"Clientes que somem recebem um lembrete na hora certa","who.p1c":"Relatório semanal no seu WhatsApp",
+ "who.k1":"Respondidas pela IA","who.k2":"Tempo médio","who.k3":"Passadas à equipe","who.knote":"Painel de exemplo com dados fictícios.",
+ "who.p2h":"Cada gerente, motorista ou unidade recebe o que precisa, todo dia.","who.p2d":"Envie metas, vendas e avisos de operação direto dos seus relatórios. Sem aplicativo novo para instalar.",
+ "who.p2a":"Mensagens personalizadas por unidade","who.p2b":"Confirmação de leitura por pessoa","who.p2c":"Respostas da ponta voltam organizadas",
+ "who.s1":"Unidade Centro","who.s2":"Unidade Rodovia","who.s3":"Unidade Porto","who.read":"lido",
+ "who.p3h":"Uma API simples para o WhatsApp oficial.","who.p3d":"Gerencie vários clientes numa conta, envie mensagens de qualquer sistema e receba eventos por webhook.",
+ "who.p3a":"Chaves de API por cliente","who.p3b":"Webhooks de entrega e resposta","who.p3c":"IA e caixa de entrada inclusas","who.code":"enviar uma mensagem",
+ "trust.eyebrow":"Confiança","trust.h2":"Seguro para o seu número e para os seus clientes.",
+ "trust.sub":"Construído sobre a plataforma oficial do WhatsApp Business. Nada de aplicativos piratas que colocam seu número em risco.",
+ "trust.a":"API oficial da Meta","trust.ad":"Seu número conectado do jeito que o WhatsApp permite.",
+ "trust.b":"Você no controle","trust.bd":"Assuma qualquer conversa da IA com um toque.",
+ "trust.c":"Respeito ao cliente","trust.cd":"Quem pede para sair da lista para de receber.",
+ "trust.d":"Seus dados são seus","trust.dd":"Exporte ou apague contatos e conversas quando quiser.",
+ "faq.eyebrow":"Dúvidas","faq.h2":"Perguntas frequentes",
+ "faq.q1":"Preciso de um técnico para começar?","faq.a1":"Não. A conexão é guiada, tela por tela, e a IA aprende com o que você já tem: site, arquivos e planilhas.",
+ "faq.q2":"Posso usar o número que já tenho?","faq.a2":"Na maioria dos casos, sim. Na hora de conectar, mostramos as opções para o seu número e o que muda em cada uma.",
+ "faq.q3":"A IA pode responder algo errado?","faq.a3":"Ela responde apenas com base no que você ensinou. Quando não sabe, avisa o cliente e passa a conversa para a sua equipe.",
+ "faq.q4":"Em quais idiomas funciona?","faq.a4":"A IA responde no idioma do cliente. O painel está em português, inglês e espanhol.",
+ "faq.q5":"Tenho um sistema próprio. Dá para integrar?","faq.a5":"Sim. A API do Kontaro envia mensagens e recebe respostas de qualquer sistema, e os webhooks avisam cada entrega.",
+ "cta.h2":"Coloque sua IA para atender ainda hoje.","cta.sub":"Deixe seu WhatsApp. Um especialista do Kontaro conecta seu número com você.",
+ "cta.name":"Seu nome","cta.phone":"WhatsApp com DDD","cta.btn":"Quero testar o Kontaro",
+ "cta.err":"Preencha seu nome e um WhatsApp válido, com DDD.","cta.ok":"Recebido! Vamos chamar você no WhatsApp em breve.","cta.demo":"Prévia: no site publicado, este formulário envia seus dados para a equipe Kontaro.","cta.fail":"Não foi possível enviar agora. Tente de novo em instantes.",
+ "foot.privacy":"Privacidade","foot.terms":"Termos"
+},
+en:{
+ "meta.title":"Kontaro · AI customer service on official WhatsApp",
+ "meta.desc":"Kontaro answers customers with AI, sends campaigns from your spreadsheets and shows what conversations are saying. Official WhatsApp Business Platform.",
+ "nav.ai":"AI","nav.manage":"Manage","nav.features":"Features","nav.how":"How it works","nav.faq":"FAQ","nav.login":"Log in","nav.cta":"Start free",
+ "hero.eyebrow":"AI on official WhatsApp",
+ "hero.h1":"Your business answers on WhatsApp. <em>Any hour</em>, any language.",
+ "hero.sub":"Kontaro answers your customers, sends campaigns from your spreadsheets and shows you what conversations are saying. All on the official WhatsApp API, no developer needed.",
+ "hero.cta1":"Start free","hero.cta2":"See the AI at work",
+ "hero.p1":"Official WhatsApp Business API","hero.p2":"WhatsApp and Instagram together","hero.p3":"No card needed to try",
+ "float.intent":"Intent","float.lang":"Language detected","float.result":"Outcome",
+ "chat.online":"AI on · replies instantly","chat.input":"Message",
+ "strip.label":"One place for",
+ "ask.eyebrow":"Conversation intelligence","ask.h2":"Ask your inbox anything.",
+ "ask.sub":"The AI reads recent conversations and answers with numbers, in seconds. Find out what to sell, what to fix and who to call back.",
+ "ask.q0":"What did customers complain about most this week?","ask.q1":"Who is ready to buy again?","ask.q2":"How fast is my team replying?",
+ "ask.sample":"Example · sample data",
+ "manage.eyebrow":"Manage by message","manage.h2":"Run everything by sending a message.",
+ "manage.sub":"Ask in plain words, on WhatsApp or Telegram. Kontaro builds the campaign, shows who gets it and sends only after you confirm.",
+ "manage.t1":"No dashboard to learn","manage.t1d":"If you can use WhatsApp, you can use Kontaro.",
+ "manage.t2":"You confirm before anything is sent","manage.t2d":"No campaign goes out without your \"send it\".",
+ "manage.t3":"Everyone gets their own numbers","manage.t3d":"One spreadsheet row becomes one personal message.",
+ "data.eyebrow":"Campaigns from your data","data.h2":"Your spreadsheet becomes personal messages.",
+ "data.sub":"Connect a Google Drive file. Every time it updates, each contact gets only what's theirs, on WhatsApp.",
+ "data.file":"daily-sales.xlsx","data.c1":"Store","data.c2":"Manager","data.c3":"Sales","data.c4":"Target",
+ "feat.eyebrow":"Features","feat.h2":"Everything customer service needs, nothing it doesn't.",
+ "feat.f1":"AI that knows your business","feat.f1d":"Teach it with your website, PDFs and spreadsheets. It answers like your best agent, in the customer's language.",
+ "feat.f2":"Hands off to your team at the right time","feat.f2d":"When a person is needed, the chat goes to an agent with a summary ready.",
+ "feat.f3":"Campaigns people actually read","feat.f3d":"Lists, scheduling and personal messages using WhatsApp-approved templates.",
+ "feat.f4":"WhatsApp and Instagram in one inbox","feat.f4d":"Your whole team replies from one place, with every contact's full history.",
+ "feat.f5":"Teams and languages","feat.f5d":"Multiple teams, per-person permissions and an app in Portuguese, English and Spanish.",
+ "feat.f6":"An API for any system","feat.f6d":"Your ERP, online store or dashboard sends messages through Kontaro in a few lines of code.",
+ "how.eyebrow":"How it works","how.h2":"From sign-up to first customer chat in one afternoon.",
+ "how.s1":"Connect your number","how.s1d":"Log in with Facebook and pick your number. We guide you through every screen.","how.s1t":"~5 min",
+ "how.s2":"Teach the AI","how.s2d":"Paste your website address or upload files: menu, price list, policies.","how.s2t":"~10 min",
+ "how.s3":"Test and go live","how.s3d":"Chat with the AI before customers do. Adjust the tone and when to call your team.","how.s3t":"~15 min",
+ "how.s4":"Track and improve","how.s4d":"See what customers ask for and turn it into better replies and campaigns.","how.s4t":"every day",
+ "who.eyebrow":"Who it's for","who.h2":"Built for businesses that live on WhatsApp.",
+ "who.t1":"Small businesses","who.t2":"Fleets and store networks","who.t3":"Agencies and developers",
+ "who.p1h":"Serve customers like a big company, with the team you already have.","who.p1d":"The AI answers questions, shares prices and closes simple orders. You step in only when it matters.",
+ "who.p1a":"Replies in seconds, even at 3 a.m.","who.p1b":"Customers who go quiet get a reminder at the right time","who.p1c":"A weekly report on your WhatsApp",
+ "who.k1":"Answered by AI","who.k2":"Average reply","who.k3":"Handed to team","who.knote":"Example dashboard with sample data.",
+ "who.p2h":"Every manager, driver or location gets what they need, every day.","who.p2d":"Send targets, sales and operations notices straight from your reports. No new app to install.",
+ "who.p2a":"Personal messages per location","who.p2b":"Read receipts per person","who.p2c":"Replies from the field come back organized",
+ "who.s1":"Downtown location","who.s2":"Highway location","who.s3":"Harbor location","who.read":"read",
+ "who.p3h":"A simple API for official WhatsApp.","who.p3d":"Manage many clients in one account, send messages from any system and receive events by webhook.",
+ "who.p3a":"API keys per client","who.p3b":"Delivery and reply webhooks","who.p3c":"AI and inbox included","who.code":"send a message",
+ "trust.eyebrow":"Trust","trust.h2":"Safe for your number and your customers.",
+ "trust.sub":"Built on the official WhatsApp Business Platform. No unofficial apps that put your number at risk.",
+ "trust.a":"Official Meta API","trust.ad":"Your number connected the way WhatsApp allows.",
+ "trust.b":"You stay in control","trust.bd":"Take over any AI conversation with one tap.",
+ "trust.c":"Respect for customers","trust.cd":"Anyone who asks to leave a list stops receiving.",
+ "trust.d":"Your data is yours","trust.dd":"Export or delete contacts and conversations anytime.",
+ "faq.eyebrow":"FAQ","faq.h2":"Frequently asked questions",
+ "faq.q1":"Do I need a developer to start?","faq.a1":"No. Connecting is guided screen by screen, and the AI learns from what you already have: website, files and spreadsheets.",
+ "faq.q2":"Can I use the number I already have?","faq.a2":"In most cases, yes. When you connect, we show the options for your number and what changes with each one.",
+ "faq.q3":"Can the AI say something wrong?","faq.a3":"It only answers from what you taught it. When it doesn't know, it tells the customer and passes the chat to your team.",
+ "faq.q4":"Which languages does it support?","faq.a4":"The AI replies in the customer's language. The app is in Portuguese, English and Spanish.",
+ "faq.q5":"I have my own system. Can I integrate?","faq.a5":"Yes. The Kontaro API sends messages and receives replies from any system, and webhooks report every delivery.",
+ "cta.h2":"Put your AI to work today.","cta.sub":"Leave your WhatsApp number. A Kontaro specialist will connect your number with you.",
+ "cta.name":"Your name","cta.phone":"WhatsApp number with country code","cta.btn":"I want to try Kontaro",
+ "cta.err":"Enter your name and a valid WhatsApp number with country code.","cta.ok":"Got it! We'll message you on WhatsApp soon.","cta.demo":"Preview: on the live site, this form sends your details to the Kontaro team.","cta.fail":"We couldn't send that right now. Please try again in a moment.",
+ "foot.privacy":"Privacy","foot.terms":"Terms"
+},
+es:{
+ "meta.title":"Kontaro · Atención con IA en WhatsApp oficial",
+ "meta.desc":"Kontaro atiende a tus clientes con IA, envía campañas desde tus hojas de cálculo y muestra lo que dicen las conversaciones. API oficial de WhatsApp Business.",
+ "nav.ai":"IA","nav.manage":"Gestión","nav.features":"Funciones","nav.how":"Cómo funciona","nav.faq":"Preguntas","nav.login":"Entrar","nav.cta":"Empezar gratis",
+ "hero.eyebrow":"IA en WhatsApp oficial",
+ "hero.h1":"Tu negocio responde en WhatsApp. <em>A cualquier hora</em>, en cualquier idioma.",
+ "hero.sub":"Kontaro atiende a tus clientes, envía campañas desde tus hojas de cálculo y te muestra lo que dicen las conversaciones. Todo con la API oficial de WhatsApp, sin técnicos.",
+ "hero.cta1":"Empezar gratis","hero.cta2":"Ver la IA en acción",
+ "hero.p1":"API oficial de WhatsApp Business","hero.p2":"WhatsApp e Instagram juntos","hero.p3":"Sin tarjeta para probar",
+ "float.intent":"Intención","float.lang":"Idioma detectado","float.result":"Resultado",
+ "chat.online":"IA activa · responde al instante","chat.input":"Mensaje",
+ "strip.label":"Un solo lugar para",
+ "ask.eyebrow":"Inteligencia de conversaciones","ask.h2":"Pregúntale a tu bandeja de entrada.",
+ "ask.sub":"La IA lee las conversaciones recientes y responde con números, en segundos. Descubre qué vender, qué corregir y a quién volver a llamar.",
+ "ask.q0":"¿De qué se quejaron más los clientes esta semana?","ask.q1":"¿Quién está listo para volver a comprar?","ask.q2":"¿Qué tan rápido responde mi equipo?",
+ "ask.sample":"Ejemplo · datos ficticios",
+ "manage.eyebrow":"Gestión por mensaje","manage.h2":"Administra todo enviando un mensaje.",
+ "manage.sub":"Pide en lenguaje normal, por WhatsApp o Telegram. Kontaro arma la campaña, muestra a quién llega y solo la envía cuando confirmas.",
+ "manage.t1":"Ningún panel que aprender","manage.t1d":"Si sabes usar WhatsApp, sabes usar Kontaro.",
+ "manage.t2":"Confirmas antes de enviar","manage.t2d":"Ninguna campaña sale sin tu \"envíala\".",
+ "manage.t3":"Cada persona recibe sus propios números","manage.t3d":"Una fila de la hoja se convierte en un mensaje personal.",
+ "data.eyebrow":"Campañas desde tus datos","data.h2":"Tu hoja de cálculo se convierte en mensajes personales.",
+ "data.sub":"Conecta un archivo de Google Drive. Con cada actualización, cada contacto recibe solo lo suyo, por WhatsApp.",
+ "data.file":"ventas-diarias.xlsx","data.c1":"Tienda","data.c2":"Gerente","data.c3":"Ventas","data.c4":"Meta",
+ "feat.eyebrow":"Funciones","feat.h2":"Todo lo que necesita tu atención al cliente, sin complicaciones.",
+ "feat.f1":"IA que conoce tu negocio","feat.f1d":"Enséñale con tu sitio web, PDF y hojas de cálculo. Responde como tu mejor agente, en el idioma del cliente.",
+ "feat.f2":"Pasa al equipo en el momento justo","feat.f2d":"Cuando hace falta una persona, la conversación va al agente con el resumen listo.",
+ "feat.f3":"Campañas que la gente lee","feat.f3d":"Listas, programación y mensajes personales con plantillas aprobadas por WhatsApp.",
+ "feat.f4":"WhatsApp e Instagram en una sola bandeja","feat.f4d":"Todo el equipo responde desde un lugar, con el historial completo de cada contacto.",
+ "feat.f5":"Equipos e idiomas","feat.f5d":"Varios equipos, permisos por persona y panel en portugués, inglés y español.",
+ "feat.f6":"API para cualquier sistema","feat.f6d":"Tu ERP, tienda online o panel envía mensajes por Kontaro con pocas líneas de código.",
+ "how.eyebrow":"Cómo funciona","how.h2":"Del registro a la primera conversación en una tarde.",
+ "how.s1":"Conecta tu número","how.s1d":"Entra con tu cuenta de Facebook y elige el número. Te guiamos en cada pantalla.","how.s1t":"~5 min",
+ "how.s2":"Enséñale a la IA","how.s2d":"Pega la dirección de tu sitio o sube tus archivos: menú, lista de precios, políticas.","how.s2t":"~10 min",
+ "how.s3":"Prueba y activa","how.s3d":"Conversa con la IA antes que tus clientes. Ajusta el tono y cuándo llamar al equipo.","how.s3t":"~15 min",
+ "how.s4":"Mide y mejora","how.s4d":"Mira lo que piden tus clientes y conviértelo en mejores respuestas y campañas.","how.s4t":"cada día",
+ "who.eyebrow":"Para quién es","who.h2":"Hecho para quien vive en WhatsApp.",
+ "who.t1":"Pequeñas empresas","who.t2":"Flotas y redes de tiendas","who.t3":"Agencias y desarrolladores",
+ "who.p1h":"Atiende como una gran empresa, con el equipo que ya tienes.","who.p1d":"La IA responde dudas, envía precios y cierra pedidos simples. Tú entras solo cuando importa.",
+ "who.p1a":"Respuestas en segundos, incluso de madrugada","who.p1b":"Clientes que desaparecen reciben un recordatorio a tiempo","who.p1c":"Informe semanal en tu WhatsApp",
+ "who.k1":"Respondidas por IA","who.k2":"Tiempo medio","who.k3":"Pasadas al equipo","who.knote":"Panel de ejemplo con datos ficticios.",
+ "who.p2h":"Cada gerente, conductor o sucursal recibe lo que necesita, cada día.","who.p2d":"Envía metas, ventas y avisos de operación directo desde tus informes. Sin instalar otra app.",
+ "who.p2a":"Mensajes personales por sucursal","who.p2b":"Confirmación de lectura por persona","who.p2c":"Las respuestas del equipo vuelven ordenadas",
+ "who.s1":"Sucursal Centro","who.s2":"Sucursal Carretera","who.s3":"Sucursal Puerto","who.read":"leído",
+ "who.p3h":"Una API simple para WhatsApp oficial.","who.p3d":"Gestiona varios clientes en una cuenta, envía mensajes desde cualquier sistema y recibe eventos por webhook.",
+ "who.p3a":"Claves de API por cliente","who.p3b":"Webhooks de entrega y respuesta","who.p3c":"IA y bandeja incluidas","who.code":"enviar un mensaje",
+ "trust.eyebrow":"Confianza","trust.h2":"Seguro para tu número y para tus clientes.",
+ "trust.sub":"Construido sobre la plataforma oficial de WhatsApp Business. Nada de apps no oficiales que ponen tu número en riesgo.",
+ "trust.a":"API oficial de Meta","trust.ad":"Tu número conectado como WhatsApp lo permite.",
+ "trust.b":"Tú tienes el control","trust.bd":"Toma cualquier conversación de la IA con un toque.",
+ "trust.c":"Respeto al cliente","trust.cd":"Quien pide salir de una lista deja de recibir.",
+ "trust.d":"Tus datos son tuyos","trust.dd":"Exporta o borra contactos y conversaciones cuando quieras.",
+ "faq.eyebrow":"Preguntas","faq.h2":"Preguntas frecuentes",
+ "faq.q1":"¿Necesito un técnico para empezar?","faq.a1":"No. La conexión es guiada, pantalla por pantalla, y la IA aprende de lo que ya tienes: sitio, archivos y hojas de cálculo.",
+ "faq.q2":"¿Puedo usar el número que ya tengo?","faq.a2":"En la mayoría de los casos, sí. Al conectar, te mostramos las opciones para tu número y qué cambia en cada una.",
+ "faq.q3":"¿La IA puede responder algo incorrecto?","faq.a3":"Solo responde con lo que le enseñaste. Cuando no sabe, avisa al cliente y pasa la conversación a tu equipo.",
+ "faq.q4":"¿En qué idiomas funciona?","faq.a4":"La IA responde en el idioma del cliente. El panel está en portugués, inglés y español.",
+ "faq.q5":"Tengo mi propio sistema. ¿Se puede integrar?","faq.a5":"Sí. La API de Kontaro envía mensajes y recibe respuestas desde cualquier sistema, y los webhooks avisan cada entrega.",
+ "cta.h2":"Pon tu IA a atender hoy mismo.","cta.sub":"Déjanos tu WhatsApp. Un especialista de Kontaro conecta tu número contigo.",
+ "cta.name":"Tu nombre","cta.phone":"WhatsApp con código de país","cta.btn":"Quiero probar Kontaro",
+ "cta.err":"Escribe tu nombre y un WhatsApp válido con código de país.","cta.ok":"¡Recibido! Te escribiremos por WhatsApp pronto.","cta.demo":"Vista previa: en el sitio publicado, este formulario envía tus datos al equipo de Kontaro.","cta.fail":"No pudimos enviarlo ahora. Inténtalo de nuevo en un momento.",
+ "foot.privacy":"Privacidad","foot.terms":"Términos"
+}};
+
+/* ---------- Scripted demo content per language ---------- */
+var DEMO = {
+pt:{
+ biz:"Loja Lumi",
+ convs:[
+  {lang:"Português",intent:"Recompra",result:"Pedido criado",msgs:[
+   ["in","Oi! Vocês entregam em Belém hoje?"],
+   ["out","Oi, Ana! Entregamos sim. Pedidos até as 16h saem hoje. Quer repetir o pedido da semana passada?"],
+   ["in","Quero, mas troca o tamanho para 8"],
+   ["out","Feito: pedido #2481, tamanho 8, total R$ 189,90. Envio o link de pagamento por Pix?"],
+   ["in","Pode mandar"],
+   ["sys","Link Pix enviado · pago em 2 min"]]},
+  {lang:"Inglês → resposta em inglês",intent:"Pergunta de turista",result:"Atendente avisado",msgs:[
+   ["in","Hi! Do you ship to Lisbon?"],
+   ["out","Hi! Yes, we ship to Portugal in 6 to 9 business days. Want me to check shipping for your cart?"],
+   ["in","Yes please, it's a gift"],
+   ["out","Shipping is €14 and I can add a gift note. I've asked Júlia from our team to confirm the delivery date with you."],
+   ["sys","Conversa passada para Júlia com resumo"]]}
+ ],
+ asks:[
+  {a:"Três temas concentram <strong>71% das reclamações</strong>: atraso na entrega, troca de tamanho e dúvidas sobre Pix. Os atrasos aumentaram desde terça, principalmente na região Norte.",viz:"bars",data:[["Atraso na entrega",38],["Troca de tamanho",21],["Dúvidas sobre Pix",12],["Outros",29]]},
+  {a:"<strong>42 clientes</strong> perguntaram sobre reposição nos últimos 7 dias e ainda não compraram. Os mais quentes:",viz:"people",data:[["AC","Ana C.","perguntou do tamanho 8"],["RM","Rafael M.","pediu frete para Ananindeua"],["JP","Joana P.","quer a cor azul"],["LS","Lucas S.","pediu desconto à vista"]],sugg:"Quer que eu crie uma campanha só para eles?",suggBtn:"Criar campanha"},
+  {a:"Mediana de <strong>9 segundos</strong> quando a IA responde e <strong>14 minutos</strong> quando um atendente assume. O pico de espera é segunda, das 9h às 11h.",viz:"spark",kpis:[["Com IA","9 s"],["Com equipe","14 min"],["Pico","seg 9h–11h"]]}
+ ],
+ admin:[
+  ["in","Manda o resumo de vendas de ontem para os gerentes das lojas"],
+  ["out","Encontrei 12 gerentes na lista Lojas. Cada um recebe só os números da própria loja, da planilha vendas-diarias. Envio agora ou às 7h?"],
+  ["in","Às 7h"],
+  ["out","Agendado para amanhã às 7h00. Te aviso quando todos tiverem lido."],
+  ["sys","07:00 · 12 enviadas · 12 lidas"]],
+ outbox:[["Marina · Centro","Bom dia, Marina! Ontem a loja Centro vendeu R$ 18.420, 104% da meta. Parabéns à equipe!"],["Carlos · Rodovia","Bom dia, Carlos! Ontem a Rodovia vendeu R$ 26.910, 97% da meta. Faltaram R$ 830."],["Juliana · Porto","Bom dia, Juliana! Ontem o Porto vendeu R$ 12.305, 88% da meta. Quer dicas da IA para hoje?"]],
+ delivered:"entregue", ai:"IA KONTARO"
+},
+en:{
+ biz:"Lumi Store",
+ convs:[
+  {lang:"English",intent:"Repeat order",result:"Order created",msgs:[
+   ["in","Hi! Can you deliver to Austin today?"],
+   ["out","Hi Ana! Yes, orders placed before 4 p.m. go out today. Want to repeat last week's order?"],
+   ["in","Yes, but change the size to 8"],
+   ["out","Done: order #2481, size 8, total $42.90. Shall I send the payment link?"],
+   ["in","Go ahead"],
+   ["sys","Payment link sent · paid in 2 min"]]},
+  {lang:"Spanish → reply in Spanish",intent:"Shipping question",result:"Agent notified",msgs:[
+   ["in","¡Hola! ¿Hacen envíos a Monterrey?"],
+   ["out","¡Hola! Sí, enviamos a México en 5 a 8 días hábiles. ¿Quieres que calcule el envío de tu carrito?"],
+   ["in","Sí, por favor. Es un regalo"],
+   ["out","El envío cuesta $14 y puedo agregar una tarjeta de regalo. Le pedí a Julia de nuestro equipo que te confirme la fecha de entrega."],
+   ["sys","Chat handed to Julia with a summary"]]}
+ ],
+ asks:[
+  {a:"Three topics make up <strong>71% of complaints</strong>: late delivery, size exchanges and payment questions. Late deliveries have grown since Tuesday, mostly in the Northeast region.",viz:"bars",data:[["Late delivery",38],["Size exchange",21],["Payment questions",12],["Other",29]]},
+  {a:"<strong>42 customers</strong> asked about restocks in the last 7 days and haven't bought yet. The warmest leads:",viz:"people",data:[["AC","Ana C.","asked about size 8"],["RM","Ryan M.","asked for shipping to Dallas"],["JP","Jen P.","wants it in blue"],["LS","Luke S.","asked for a cash discount"]],sugg:"Want me to create a campaign just for them?",suggBtn:"Create campaign"},
+  {a:"Median of <strong>9 seconds</strong> when the AI replies and <strong>14 minutes</strong> when an agent takes over. The longest waits are Mondays, 9 to 11 a.m.",viz:"spark",kpis:[["With AI","9 s"],["With team","14 min"],["Peak","Mon 9–11 a.m."]]}
+ ],
+ admin:[
+  ["in","Send yesterday's sales summary to the store managers"],
+  ["out","I found 12 managers in the Stores list. Each one gets only their own store's numbers from the daily-sales sheet. Send now or at 7 a.m.?"],
+  ["in","7 a.m."],
+  ["out","Scheduled for tomorrow at 7:00 a.m. I'll let you know when everyone has read it."],
+  ["sys","7:00 · 12 sent · 12 read"]],
+ outbox:[["Marina · Downtown","Good morning, Marina! Downtown sold $18,420 yesterday, 104% of target. Great job, team!"],["Carlos · Highway","Good morning, Carlos! Highway sold $26,910 yesterday, 97% of target. You were $830 short."],["Juliana · Harbor","Good morning, Juliana! Harbor sold $12,305 yesterday, 88% of target. Want AI tips for today?"]],
+ delivered:"delivered", ai:"KONTARO AI"
+},
+es:{
+ biz:"Tienda Lumi",
+ convs:[
+  {lang:"Español",intent:"Recompra",result:"Pedido creado",msgs:[
+   ["in","¡Hola! ¿Entregan en Bogotá hoy?"],
+   ["out","¡Hola, Ana! Sí, los pedidos hasta las 4 p. m. salen hoy. ¿Quieres repetir el pedido de la semana pasada?"],
+   ["in","Sí, pero cambia la talla a 8"],
+   ["out","Listo: pedido #2481, talla 8, total $159.900. ¿Te envío el enlace de pago?"],
+   ["in","Envíalo"],
+   ["sys","Enlace de pago enviado · pagado en 2 min"]]},
+  {lang:"Portugués → respuesta en portugués",intent:"Pregunta de envío",result:"Agente avisado",msgs:[
+   ["in","Oi! Vocês enviam para São Paulo?"],
+   ["out","Oi! Enviamos sim, em 6 a 9 dias úteis. Quer que eu calcule o frete do seu carrinho?"],
+   ["in","Quero, é para presente"],
+   ["out","O frete fica em R$ 49 e posso incluir um cartão de presente. Pedi para a Julia, da nossa equipe, confirmar a data de entrega com você."],
+   ["sys","Conversación pasada a Julia con resumen"]]}
+ ],
+ asks:[
+  {a:"Tres temas suman el <strong>71% de las quejas</strong>: retrasos en la entrega, cambios de talla y dudas de pago. Los retrasos aumentaron desde el martes, sobre todo en la zona norte.",viz:"bars",data:[["Retraso en la entrega",38],["Cambio de talla",21],["Dudas de pago",12],["Otros",29]]},
+  {a:"<strong>42 clientes</strong> preguntaron por reposiciones en los últimos 7 días y aún no compran. Los más interesados:",viz:"people",data:[["AC","Ana C.","preguntó por la talla 8"],["RM","Rafael M.","pidió envío a Medellín"],["JP","Juana P.","lo quiere en azul"],["LS","Luis S.","pidió descuento de contado"]],sugg:"¿Creo una campaña solo para ellos?",suggBtn:"Crear campaña"},
+  {a:"Mediana de <strong>9 segundos</strong> cuando responde la IA y <strong>14 minutos</strong> cuando entra un agente. La mayor espera es el lunes, de 9 a 11 a. m.",viz:"spark",kpis:[["Con IA","9 s"],["Con equipo","14 min"],["Pico","lun 9–11 a. m."]]}
+ ],
+ admin:[
+  ["in","Envía el resumen de ventas de ayer a los gerentes de tienda"],
+  ["out","Encontré 12 gerentes en la lista Tiendas. Cada uno recibe solo los números de su tienda, de la hoja ventas-diarias. ¿Envío ahora o a las 7 a. m.?"],
+  ["in","A las 7"],
+  ["out","Programado para mañana a las 7:00 a. m. Te aviso cuando todos lo hayan leído."],
+  ["sys","7:00 · 12 enviados · 12 leídos"]],
+ outbox:[["Marina · Centro","¡Buenos días, Marina! Ayer Centro vendió $18.420.000, el 104% de la meta. ¡Felicitaciones al equipo!"],["Carlos · Carretera","¡Buenos días, Carlos! Ayer Carretera vendió $26.910.000, el 97% de la meta. Faltaron $830.000."],["Juliana · Puerto","¡Buenos días, Juliana! Ayer Puerto vendió $12.305.000, el 88% de la meta. ¿Quieres consejos de la IA para hoy?"]],
+ delivered:"entregado", ai:"IA KONTARO"
+}};
+var SHEET = {
+ pt:[["Centro","Marina","R$ 18.420","104%"],["Rodovia","Carlos","R$ 26.910","97%"],["Porto","Juliana","R$ 12.305","88%"]],
+ en:[["Downtown","Marina","$18,420","104%"],["Highway","Carlos","$26,910","97%"],["Harbor","Juliana","$12,305","88%"]],
+ es:[["Centro","Marina","$18.420.000","104%"],["Carretera","Carlos","$26.910.000","97%"],["Puerto","Juliana","$12.305.000","88%"]]
+};
+
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var lang = "pt";
+var loops = {};
+function token(name){ if(loops[name]) loops[name].alive=false; var tk={alive:true}; loops[name]=tk; return tk; }
+function stopAll(){ for(var k in loops){ if(loops[k]) loops[k].alive=false; } }
+var $ = function(s,r){return (r||document).querySelector(s)};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function store(k,v){try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function wait(ms,tk){return new Promise(function(res,rej){setTimeout(function(){ tk.alive?res():rej("stale") }, reduce?Math.min(ms,60):ms)})}
+function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.pt[k]||""}
+
+function pickLang(){
+  var q=(location.search.match(/[?&]lang=(pt|en|es)\b/)||[])[1];
+  var pathL=(location.pathname.match(/^\/(en|es)(\/|$)/)||[])[1];
+  var htmlL=document.documentElement.getAttribute("data-prerender-lang");
+  var saved=store("kontaro.lang");
+  var nav=(navigator.language||"pt").slice(0,2).toLowerCase();
+  return q||pathL||saved||htmlL||(I18N[nav]?nav:"en");
+}
+
+function applyLang(l){
+  lang=I18N[l]?l:"pt";
+  document.documentElement.lang = lang==="pt"?"pt-BR":lang;
+  $$("[data-i18n]").forEach(function(el){var v=t(el.getAttribute("data-i18n")); if(v) el.textContent=v;});
+  $$("[data-i18n-html]").forEach(function(el){var v=t(el.getAttribute("data-i18n-html")); if(v) el.innerHTML=v;});
+  document.title=t("meta.title");
+  var md=$('meta[name="description"]'); if(md) md.setAttribute("content",t("meta.desc"));
+  $$(".lang button").forEach(function(b){b.setAttribute("aria-pressed", String(b.getAttribute("data-lang")===lang))});
+  $("#bizName").textContent=DEMO[lang].biz;
+  renderSheet(); startHero(); runAsk(currentQ); startAdmin(); startOutbox();
+}
+
+/* ---------- Hero chat loop ---------- */
+function bubble(container,type,text,ai){
+  var d=document.createElement("div");
+  d.className="msg "+type;
+  if(type==="sys"){ d.textContent=text; }
+  else{
+    var now=new Date(); var hh=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+    d.innerHTML=(ai?'<span class="ai">'+esc(DEMO[lang].ai)+'</span>':"")+esc(text)+'<span class="meta">'+hh+'</span>';
+  }
+  container.appendChild(d);
+  while(container.children.length>7) container.removeChild(container.firstChild);
+  return d;
+}
+function typing(container,cls){var d=document.createElement("div");d.className="typing"+(cls?" "+cls:"");d.innerHTML="<i></i><i></i><i></i>";container.appendChild(d);return d}
+function setFloat(id,val,show){var f=$("#"+id); $("#"+id+"v").textContent=val; f.classList.toggle("dim",!show)}
+
+function startHero(){
+  var g=token("hero"), box=$("#heroChat"); box.innerHTML="";
+  ["f1","f2","f3"].forEach(function(id){$("#"+id).classList.add("dim")});
+  var convs=DEMO[lang].convs, ci=0;
+  (function loop(){
+    var c=convs[ci%convs.length]; ci++;
+    box.innerHTML=""; ["f1","f2","f3"].forEach(function(id){$("#"+id).classList.add("dim")});
+    var p=wait(600,g), step=0;
+    c.msgs.forEach(function(m){
+      p=p.then(function(){
+        if(m[0]==="out"){ var ty=typing(box); return wait(1100,g).then(function(){ty.remove(); bubble(box,"out",m[1],true)}); }
+        bubble(box,m[0],m[1]); return null;
+      }).then(function(){
+        step++;
+        if(step===1) setFloat("f2",c.lang,true);
+        if(step===2) setFloat("f1",c.intent,true);
+        if(step===c.msgs.length) setFloat("f3",c.result,true);
+        return wait(m[0]==="in"?900:1500,g);
+      });
+    });
+    p.then(function(){return wait(2600,g)}).then(loop).catch(function(){});
+  })();
+}
+
+/* ---------- Ask your inbox ---------- */
+var currentQ=0;
+function runAsk(i){
+  currentQ=i; var g=token("ask");
+  $$(".q").forEach(function(b){b.setAttribute("aria-pressed",String(+b.getAttribute("data-q")===i))});
+  var item=DEMO[lang].asks[i], ans=$("#answer"), viz=$("#viz");
+  $("#asked").textContent=t("ask.q"+i);
+  viz.classList.remove("show"); viz.innerHTML=""; ans.innerHTML='<span class="caret"></span>';
+  /* typewriter over plain text, then swap to rich html */
+  var plain=item.a.replace(/<[^>]+>/g,""), n=0;
+  var tick=function(){
+    if(!g.alive) return;
+    n+= reduce? plain.length : 3;
+    if(n<plain.length){ ans.innerHTML=esc(plain.slice(0,n))+'<span class="caret"></span>'; setTimeout(tick,18); }
+    else { ans.innerHTML=item.a; drawViz(item,viz); }
+  };
+  setTimeout(tick,350);
+}
+function drawViz(item,viz){
+  var h="";
+  if(item.viz==="bars"){
+    h='<div class="bars">'+item.data.map(function(r){return '<div class="bar"><span>'+esc(r[0])+'</span><span class="track"><span class="fill" data-w="'+r[1]+'"></span></span><span class="v">'+r[1]+'%</span></div>'}).join("")+'</div>';
+  } else if(item.viz==="people"){
+    h='<div class="people">'+item.data.map(function(p){return '<div class="person"><i>'+esc(p[0])+'</i><span style="min-width:0">'+esc(p[1])+'<small>'+esc(p[2])+'</small></span></div>'}).join("")+'</div>'+
+      '<div class="suggest" style="margin-top:12px"><span>'+esc(item.sugg)+'</span><button type="button" class="btn">'+esc(item.suggBtn)+'</button></div>';
+  } else {
+    var pts=[22,18,30,34,26,20,15,12,10,9,11,9], w=560, hgt=120, max=40;
+    var step=w/(pts.length-1);
+    var line=pts.map(function(v,i){return (i?"L":"M")+(i*step).toFixed(1)+","+(hgt-10-(v/max)*(hgt-24)).toFixed(1)}).join(" ");
+    var last=pts.length-1, ly=(hgt-10-(pts[last]/max)*(hgt-24)).toFixed(1);
+    h='<div class="kpis">'+item.kpis.map(function(k){return '<div class="kpi"><span class="k">'+esc(k[0])+'</span><b>'+esc(k[1])+'</b></div>'}).join("")+'</div>'+
+      '<svg class="spark" viewBox="0 0 '+w+' '+hgt+'" preserveAspectRatio="none" aria-hidden="true">'+
+      '<line x1="0" y1="'+(hgt-10)+'" x2="'+w+'" y2="'+(hgt-10)+'" stroke="var(--line)" stroke-width="1"/>'+
+      '<path d="'+line+' L'+w+','+(hgt-10)+' L0,'+(hgt-10)+' Z" fill="var(--accent-soft)"/>'+
+      '<path d="'+line+'" fill="none" stroke="var(--accent)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>'+
+      '<circle cx="'+(last*step-4)+'" cy="'+ly+'" r="5" fill="var(--signal)"/></svg>';
+  }
+  viz.innerHTML=h;
+  requestAnimationFrame(function(){ viz.classList.add("show"); $$(".fill",viz).forEach(function(f){f.style.width=f.getAttribute("data-w")+"%"}) });
+}
+
+
+/* ---------- Admin chat loop ---------- */
+function startAdmin(){
+  var g=token("admin"), box=$("#adminChat");
+  (function loop(){
+    box.innerHTML=""; var p=wait(400,g);
+    DEMO[lang].admin.forEach(function(m){
+      p=p.then(function(){
+        if(m[0]==="out"){ var ty=typing(box); return wait(1200,g).then(function(){ty.remove(); bubble(box,"out",m[1],true)}); }
+        bubble(box,m[0],m[1]); return null;
+      }).then(function(){return wait(1300,g)});
+    });
+    p.then(function(){return wait(4000,g)}).then(loop).catch(function(){});
+  })();
+}
+
+/* ---------- Sheet → outbox loop ---------- */
+function renderSheet(){
+  $("#sheetRows").innerHTML=SHEET[lang].map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="num">'+esc(r[2])+'</td><td class="num">'+esc(r[3])+'</td></tr>'}).join("");
+  $("#outbox").innerHTML=DEMO[lang].outbox.map(function(o){return '<div class="out-msg"><div class="to"><span>'+esc(o[0])+'</span><em>✓✓ '+esc(DEMO[lang].delivered)+'</em></div>'+esc(o[1])+'</div>'}).join("");
+}
+function startOutbox(){
+  var g=token("out"), i=0;
+  (function loop(){
+    var rows=$$("#sheetRows tr"), outs=$$("#outbox .out-msg");
+    rows.forEach(function(r,k){r.classList.toggle("hl",k===i)}); outs.forEach(function(o,k){o.classList.toggle("hl",k===i)});
+    i=(i+1)%3; wait(2200,g).then(loop).catch(function(){});
+  })();
+}
+
+/* ---------- Tabs ---------- */
+$$(".tab").forEach(function(tab){
+  tab.addEventListener("click",function(){
+    $$(".tab").forEach(function(x){var on=x===tab; x.setAttribute("aria-selected",String(on)); document.getElementById(x.getAttribute("aria-controls")).hidden=!on;});
+  });
+});
+
+/* ---------- Lead form ---------- */
+$("#leadForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  var name=$("#leadName").value.trim(), phone=$("#leadPhone").value.replace(/[^\d+]/g,""), msg=$("#formMsg");
+  if(name.length<2 || phone.replace(/\D/g,"").length<10){ msg.textContent=t("cta.err"); return; }
+  var endpoint=window.KONTARO_LEAD_ENDPOINT;
+  if(!endpoint){ msg.textContent=t("cta.demo"); return; }
+  var btn=this.querySelector("button"); btn.disabled=true;
+  fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:name,phone:phone,lang:lang,source:"kontaro.ai"})})
+    .then(function(r){ if(!r.ok) throw 0; msg.textContent=t("cta.ok"); e.target.reset(); })
+    .catch(function(){ msg.textContent=t("cta.fail"); })
+    .then(function(){ btn.disabled=false; });
+});
+
+/* ---------- Wiring ---------- */
+$$(".q").forEach(function(b){b.addEventListener("click",function(){runAsk(+b.getAttribute("data-q"))})});
+$$(".lang button").forEach(function(b){b.addEventListener("click",function(){var l=b.getAttribute("data-lang"); store("kontaro.lang",l); applyLang(l);})});
+var nav=$("#nav"); window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>8)},{passive:true});
+
+/* Pause animations when the tab is hidden, to save battery. */
+document.addEventListener("visibilitychange",function(){ if(document.hidden){stopAll()} else {applyLang(lang)} });
+
+applyLang(pickLang());
+})();
+</script>

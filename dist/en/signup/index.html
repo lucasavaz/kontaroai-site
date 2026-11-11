@@ -21,7 +21,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://kontaro.ai/#org","name":"Kontaro Inc.","alternateName":"Kontaro","url":"https://kontaro.ai","logo":"https://kontaro.ai/favicon.svg","email":"talk@kontaro.ai","address":{"@type":"PostalAddress","streetAddress":"830 Brickell Plaza","addressLocality":"Miami","addressRegion":"FL","postalCode":"33131","addressCountry":"US"},"sameAs":["https://www.instagram.com/kontaro.ai/","https://www.linkedin.com/company/kontaro-ai/"]},{"@type":"SoftwareApplication","name":"Kontaro","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://kontaro.ai","description":"Kontaro answers customers with AI, sends campaigns from your spreadsheets and shows what conversations are saying. Official WhatsApp Business Platform.","inLanguage":["pt-BR","en","es"],"publisher":{"@id":"https://kontaro.ai/#org"}}]}</script>
 
-<script>window.KONTARO_AUTH_MODE="app";window.KONTARO_APP_URL="https://relay.kontaro.ai";window.KONTARO_API_URL="https://relay-whatsapp-api.onrender.com";</script>
+<script>window.KONTARO_AUTH_MODE="api";window.KONTARO_APP_URL="https://relay.kontaro.ai";window.KONTARO_API_URL="https://relay-whatsapp-api.onrender.com";</script>
 </head>
 <body data-page="signup">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -512,12 +512,12 @@ body[data-page="pricing"] #pricing .sec-head{display:none}
 .auth-form input:not([type=checkbox]){font:500 16px var(--f-body);padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
 .auth-form input[aria-invalid="true"]{border-color:var(--signal);box-shadow:0 0 0 3px var(--signal-soft)}
 .auth-form small{color:var(--muted);font-weight:400}
-.pw{position:relative;display:block}.pw-show{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--accent);font:600 13px var(--f-body);cursor:pointer;padding:6px}
+.pw{position:relative;display:block}.pw input{padding-right:84px!important}.pw-show{position:absolute;right:4px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--accent);font:600 13px var(--f-body);cursor:pointer;padding:6px 12px;min-height:44px;min-width:44px}
 .chk{grid-template-columns:20px 1fr!important;align-items:start;font-weight:400!important;color:var(--muted)}
-.chk input{width:18px;height:18px;margin-top:2px}
-.auth-btn{width:100%;padding:15px}
-.auth-msg{font-size:14px;min-height:1.2em}.auth-msg.err{color:var(--signal)}.auth-msg.ok{color:var(--ok)}
-.auth-alt{font-size:14px;color:var(--muted);text-align:center}.auth-alt a{font-weight:600;color:var(--accent)}
+.chk input{width:18px;height:18px;margin-top:2px}.chk{padding:4px 0;min-height:44px}
+.auth-btn{width:100%;padding:15px;min-height:48px}.auth-btn:disabled{opacity:.65;cursor:progress}
+.auth-msg{font-size:14px}.auth-msg:empty{display:none}.auth-msg.err{color:var(--signal)}.auth-msg.ok{color:var(--ok)}.auth-msg a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--accent)}
+.auth-alt{font-size:14px;color:var(--muted);text-align:center}.auth-alt a{font-weight:600;color:var(--accent);display:inline-flex;align-items:center;min-height:44px}
 .secure{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:16px;font-size:12.5px;color:var(--muted)}.secure svg{width:14px;height:14px}
 body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display:none!important}
 </style>
@@ -608,28 +608,28 @@ body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display
     </div>
     <div class="auth-card">
       <!-- APP mode: until Relay's API accepts requests from kontaro.ai, sign-up/login finish in the app -->
-      <div id="auApp">
+      <div id="auApp" hidden="">
         <h2 data-i18n="au.appH">Your dashboard opens in the Kontaro app</h2>
         <p class="note" data-i18n="au.appP">Sign-up and login happen securely in the app. You can come back here anytime.</p>
-        <a class="btn btn-primary auth-btn" id="auAppBtn" href="https://relay.kontaro.ai/#signup">Create my free account</a>
-        <p class="auth-alt" id="auAppAlt">Already have an account? <a href="/en/login/">Log in</a></p>
+        <a class="btn btn-primary auth-btn" id="auAppBtn"></a>
+        <p class="auth-alt" id="auAppAlt"></p>
       </div>
       <!-- API mode: forms talk to Relay's API directly -->
-      <form id="fSignup" class="auth-form" novalidate="" hidden="">
+      <form id="fSignup" class="auth-form" novalidate="">
         <label><span data-i18n="au.name">Your name</span><input name="name" autocomplete="name" required="" minlength="2"></label>
         <label><span data-i18n="au.company">Company name</span><input name="workspace" autocomplete="organization" required="" minlength="2"></label>
         <label><span data-i18n="au.email">Email</span><input name="email" type="email" autocomplete="email" required=""></label>
-        <label><span data-i18n="au.pass">Password</span><span class="pw"><input name="password" type="password" autocomplete="new-password" required="" minlength="8"><button type="button" class="pw-show" data-i18n="au.show">Show</button></span><small data-i18n="au.passHint">At least 8 characters</small></label>
+        <label><span data-i18n="au.pass">Password</span><span class="pw"><input name="password" type="password" autocomplete="new-password" required="" minlength="12" aria-describedby="suPassHint"><button type="button" class="pw-show" data-i18n="au.show" aria-pressed="false">Show</button></span><small id="suPassHint" data-i18n="au.passHint">At least 12 characters</small></label>
         <label class="chk"><input type="checkbox" name="terms" required=""><span data-i18n-html="au.terms">I have read and agree to the <a href="/terms/">Terms of Service</a> and <a href="/privacy/">Privacy Policy</a>.</span></label>
         <button class="btn btn-primary auth-btn" type="submit" data-i18n="au.create">Create free account</button>
-        <p class="auth-msg" role="status"></p>
+        <p class="auth-msg" role="status"></p><p class="auth-msg err" role="alert"></p>
         <p class="auth-alt"><span data-i18n="au.haveAcc">Already have an account?</span> <a data-go="login" data-i18n="au.login" href="/en/login/">Log in</a></p>
       </form>
       <form id="fLogin" class="auth-form" novalidate="" hidden="">
         <label><span data-i18n="au.email">Email</span><input name="email" type="email" autocomplete="email" required=""></label>
-        <label><span data-i18n="au.pass">Password</span><span class="pw"><input name="password" type="password" autocomplete="current-password" required=""><button type="button" class="pw-show" data-i18n="au.show">Show</button></span></label>
+        <label><span data-i18n="au.pass">Password</span><span class="pw"><input name="password" type="password" autocomplete="current-password" required=""><button type="button" class="pw-show" data-i18n="au.show" aria-pressed="false">Show</button></span></label>
         <button class="btn btn-primary auth-btn" type="submit" data-i18n="au.login">Log in</button>
-        <p class="auth-msg" role="status"></p>
+        <p class="auth-msg" role="status"></p><p class="auth-msg err" role="alert"></p>
         <p class="auth-alt"><a href="#forgot" id="toForgot" data-i18n="au.forgot">Forgot password?</a></p>
         <p class="auth-alt"><span data-i18n="au.noAcc">Don't have an account?</span> <a data-go="signup" data-i18n="au.createLink" href="/en/signup/">Create free account</a></p>
       </form>
@@ -637,7 +637,7 @@ body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display
         <h2 data-i18n="au.forgotH">Reset your password</h2><p class="note" data-i18n="au.forgotP">Enter your email and we'll send you a link to set a new password.</p>
         <label><span data-i18n="au.email">Email</span><input name="email" type="email" autocomplete="email" required=""></label>
         <button class="btn btn-primary auth-btn" type="submit" data-i18n="au.send">Send link</button>
-        <p class="auth-msg" role="status"></p>
+        <p class="auth-msg" role="status"></p><p class="auth-msg err" role="alert"></p>
         <p class="auth-alt"><a href="#" id="toLogin" data-i18n="au.back">Back to log in</a></p>
       </form>
       <p class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span data-i18n="au.secure">Secure connection · your data protected</span></p>
@@ -1711,11 +1711,11 @@ Object.assign(I18N.pt,{
  "au.st1":"Crie sua conta","au.st1d":"Nome, empresa e e-mail.","au.st2":"Confirme seu e-mail","au.st2d":"Enviamos um link de confirmação.","au.st3":"Conecte seu WhatsApp","au.st3d":"Entre com o Facebook e escolha o número.",
  "au.plan":"Plano escolhido","au.planNote":"No teste você usa os recursos do Crescimento. O plano só é escolhido no fim dos 14 dias.",
  "au.li.e":"Bem-vindo de volta","au.li.h":"Entre no Kontaro","au.li.p":"Acesse sua caixa de entrada, campanhas e a IA do seu negócio.",
- "au.name":"Seu nome","au.company":"Nome da empresa","au.email":"E-mail","au.pass":"Senha","au.passHint":"Mínimo de 8 caracteres","au.show":"Mostrar",
+ "au.name":"Seu nome","au.company":"Nome da empresa","au.email":"E-mail","au.pass":"Senha","au.passHint":"Mínimo de 12 caracteres","au.show":"Mostrar",
  "au.terms":"Li e concordo com os <a href=\"/terms/\">Termos de Serviço</a> e a <a href=\"/privacy/\">Política de Privacidade</a>.",
  "au.create":"Criar conta grátis","au.login":"Entrar","au.forgot":"Esqueci minha senha","au.forgotH":"Recuperar senha","au.forgotP":"Informe seu e-mail e enviaremos um link para criar uma nova senha.","au.send":"Enviar link","au.back":"Voltar para o login",
  "au.haveAcc":"Já tem conta?","au.noAcc":"Ainda não tem conta?","au.createLink":"Criar conta grátis",
- "au.err":"Confira os campos destacados.","au.errTerms":"Para continuar, aceite os Termos e a Política de Privacidade.","au.errNet":"Não conseguimos conectar agora. Tente novamente em instantes.",
+ "au.err":"Confira os campos destacados.","au.errTerms":"Para continuar, aceite os Termos e a Política de Privacidade.","au.errNet":"Não conseguimos conectar agora. Tente novamente em instantes.","au.errPass":"A senha precisa ter no mínimo 12 caracteres.","au.busySignup":"Criando sua conta…","au.busyLogin":"Entrando…","au.busyForgot":"Enviando…","au.fbSignup":"Ou crie sua conta direto no app Kontaro","au.fbLogin":"Ou entre direto no app Kontaro","au.fbForgot":"Ou recupere sua senha direto no app Kontaro",
  "au.okSignup":"Conta criada! Abrindo seu painel…","au.okLogin":"Tudo certo! Abrindo seu painel…","au.okForgot":"Se houver uma conta com esse e-mail, você vai receber o link em instantes.",
  "au.appH":"Seu painel abre no app Kontaro","au.appP":"O cadastro e o login são feitos com segurança no app. Você volta para cá quando quiser.",
  "au.appSignup":"Criar minha conta grátis","au.appLogin":"Entrar no meu painel","au.secure":"Conexão segura · seus dados protegidos"
@@ -1734,11 +1734,11 @@ Object.assign(I18N.en,{
  "au.st1":"Create your account","au.st1d":"Name, company and email.","au.st2":"Confirm your email","au.st2d":"We send you a confirmation link.","au.st3":"Connect your WhatsApp","au.st3d":"Log in with Facebook and pick your number.",
  "au.plan":"Selected plan","au.planNote":"During the trial you get Growth features. You only choose a plan at the end of the 14 days.",
  "au.li.e":"Welcome back","au.li.h":"Log in to Kontaro","au.li.p":"Get to your inbox, campaigns and your business AI.",
- "au.name":"Your name","au.company":"Company name","au.email":"Email","au.pass":"Password","au.passHint":"At least 8 characters","au.show":"Show",
+ "au.name":"Your name","au.company":"Company name","au.email":"Email","au.pass":"Password","au.passHint":"At least 12 characters","au.show":"Show",
  "au.terms":"I have read and agree to the <a href=\"/terms/\">Terms of Service</a> and <a href=\"/privacy/\">Privacy Policy</a>.",
  "au.create":"Create free account","au.login":"Log in","au.forgot":"Forgot password?","au.forgotH":"Reset your password","au.forgotP":"Enter your email and we'll send you a link to set a new password.","au.send":"Send link","au.back":"Back to log in",
  "au.haveAcc":"Already have an account?","au.noAcc":"Don't have an account?","au.createLink":"Create free account",
- "au.err":"Please check the highlighted fields.","au.errTerms":"To continue, please accept the Terms and Privacy Policy.","au.errNet":"We couldn't connect right now. Please try again in a moment.",
+ "au.err":"Please check the highlighted fields.","au.errTerms":"To continue, please accept the Terms and Privacy Policy.","au.errNet":"We couldn't connect right now. Please try again in a moment.","au.errPass":"Your password needs at least 12 characters.","au.busySignup":"Creating your account…","au.busyLogin":"Logging in…","au.busyForgot":"Sending…","au.fbSignup":"Or create your account directly in the Kontaro app","au.fbLogin":"Or log in directly in the Kontaro app","au.fbForgot":"Or reset your password directly in the Kontaro app",
  "au.okSignup":"Account created! Opening your dashboard…","au.okLogin":"All set! Opening your dashboard…","au.okForgot":"If an account exists for that email, you'll get the link shortly.",
  "au.appH":"Your dashboard opens in the Kontaro app","au.appP":"Sign-up and login happen securely in the app. You can come back here anytime.",
  "au.appSignup":"Create my free account","au.appLogin":"Go to my dashboard","au.secure":"Secure connection · your data protected"
@@ -1757,11 +1757,11 @@ Object.assign(I18N.es,{
  "au.st1":"Crea tu cuenta","au.st1d":"Nombre, empresa y correo.","au.st2":"Confirma tu correo","au.st2d":"Te enviamos un enlace de confirmación.","au.st3":"Conecta tu WhatsApp","au.st3d":"Entra con Facebook y elige el número.",
  "au.plan":"Plan elegido","au.planNote":"Durante la prueba usas las funciones de Crecimiento. Eliges el plan al final de los 14 días.",
  "au.li.e":"Bienvenido de nuevo","au.li.h":"Inicia sesión en Kontaro","au.li.p":"Accede a tu bandeja, tus campañas y la IA de tu negocio.",
- "au.name":"Tu nombre","au.company":"Nombre de la empresa","au.email":"Correo","au.pass":"Contraseña","au.passHint":"Mínimo 8 caracteres","au.show":"Mostrar",
+ "au.name":"Tu nombre","au.company":"Nombre de la empresa","au.email":"Correo","au.pass":"Contraseña","au.passHint":"Mínimo 12 caracteres","au.show":"Mostrar",
  "au.terms":"Leí y acepto los <a href=\"/terms/\">Términos de Servicio</a> y la <a href=\"/privacy/\">Política de Privacidad</a>.",
  "au.create":"Crear cuenta gratis","au.login":"Iniciar sesión","au.forgot":"Olvidé mi contraseña","au.forgotH":"Recuperar contraseña","au.forgotP":"Escribe tu correo y te enviaremos un enlace para crear una nueva contraseña.","au.send":"Enviar enlace","au.back":"Volver al inicio de sesión",
  "au.haveAcc":"¿Ya tienes cuenta?","au.noAcc":"¿Aún no tienes cuenta?","au.createLink":"Crear cuenta gratis",
- "au.err":"Revisa los campos marcados.","au.errTerms":"Para continuar, acepta los Términos y la Política de Privacidad.","au.errNet":"No pudimos conectar ahora. Inténtalo de nuevo en un momento.",
+ "au.err":"Revisa los campos marcados.","au.errTerms":"Para continuar, acepta los Términos y la Política de Privacidad.","au.errNet":"No pudimos conectar ahora. Inténtalo de nuevo en un momento.","au.errPass":"La contraseña necesita al menos 12 caracteres.","au.busySignup":"Creando tu cuenta…","au.busyLogin":"Iniciando sesión…","au.busyForgot":"Enviando…","au.fbSignup":"O crea tu cuenta directamente en la app Kontaro","au.fbLogin":"O inicia sesión directamente en la app Kontaro","au.fbForgot":"O recupera tu contraseña directamente en la app Kontaro",
  "au.okSignup":"¡Cuenta creada! Abriendo tu panel…","au.okLogin":"¡Listo! Abriendo tu panel…","au.okForgot":"Si existe una cuenta con ese correo, recibirás el enlace en unos instantes.",
  "au.appH":"Tu panel se abre en la app de Kontaro","au.appP":"El registro y el inicio de sesión se hacen de forma segura en la app. Puedes volver aquí cuando quieras.",
  "au.appSignup":"Crear mi cuenta gratis","au.appLogin":"Ir a mi panel","au.secure":"Conexión segura · tus datos protegidos"
@@ -2143,7 +2143,7 @@ document.addEventListener("click",function(e){var a=e.target.closest&&e.target.c
 /* ===== v4: page routing, dedicated pages, auth ===== */
 var APP_URL=(window.KONTARO_APP_URL||"https://relay.kontaro.ai").replace(/\/$/,"");
 var API_URL=(window.KONTARO_API_URL||"https://relay-whatsapp-api.onrender.com").replace(/\/$/,"");
-var AUTH_MODE=window.KONTARO_AUTH_MODE||"app";
+var AUTH_MODE=window.KONTARO_AUTH_MODE||"api";
 var KPAGE={id:"home"};
 function urlFor(l,page,plan){ return page==="plan"?PAGES[l].plan.replace("{p}",PLAN_SLUG[l][plan||"growth"]):(PAGES[l][page]||PAGES[l].home); }
 function detectPage(l){
@@ -2254,30 +2254,54 @@ function setupAuth(){
   if(authReady) return; authReady=true;
   window.addEventListener("hashchange",show);
   $("#toLogin").addEventListener("click",function(e){e.preventDefault(); history.replaceState(null,"",location.pathname); show();});
-  $$(".pw-show").forEach(function(b){b.addEventListener("click",function(){var i=b.previousElementSibling; i.type=i.type==="password"?"text":"password";})});
+  $$(".pw-show").forEach(function(b){b.addEventListener("click",function(){var i=b.previousElementSibling, show=i.type==="password"; i.type=show?"text":"password"; b.setAttribute("aria-pressed",String(show));})});
+  /* Talks to the Relay API. Errors from the API are {"error":"…"} with a non-2xx status and are shown as is.
+     Network problems (offline, CORS, timeout) are marked .net so we can offer a direct link to the app. */
   function call(path,body){
-    return fetch(API_URL+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
-      .then(function(r){return r.json().catch(function(){return {}}).then(function(d){ if(!r.ok) throw new Error(d.error||d.message||t("au.errNet")); return d; });},
-            function(){ throw new Error(t("au.errNet")); });
+    var ctl=window.AbortController?new AbortController():null, timer=ctl&&setTimeout(function(){ctl.abort()},60000);
+    function netErr(){ var e=new Error(t("au.errNet")); e.net=true; throw e; }
+    return fetch(API_URL+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),signal:ctl?ctl.signal:undefined})
+      .then(function(r){ clearTimeout(timer); return r.json().catch(function(){return {}}).then(function(d){ if(!r.ok){ var e=new Error(d.error||d.message||t("au.errNet")); e.status=r.status; throw e; } return d; });},
+            function(){ clearTimeout(timer); netErr(); });
   }
-  function handoff(d){ /* The app reads #session=… once, stores it and clears the URL (see README). */
-    location.href=APP_URL+"/#session="+encodeURIComponent(d.token)+"&email="+encodeURIComponent(d.email||"");
-  }
-  function wire(form,fields,path,body,okKey,after){
+  var apiLang=lang==="pt"?"pt-BR":"en"; /* Relay accepts only pt-BR or en */
+  function wire(form,fields,path,body,kind,after){
+    var msg=$(".auth-msg[role=status]",form), alert=$(".auth-msg[role=alert]",form), btn=$("button[type=submit]",form);
+    function say(ok,text){ msg.className="auth-msg"+(ok?" ok":""); msg.textContent=text||""; }
+    function fail(text,fallback){
+      alert.textContent=text;
+      if(fallback){ var a=document.createElement("a"); a.href=APP_URL+"/#"+fallback; a.textContent=t("au.fb"+kind)+" →"; alert.appendChild(document.createElement("br")); alert.appendChild(a); }
+    }
     form.addEventListener("submit",function(e){
-      e.preventDefault(); var msg=$(".auth-msg",form), bad=false;
-      fields.forEach(function(n){ var el=form[n], ok=el.type==="checkbox"?el.checked:el.checkValidity(); el.setAttribute("aria-invalid",String(!ok)); if(!ok) bad=true; });
-      msg.className="auth-msg err";
-      if(bad){ msg.textContent=(form.terms&&!form.terms.checked)?t("au.errTerms"):t("au.err"); return; }
-      var btn=$("button[type=submit]",form); btn.disabled=true; msg.className="auth-msg"; msg.textContent="…";
-      call(path,body(form)).then(function(d){ msg.className="auth-msg ok"; msg.textContent=t(okKey); if(after) after(d); })
-        .catch(function(err){ msg.className="auth-msg err"; msg.textContent=err.message; })
-        .then(function(){ btn.disabled=false; });
+      e.preventDefault(); if(btn.disabled) return;
+      var bad=[];
+      fields.forEach(function(n){ var el=form[n], ok=el.type==="checkbox"?el.checked:el.checkValidity(); el.setAttribute("aria-invalid",String(!ok)); if(!ok) bad.push(n); });
+      say(false,""); alert.textContent="";
+      if(bad.length){
+        var only=bad.length===1?bad[0]:null;
+        fail(only==="terms"?t("au.errTerms"):only==="password"&&form.password.value&&form.password.minLength>0?t("au.errPass"):t("au.err"));
+        form[bad[0]].focus(); return;
+      }
+      var data=body(form), email=data.email;
+      btn.disabled=true; form.setAttribute("aria-busy","true"); say(false,t("au.busy"+kind));
+      function done(){ btn.disabled=false; form.removeAttribute("aria-busy"); }
+      call(path,data).then(function(d){
+        if(after&&!d.token){ var e=new Error(t("au.errNet")); e.net=true; throw e; }
+        say(true,t("au.ok"+kind));
+        if(after) after(d.token,email); else done();
+      }).catch(function(err){
+        done();
+        if(!after&&!err.net){ say(true,t("au.okForgot")); return; } /* forgot-password: never reveal whether an account exists */
+        say(false,""); fail(err.message,err.net?(kind==="Signup"?"signup":kind==="Login"?"login":"forgot"):null);
+      });
     });
   }
-  wire($("#fSignup"),["name","workspace","email","password","terms"],"/api/auth/register",function(f){return {name:f.name.value.trim(),workspace:f.workspace.value.trim(),email:f.email.value.trim(),password:f.password.value,lang:lang==="pt"?"pt":"en"}},"au.okSignup",handoff);
-  wire($("#fLogin"),["email","password"],"/api/login",function(f){return {email:f.email.value.trim(),password:f.password.value}},"au.okLogin",handoff);
-  wire($("#fForgot"),["email"],"/api/auth/forgot-password",function(f){return {email:f.email.value.trim(),lang:lang==="pt"?"pt":"en"}},"au.okForgot",null);
+  /* Hand-off: the app reads #session=…&email=… once, stores the session and clears the address bar.
+     The API returns only {token}, so we use the email the person typed. */
+  function handoff(token,email){ location.href=APP_URL+"/#session="+encodeURIComponent(token)+"&email="+encodeURIComponent(email); }
+  wire($("#fSignup"),["name","workspace","email","password","terms"],"/api/auth/register",function(f){return {name:f.name.value.trim(),workspace:f.workspace.value.trim(),email:f.email.value.trim(),password:f.password.value,lang:apiLang}},"Signup",handoff);
+  wire($("#fLogin"),["email","password"],"/api/login",function(f){return {email:f.email.value.trim(),password:f.password.value}},"Login",handoff);
+  wire($("#fForgot"),["email"],"/api/auth/forgot-password",function(f){return {email:f.email.value.trim(),lang:apiLang}},"Forgot",null);
 }
 
 applyLang(pickLang());

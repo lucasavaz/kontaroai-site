@@ -39,7 +39,7 @@ Alternatively, run the build on your own computer and upload `dist/` to any stat
 
 All pages come from `src/index.html` (sections are shown per page with `data-pages`); `build.js` pre-renders each one. The homepage keeps every section. URL maps live in `PAGES`/`PLAN_SLUG` (index.html) and `build.js`; keep them in sync.
 
-Sign-up/login: `AUTH_MODE=app` (default) sends people to the Relay app (`#signup` / `#login`); `AUTH_MODE=api` uses the on-site forms against the Relay API. See RELAY-DEV-SPEC.md for what Relay must change first.
+Sign-up/login: `AUTH_MODE=api` (default) uses the on-site forms against the Relay API and then hands the session to the app; `AUTH_MODE=app` (fallback) sends people to the Relay app (`#signup` / `#login`). See RELAY-DEV-SPEC.md.
 
 ## Sign-up (homepage form)
 

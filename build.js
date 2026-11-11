@@ -1,9 +1,11 @@
 // Builds a static, SEO-ready, multilingual site into ./dist
-// Usage: SITE_URL=https://kontaro.ai [AUTH_MODE=app|api] [APP_URL=https://relay.kontaro.ai] [API_URL=https://relay-whatsapp-api.onrender.com] [LEAD_ENDPOINT=...] node build.js
+// Usage: SITE_URL=https://kontaro.ai [AUTH_MODE=api|app] [APP_URL=https://relay.kontaro.ai] [API_URL=https://relay-whatsapp-api.onrender.com] [LEAD_ENDPOINT=...] node build.js
 const {chromium}=require('playwright'); const fs=require('fs'); const path=require('path');
 const SITE=(process.env.SITE_URL||'https://kontaro.ai').replace(/\/$/,'');
 const LEAD=process.env.LEAD_ENDPOINT||'';
-const AUTH_MODE=process.env.AUTH_MODE||'app';
+// api (default): the sign-up/login forms on kontaro.ai talk to the Relay API, then hand the session to the app.
+// app (fallback): AUTH_MODE=app node build.js sends people to the Relay app to sign up / log in instead.
+const AUTH_MODE=process.env.AUTH_MODE==='app'?'app':'api';
 const APP_URL=process.env.APP_URL||'https://relay.kontaro.ai';
 const API_URL=process.env.API_URL||'https://relay-whatsapp-api.onrender.com';
 // Page URLs per language (must match PAGES / PLAN_SLUG in src/index.html)

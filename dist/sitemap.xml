@@ -15,6 +15,98 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/"/>
   </url>
+  <url><loc>https://kontaro.ai/precos/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/"/>
+  </url>
+  <url><loc>https://kontaro.ai/en/pricing/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/"/>
+  </url>
+  <url><loc>https://kontaro.ai/es/precios/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/"/>
+  </url>
+  <url><loc>https://kontaro.ai/duvidas/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/duvidas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/preguntas/"/>
+  </url>
+  <url><loc>https://kontaro.ai/en/faq/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/duvidas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/preguntas/"/>
+  </url>
+  <url><loc>https://kontaro.ai/es/preguntas/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/duvidas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/preguntas/"/>
+  </url>
+  <url><loc>https://kontaro.ai/criar-conta/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/criar-conta/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/crear-cuenta/"/>
+  </url>
+  <url><loc>https://kontaro.ai/en/signup/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/criar-conta/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/crear-cuenta/"/>
+  </url>
+  <url><loc>https://kontaro.ai/es/crear-cuenta/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/criar-conta/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/signup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/crear-cuenta/"/>
+  </url>
+  <url><loc>https://kontaro.ai/precos/essencial/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/essencial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/starter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/esencial/"/>
+  </url>
+  <url><loc>https://kontaro.ai/en/pricing/starter/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/essencial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/starter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/esencial/"/>
+  </url>
+  <url><loc>https://kontaro.ai/es/precios/esencial/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/essencial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/starter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/esencial/"/>
+  </url>
+  <url><loc>https://kontaro.ai/precos/crescimento/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/crescimento/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/growth/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/crecimiento/"/>
+  </url>
+  <url><loc>https://kontaro.ai/en/pricing/growth/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/crescimento/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/growth/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/crecimiento/"/>
+  </url>
+  <url><loc>https://kontaro.ai/es/precios/crecimiento/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/crescimento/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/growth/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/crecimiento/"/>
+  </url>
+  <url><loc>https://kontaro.ai/precos/escala/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/escala/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/scale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/escala/"/>
+  </url>
+  <url><loc>https://kontaro.ai/en/pricing/scale/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/escala/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/scale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/escala/"/>
+  </url>
+  <url><loc>https://kontaro.ai/es/precios/escala/</loc><lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kontaro.ai/precos/escala/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kontaro.ai/en/pricing/scale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://kontaro.ai/es/precios/escala/"/>
+  </url>
+  <url><loc>https://kontaro.ai/terms/</loc><lastmod>2026-11-11</lastmod></url>
+  <url><loc>https://kontaro.ai/privacy/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://kontaro.ai/pt-br/blog/transformar-conversas-do-whatsapp-em-vendas/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://kontaro.ai/pt-br/blog/whatsapp-business-app-ou-api/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://kontaro.ai/pt-br/blog/janela-de-24-horas-do-whatsapp/</loc><lastmod>2026-11-11</lastmod></url>

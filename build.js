@@ -1,8 +1,10 @@
 // Builds a static, SEO-ready, multilingual site into ./dist
-// Usage: SITE_URL=https://kontaro.ai LEAD_ENDPOINT=https://api.kontaro.ai/v1/leads node build.js
+// Usage: SITE_URL=https://kontaro.ai APP_SIGNUP_URL=https://relay.kontaro.ai/signup [LEAD_ENDPOINT=...] node build.js
 const {chromium}=require('playwright'); const fs=require('fs'); const path=require('path');
 const SITE=(process.env.SITE_URL||'https://kontaro.ai').replace(/\/$/,'');
 const LEAD=process.env.LEAD_ENDPOINT||'';
+const SIGNUP=process.env.APP_SIGNUP_URL||'https://relay.kontaro.ai/signup';
+const LOGIN=process.env.APP_LOGIN_URL||'https://relay.kontaro.ai';
 const body=fs.readFileSync(path.join(__dirname,'src/index.html'),'utf8')
   .replace(/<title>[\s\S]*?<\/title>\s*/,'').replace(/<meta name="claude:viewport-fit-sides"[^>]*>\s*/,'').replace(/<meta name="description"[^>]*>\s*/,'');
 const LANGS=[{code:'pt',hl:'pt-BR',dir:'',og:'pt_BR'},{code:'en',hl:'en',dir:'en/',og:'en_US'},{code:'es',hl:'es',dir:'es/',og:'es_ES'}];
@@ -20,7 +22,10 @@ function ogCard(c){const o=OG[c];return `<html><body style="margin:0"><div style
 function head(L){
   const url=`${SITE}/${L.dir}`;
   const alts=LANGS.map(x=>`<link rel="alternate" hreflang="${x.hl}" href="${SITE}/${x.dir}">`).join('\n')+`\n<link rel="alternate" hreflang="x-default" href="${SITE}/">`;
-  const ld={"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kontaro","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":SITE,"description":T[L.code].desc,"inLanguage":["pt-BR","en","es"]};
+  const ORG={"@type":"Organization","@id":SITE+"/#org","name":"Kontaro Inc.","alternateName":"Kontaro","url":SITE,"logo":SITE+"/favicon.svg","email":"talk@kontaro.ai",
+    "address":{"@type":"PostalAddress","streetAddress":"830 Brickell Plaza","addressLocality":"Miami","addressRegion":"FL","postalCode":"33131","addressCountry":"US"},
+    "sameAs":["https://www.instagram.com/kontaro.ai/","https://www.linkedin.com/company/kontaro-ai/"]};
+  const ld={"@context":"https://schema.org","@graph":[ORG,{"@type":"SoftwareApplication","name":"Kontaro","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":SITE,"description":T[L.code].desc,"inLanguage":["pt-BR","en","es"],"publisher":{"@id":SITE+"/#org"}}]};
   return `<!doctype html>
 <html lang="${L.hl}" data-prerender-lang="${L.code}">
 <head>
@@ -41,7 +46,7 @@ ${alts}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
-${LEAD?`<script>window.KONTARO_LEAD_ENDPOINT=${JSON.stringify(LEAD)};</script>`:''}
+<script>window.KONTARO_SIGNUP_URL=${JSON.stringify(SIGNUP)};window.KONTARO_LOGIN_URL=${JSON.stringify(LOGIN)};${LEAD?`window.KONTARO_LEAD_ENDPOINT=${JSON.stringify(LEAD)};`:''}</script>
 </head>
 <body>
 `;}
@@ -59,16 +64,21 @@ ${LEAD?`<script>window.KONTARO_LEAD_ENDPOINT=${JSON.stringify(LEAD)};</script>`:
     const html=await p.evaluate(()=>{
       ['#heroChat','#adminChat','#answer','#viz','#asked'].forEach(s=>{const e=document.querySelector(s); if(e) e.innerHTML='';});
       document.querySelectorAll('.float').forEach(f=>f.classList.add('dim'));
+      const qa=[...document.querySelectorAll('#faqList details')].map(d=>({"@type":"Question","name":d.querySelector('summary').textContent,"acceptedAnswer":{"@type":"Answer","text":d.querySelector('p').textContent}}));
+      const sc=document.createElement('script'); sc.type='application/ld+json'; sc.textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":qa}); document.head.appendChild(sc);
       return '<!doctype html>\n'+document.documentElement.outerHTML;
     });
     const out=path.join(dist,L.dir); fs.mkdirSync(out,{recursive:true});
     fs.writeFileSync(path.join(out,'index.html'),html); fs.unlinkSync(tmp); await p.close();
   }
   await b.close();
+  const pub=path.join(__dirname,'public'); if(fs.existsSync(pub)) fs.cpSync(pub,dist,{recursive:true});
   fs.writeFileSync(path.join(dist,'favicon.svg'),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="9" fill="#2F52F5"/><path d="M10 8v16M10 16l8-8M13.5 13.5 21 24" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="23.5" cy="9.5" r="3" fill="#F2672E"/></svg>');
   fs.writeFileSync(path.join(dist,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
   const today=new Date().toISOString().slice(0,10);
   fs.writeFileSync(path.join(dist,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`+
-    LANGS.map(L=>`  <url><loc>${SITE}/${L.dir}</loc><lastmod>${today}</lastmod>\n`+LANGS.map(x=>`    <xhtml:link rel="alternate" hreflang="${x.hl}" href="${SITE}/${x.dir}"/>`).join('\n')+`\n  </url>`).join('\n')+`\n</urlset>\n`);
+    LANGS.map(L=>`  <url><loc>${SITE}/${L.dir}</loc><lastmod>${today}</lastmod>\n`+LANGS.map(x=>`    <xhtml:link rel="alternate" hreflang="${x.hl}" href="${SITE}/${x.dir}"/>`).join('\n')+`\n  </url>`).join('\n')+`\n`+
+    require('child_process').execSync('find '+JSON.stringify(path.join(dist))+' -path "*/blog/*" -name index.html').toString().trim().split('\n').filter(Boolean).concat([path.join(dist,'blog/index.html')]).filter((v,i,a)=>a.indexOf(v)===i)
+      .map(f=>'  <url><loc>'+SITE+'/'+path.relative(dist,path.dirname(f)).split(path.sep).join('/')+'/</loc><lastmod>'+today+'</lastmod></url>').join('\n')+`\n</urlset>\n`);
   console.log('Built:',fs.readdirSync(dist));
 })();

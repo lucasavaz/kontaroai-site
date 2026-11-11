@@ -26,7 +26,22 @@ SITE_URL=https://kontaro.ai APP_SIGNUP_URL=https://relay.kontaro.ai/signup node 
 
 Alternatively, run the build on your own computer and upload `dist/` to any static host.
 
-## Sign-up
+## Pages
+
+| Page | PT | EN | ES |
+|---|---|---|---|
+| Home | / | /en/ | /es/ |
+| Pricing | /precos/ | /en/pricing/ | /es/precios/ |
+| Plan | /precos/essencial/, /crescimento/, /escala/ | /en/pricing/starter/, /growth/, /scale/ | /es/precios/esencial/, /crecimiento/, /escala/ |
+| FAQ | /duvidas/ | /en/faq/ | /es/preguntas/ |
+| Sign-up | /criar-conta/ | /en/signup/ | /es/crear-cuenta/ |
+| Login | /entrar/ | /en/login/ | /es/iniciar-sesion/ |
+
+All pages come from `src/index.html` (sections are shown per page with `data-pages`); `build.js` pre-renders each one. The homepage keeps every section. URL maps live in `PAGES`/`PLAN_SLUG` (index.html) and `build.js`; keep them in sync.
+
+Sign-up/login: `AUTH_MODE=app` (default) sends people to the Relay app (`#signup` / `#login`); `AUTH_MODE=api` uses the on-site forms against the Relay API. See RELAY-DEV-SPEC.md for what Relay must change first.
+
+## Sign-up (homepage form)
 
 All "Start free" buttons lead to the sign-up form (name + email). On submit, the visitor goes to `APP_SIGNUP_URL` (default `https://relay.kontaro.ai/signup`) with `?lang=pt|en|es`. Name and email travel in the URL **hash** (`#name=...&email=...`), which is never sent to servers or leaked in referrers, so the app can pre-fill its form. The app handles email verification. "Create campaign" in the AI demo also opens the sign-up page.
 

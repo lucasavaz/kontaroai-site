@@ -9,11 +9,11 @@ const AUTH_MODE=process.env.AUTH_MODE==='app'?'app':'api';
 const APP_URL=process.env.APP_URL||'https://relay.kontaro.ai';
 const API_URL=process.env.API_URL||'https://relay-whatsapp-api.onrender.com';
 // Page URLs per language (must match PAGES / PLAN_SLUG in src/index.html)
-const PAGES={pt:{home:'',pricing:'precos/',faq:'duvidas/',signup:'criar-conta/',login:'entrar/',plan:'precos/{p}/'},
-  en:{home:'en/',pricing:'en/pricing/',faq:'en/faq/',signup:'en/signup/',login:'en/login/',plan:'en/pricing/{p}/'},
-  es:{home:'es/',pricing:'es/precios/',faq:'es/preguntas/',signup:'es/crear-cuenta/',login:'es/iniciar-sesion/',plan:'es/precios/{p}/'}};
+const PAGES={pt:{home:'',pricing:'precos/',faq:'duvidas/',signup:'criar-conta/',login:'entrar/',about:'sobre/',contact:'fale-conosco/',plan:'precos/{p}/'},
+  en:{home:'en/',pricing:'en/pricing/',faq:'en/faq/',signup:'en/signup/',login:'en/login/',about:'en/about/',contact:'en/contact/',plan:'en/pricing/{p}/'},
+  es:{home:'es/',pricing:'es/precios/',faq:'es/preguntas/',signup:'es/crear-cuenta/',login:'es/iniciar-sesion/',about:'es/sobre-nosotros/',contact:'es/contacto/',plan:'es/precios/{p}/'}};
 const PLAN_SLUG={pt:{starter:'essencial',growth:'crescimento',scale:'escala'},en:{starter:'starter',growth:'growth',scale:'scale'},es:{starter:'esencial',growth:'crecimiento',scale:'escala'}};
-const PAGE_LIST=[{id:'home'},{id:'pricing'},{id:'faq'},{id:'signup'},{id:'login'},{id:'plan',plan:'starter'},{id:'plan',plan:'growth'},{id:'plan',plan:'scale'}];
+const PAGE_LIST=[{id:'home'},{id:'pricing'},{id:'faq'},{id:'signup'},{id:'login'},{id:'about'},{id:'contact'},{id:'plan',plan:'starter'},{id:'plan',plan:'growth'},{id:'plan',plan:'scale'}];
 const dirFor=(c,pg)=>pg.id==='plan'?PAGES[c].plan.replace('{p}',PLAN_SLUG[c][pg.plan]):PAGES[c][pg.id];
 const body=fs.readFileSync(path.join(__dirname,'src/index.html'),'utf8')
   .replace(/<title>[\s\S]*?<\/title>\s*/,'').replace(/<meta name="claude:viewport-fit-sides"[^>]*>\s*/,'').replace(/<meta name="description"[^>]*>\s*/,'');

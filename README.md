@@ -36,6 +36,8 @@ Alternatively, run the build on your own computer and upload `dist/` to any stat
 | FAQ | /duvidas/ | /en/faq/ | /es/preguntas/ |
 | Sign-up | /criar-conta/ | /en/signup/ | /es/crear-cuenta/ |
 | Login | /entrar/ | /en/login/ | /es/iniciar-sesion/ |
+| About Us | /sobre/ | /en/about/ | /es/sobre-nosotros/ |
+| Let's Talk (contact) | /fale-conosco/ | /en/contact/ | /es/contacto/ |
 
 All pages come from `src/index.html` (sections are shown per page with `data-pages`); `build.js` pre-renders each one. The homepage keeps every section. URL maps live in `PAGES`/`PLAN_SLUG` (index.html) and `build.js`; keep them in sync.
 
@@ -58,6 +60,8 @@ The blog lives in `public/` (`/blog/` EN, `/pt-br/blog/` PT, `/es/blog/` ES) and
 ## Pricing explainer and calculator
 
 The "How billing works" section (`#billing`) explains the three parts of a customer's bill (Kontaro plan, Meta per-message fees, AI usage) and has a cost estimator. Meta's rates live in `RATES` in `src/index.html` (USD per delivered message, Meta rate card effective 2026-10-01; service messages are billed at the utility rate since that date). **Meta can change rates on Jan 1, Apr 1, Jul 1 and Oct 1. Update `RATES` and the dates in the copy every quarter** from https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing
+
+The FAQ answer "Why does Meta charge for replies to customers?" also describes Meta's rules (message categories, 1,000 free service messages per number per month since 2026-10-01). Check it at the same time.
 
 ## Legal pages
 

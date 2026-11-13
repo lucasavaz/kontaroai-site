@@ -444,6 +444,7 @@ footer.site address{font-style:normal;line-height:1.6}
 .est-out .row b{font:700 18px var(--f-display);font-variant-numeric:tabular-nums;text-align:right}
 .est-out .row.sub{font-size:13px;opacity:.72;padding-left:12px}
 .est-out .row.sub b{font:500 13px var(--f-mono)}
+.est-out .row.free-note{font-size:12px;padding-left:24px;margin-top:-4px}
 .est-out .row.total{border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);padding-top:14px;margin-top:4px}
 .est-out .row.total b{font-size:28px}
 .est-out .warn{background:var(--signal-soft);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13.5px}
@@ -957,7 +958,7 @@ curl https://api.kontaro.ai/v1/messages \
 
     <h3 class="subh" data-i18n="bl.mh">Tarifas de Meta por tipo de mensaje</h3>
     <div class="cmp-scroll" tabindex="0" role="region" aria-labelledby="metaCap">
-      <table class="mtab" id="metaTable"><caption id="metaCap" class="sr">Tarifas de Meta por tipo de mensaje</caption><thead><tr><th>Tipo</th><th>Cuándo ocurre</th><th>Ejemplo</th><th>Brasil</th><th>EE. UU. y Canadá</th><th>México</th></tr></thead><tbody><tr><td><b>Mensajes del cliente</b></td><td>Cuando el cliente te escribe</td><td>"Hola, ¿entregan hoy?"</td><td class="p free">Gratis</td><td class="p free">Gratis</td><td class="p free">Gratis</td></tr><tr><td><b>Atención</b></td><td>Tus respuestas dentro de las 24 h desde el último mensaje del cliente (se cobran desde el 1/10/2026)</td><td>"Sí, entregamos hasta las 4 p. m."</td><td class="p">US$&nbsp;0,0068</td><td class="p">US$&nbsp;0,0034</td><td class="p">US$&nbsp;0,0085</td></tr><tr><td><b>Utilidad</b></td><td>Avisos sobre algo que el cliente pidió o contrató</td><td>Pedido enviado, factura, recordatorio de cita</td><td class="p">US$&nbsp;0,0068</td><td class="p">US$&nbsp;0,0034</td><td class="p">US$&nbsp;0,0085</td></tr><tr><td><b>Autenticación</b></td><td>Códigos de verificación</td><td>"Tu código es 482913"</td><td class="p">US$&nbsp;0,0068</td><td class="p">US$&nbsp;0,0034</td><td class="p">US$&nbsp;0,0085</td></tr><tr><td><b>Marketing</b></td><td>Campañas, ofertas y reactivación</td><td>"20% de descuento solo hoy"</td><td class="p">US$&nbsp;0,0625</td><td class="p">US$&nbsp;0,0250</td><td class="p">US$&nbsp;0,0397</td></tr><tr><td><b>Anuncio de clic a WhatsApp</b></td><td>El cliente llega desde un anuncio y respondes en 24 h: se abren 72 h gratis</td><td>Cualquier mensaje en esas 72 h</td><td class="p free">Gratis</td><td class="p free">Gratis</td><td class="p free">Gratis</td></tr></tbody></table>
+      <table class="mtab" id="metaTable"><caption id="metaCap" class="sr">Tarifas de Meta por tipo de mensaje</caption><thead><tr><th>Tipo</th><th>Cuándo ocurre</th><th>Ejemplo</th><th>Brasil</th><th>EE. UU. y Canadá</th><th>México</th></tr></thead><tbody><tr><td><b>Mensajes del cliente</b></td><td>Cuando el cliente te escribe</td><td>"Hola, ¿entregan hoy?"</td><td class="p free">Gratis</td><td class="p free">Gratis</td><td class="p free">Gratis</td></tr><tr><td><b>Atención</b></td><td>Tus respuestas dentro de las 24 h desde el último mensaje del cliente (desde el 1/10/2026: 1.000 gratis al mes por número, luego se cobran)</td><td>"Sí, entregamos hasta las 4 p. m."</td><td class="p">US$&nbsp;0,0068</td><td class="p">US$&nbsp;0,0034</td><td class="p">US$&nbsp;0,0085</td></tr><tr><td><b>Utilidad</b></td><td>Avisos sobre algo que el cliente pidió o contrató</td><td>Pedido enviado, factura, recordatorio de cita</td><td class="p">US$&nbsp;0,0068</td><td class="p">US$&nbsp;0,0034</td><td class="p">US$&nbsp;0,0085</td></tr><tr><td><b>Autenticación</b></td><td>Códigos de verificación</td><td>"Tu código es 482913"</td><td class="p">US$&nbsp;0,0068</td><td class="p">US$&nbsp;0,0034</td><td class="p">US$&nbsp;0,0085</td></tr><tr><td><b>Marketing</b></td><td>Campañas, ofertas y reactivación</td><td>"20% de descuento solo hoy"</td><td class="p">US$&nbsp;0,0625</td><td class="p">US$&nbsp;0,0250</td><td class="p">US$&nbsp;0,0397</td></tr><tr><td><b>Anuncio de clic a WhatsApp</b></td><td>El cliente llega desde un anuncio y respondes en 24 h: se abren 72 h gratis</td><td>Cualquier mensaje en esas 72 h</td><td class="p free">Gratis</td><td class="p free">Gratis</td><td class="p free">Gratis</td></tr></tbody></table>
     </div>
     <p class="fine"><span data-i18n="bl.mnote">Valores en dólares por mensaje entregado, de la tabla oficial de Meta vigente desde el 1 de octubre de 2026, antes de descuentos por volumen. Meta puede cambiar las tarifas el primer día de cada trimestre.</span> <a href="https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing" target="_blank" rel="noopener" data-i18n="bl.mlink">Ver la tabla oficial de Meta</a></p>
 
@@ -983,11 +984,12 @@ curl https://api.kontaro.ai/v1/messages \
       <div class="est-out" aria-live="polite">
         <div class="row"><span data-i18n="es.o1">Plan Kontaro</span><b id="oPlan">US$&nbsp;108</b></div>
         <div class="row sub"><span data-i18n="es.o1b">Paquetes extra de IA (opcional)</span><b id="oAi">—</b></div>
-        <div class="row"><span data-i18n="es.o2">Tarifas de Meta (estimación)</span><b id="oMeta">US$&nbsp;31,75</b></div>
-        <div class="row sub"><span data-i18n="es.o2a">Respuestas de atención</span><b id="oMetaS">US$&nbsp;10,20</b></div>
+        <div class="row"><span data-i18n="es.o2">Tarifas de Meta (estimación)</span><b id="oMeta">US$&nbsp;23,25</b></div>
+        <div class="row sub"><span data-i18n="es.o2a">Respuestas de atención</span><b id="oMetaS">US$&nbsp;1,70</b></div>
+        <div class="row sub free-note"><span data-i18n="es.o2f">1.000 respuestas gratis al mes incluidas (por número)</span></div>
         <div class="row sub"><span data-i18n="es.o2b">Campañas (marketing)</span><b id="oMetaM">US$&nbsp;19,85</b></div>
         <div class="row sub"><span data-i18n="es.o2c">Avisos (utilidad)</span><b id="oMetaU">US$&nbsp;1,70</b></div>
-        <div class="row total"><span data-i18n="es.o3">Total estimado al mes</span><b id="oTotal">US$&nbsp;140</b></div>
+        <div class="row total"><span data-i18n="es.o3">Total estimado al mes</span><b id="oTotal">US$&nbsp;131</b></div>
         <p class="warn" id="oWarn" hidden=""></p>
         <p class="disc"><span data-i18n="es.disc">Estimación sin valor de cotización. Tarifas de Meta según la tabla del 1/10/2026, sin descuentos por volumen. Impuestos no incluidos.</span> <a href="/terms/#s4" data-i18n="es.terms">Ver reglas de cobro en los Términos.</a></p>
         <a class="btn btn-primary" id="esCta" data-go="signup" href="/es/crear-cuenta/?plan=growth" data-i18n="es.cta">Probar 14 días gratis</a>
@@ -1579,7 +1581,7 @@ Object.assign(I18N.pt,{
  "es.p1":"Loja pequena","es.p2":"Empresa em crescimento","es.p3":"Rede com várias unidades",
  "es.country":"País dos seus clientes","es.plan":"Plano","es.conv":"Conversas de clientes por mês","es.replies":"Respostas da empresa por conversa",
  "es.mkt":"Mensagens de campanha por mês","es.util":"Avisos por mês (pedido, cobrança, lembrete)","es.fx":"Câmbio usado (R$ por US$ 1)",
- "es.o1":"Plano Kontaro","es.o1b":"Pacotes extras de IA (opcional)","es.o2":"Tarifas da Meta (estimativa)","es.o2a":"Respostas de atendimento","es.o2b":"Campanhas (marketing)","es.o2c":"Avisos (utilidade)","es.o3":"Total estimado por mês",
+ "es.o1":"Plano Kontaro","es.o1b":"Pacotes extras de IA (opcional)","es.o2":"Tarifas da Meta (estimativa)","es.o2a":"Respostas de atendimento","es.o2b":"Campanhas (marketing)","es.o2c":"Avisos (utilidade)","es.o2f":"1.000 respostas grátis por mês incluídas (por número)","es.o3":"Total estimado por mês",
  "es.warn":"Com {n} conversas por mês, você passaria do limite de IA do plano ({a}). Veja o plano {p} ou os pacotes extras.",
  "es.disc":"Estimativa sem valor de proposta. Tarifas da Meta pela tabela de 1º/10/2026, sem descontos por volume, convertidas pelo câmbio informado; a Meta cobra em dólar ou na moeda local. Impostos não incluídos.",
  "es.cta":"Testar 14 dias grátis"
@@ -1609,7 +1611,7 @@ Object.assign(I18N.en,{
  "es.p1":"Small shop","es.p2":"Growing business","es.p3":"Multi-location network",
  "es.country":"Your customers' country","es.plan":"Plan","es.conv":"Customer conversations per month","es.replies":"Business replies per conversation",
  "es.mkt":"Campaign messages per month","es.util":"Notifications per month (orders, payments, reminders)","es.fx":"Exchange rate",
- "es.o1":"Kontaro plan","es.o1b":"Extra AI packs (optional)","es.o2":"Meta fees (estimate)","es.o2a":"Service replies","es.o2b":"Campaigns (marketing)","es.o2c":"Notifications (utility)","es.o3":"Estimated total per month",
+ "es.o1":"Kontaro plan","es.o1b":"Extra AI packs (optional)","es.o2":"Meta fees (estimate)","es.o2a":"Service replies","es.o2b":"Campaigns (marketing)","es.o2c":"Notifications (utility)","es.o2f":"1,000 free replies a month included (per number)","es.o3":"Estimated total per month",
  "es.warn":"With {n} conversations a month, you'd go over the plan's AI limit ({a}). Consider the {p} plan or extra packs.",
  "es.disc":"Estimate only, not a quote. Meta fees use the October 1, 2026 rate card with no volume discounts. Taxes not included.",
  "es.cta":"Start 14-day free trial"
@@ -1639,7 +1641,7 @@ Object.assign(I18N.es,{
  "es.p1":"Tienda pequeña","es.p2":"Empresa en crecimiento","es.p3":"Red con varias sucursales",
  "es.country":"País de tus clientes","es.plan":"Plan","es.conv":"Conversaciones de clientes al mes","es.replies":"Respuestas de la empresa por conversación",
  "es.mkt":"Mensajes de campaña al mes","es.util":"Avisos al mes (pedidos, cobros, recordatorios)","es.fx":"Tipo de cambio",
- "es.o1":"Plan Kontaro","es.o1b":"Paquetes extra de IA (opcional)","es.o2":"Tarifas de Meta (estimación)","es.o2a":"Respuestas de atención","es.o2b":"Campañas (marketing)","es.o2c":"Avisos (utilidad)","es.o3":"Total estimado al mes",
+ "es.o1":"Plan Kontaro","es.o1b":"Paquetes extra de IA (opcional)","es.o2":"Tarifas de Meta (estimación)","es.o2a":"Respuestas de atención","es.o2b":"Campañas (marketing)","es.o2c":"Avisos (utilidad)","es.o2f":"1.000 respuestas gratis al mes incluidas (por número)","es.o3":"Total estimado al mes",
  "es.warn":"Con {n} conversaciones al mes superarías el límite de IA del plan ({a}). Mira el plan {p} o los paquetes extra.",
  "es.disc":"Estimación sin valor de cotización. Tarifas de Meta según la tabla del 1/10/2026, sin descuentos por volumen. Impuestos no incluidos.",
  "es.cta":"Probar 14 días gratis"
@@ -1649,7 +1651,8 @@ Object.assign(I18N.es,{
 var AI_LIMIT={starter:500,growth:2500,scale:10000};
 var AI_PACK={size:1000,brl:99,usd:25};
 
-/* Meta rate card (USD per delivered message), effective 2026-10-01. Service messages are billed at the utility rate. */
+/* Meta rate card (USD per delivered message), effective 2026-10-01. Service rate per Meta's card (same as utility); the first 1,000 service messages per number per month are free since 2026-10-01 (SERVICE_FREE below). Utility, marketing and authentication are charged from the first message. */
+var SERVICE_FREE=1000; /* free service messages per WhatsApp number per month (Meta, since 2026-10-01) */
 var RATES={BR:[0.0625,0.0068],NA:[0.0250,0.0034],MX:[0.0397,0.0085],CO:[0.0125,0.0008],AR:[0.0618,0.0260],CL:[0.0889,0.0200],PE:[0.0703,0.0300],ES:[0.0707,0.0200],LATAM:[0.0740,0.0113],WEU:[0.0592,0.0171],OTHER:[0.0604,0.0077]};
 var COUNTRY_NAMES={
  pt:{BR:"Brasil",NA:"EUA e Canadá",MX:"México",CO:"Colômbia",AR:"Argentina",CL:"Chile",PE:"Peru",ES:"Espanha",LATAM:"Outros da América Latina",WEU:"Outros da Europa Ocidental",OTHER:"Outros países"},
@@ -1660,19 +1663,19 @@ var COUNTRY_NAMES={
 /* Meta message types table: [type, when, example, rateIndex or "free"] */
 var META_TYPES={
  pt:[["Mensagens do cliente","Quando o cliente escreve para você","\"Oi, vocês entregam hoje?\"","free"],
-     ["Atendimento","Suas respostas em até 24 h após a última mensagem do cliente (pagas desde 1º/10/2026)","\"Entregamos sim, até as 16h.\"",1],
+     ["Atendimento","Suas respostas em até 24 h após a última mensagem do cliente (desde 1º/10/2026: 1.000 grátis por mês por número, depois pagas)","\"Entregamos sim, até as 16h.\"",1],
      ["Utilidade","Avisos sobre algo que o cliente pediu ou contratou","Pedido enviado, boleto, lembrete de horário",1],
      ["Autenticação","Códigos de verificação","\"Seu código é 482913\"",1],
      ["Marketing","Campanhas, ofertas e reengajamento","\"20% off só hoje\"",0],
      ["Anúncio Clique para WhatsApp","Cliente chega por anúncio e você responde em 24 h: abre 72 h grátis","Qualquer mensagem nessas 72 h","free"]],
  en:[["Customer messages","When a customer writes to you","\"Hi, do you deliver today?\"","free"],
-     ["Service","Your replies within 24 h of the customer's last message (billed since Oct 1, 2026)","\"Yes, we deliver until 4 p.m.\"",1],
+     ["Service","Your replies within 24 h of the customer's last message (since Oct 1, 2026: 1,000 free a month per number, then billed)","\"Yes, we deliver until 4 p.m.\"",1],
      ["Utility","Updates about something the customer ordered or signed up for","Order shipped, invoice, appointment reminder",1],
      ["Authentication","Verification codes","\"Your code is 482913\"",1],
      ["Marketing","Campaigns, offers and re-engagement","\"20% off today only\"",0],
      ["Click-to-WhatsApp ad","Customer arrives from an ad and you reply within 24 h: opens 72 free hours","Any message in those 72 h","free"]],
  es:[["Mensajes del cliente","Cuando el cliente te escribe","\"Hola, ¿entregan hoy?\"","free"],
-     ["Atención","Tus respuestas dentro de las 24 h desde el último mensaje del cliente (se cobran desde el 1/10/2026)","\"Sí, entregamos hasta las 4 p. m.\"",1],
+     ["Atención","Tus respuestas dentro de las 24 h desde el último mensaje del cliente (desde el 1/10/2026: 1.000 gratis al mes por número, luego se cobran)","\"Sí, entregamos hasta las 4 p. m.\"",1],
      ["Utilidad","Avisos sobre algo que el cliente pidió o contrató","Pedido enviado, factura, recordatorio de cita",1],
      ["Autenticación","Códigos de verificación","\"Tu código es 482913\"",1],
      ["Marketing","Campañas, ofertas y reactivación","\"20% de descuento solo hoy\"",0],
@@ -2135,14 +2138,16 @@ function calcEstimate(){
   var fx=lang==="pt"?(num("#esFx")||5.4):1;
   var conv=num("#esConv"), rep=num("#esReplies"), mkt=num("#esMkt"), util=num("#esUtil");
   var r=RATES[estCountry];
-  var mS=conv*rep*r[1], mM=mkt*r[0], mU=util*r[1], meta=mS+mM+mU;
+  var numbers=1; /* the estimator assumes 1 WhatsApp number */
+  var paidS=Math.max(0,conv*rep-SERVICE_FREE*numbers);
+  var mS=paidS*r[1], mM=mkt*r[0], mU=util*r[1], meta=mS+mM+mU;
   var over=Math.max(0,conv-AI_LIMIT[planId]), packs=Math.ceil(over/AI_PACK.size), packCost=packs*(lang==="pt"?AI_PACK.brl:AI_PACK.usd);
   var money=function(v){return fmtMoney(Math.round(v))};
   var metaLocal=function(v){return lang==="pt"?"≈ "+fmtMoney(Math.round(v*fx))+" ("+usd(v)+")":usd(v)};
   $("#oPlan").textContent=money(planCost);
   $("#oAi").textContent=packs?packs+" × "+money(lang==="pt"?AI_PACK.brl:AI_PACK.usd)+" = "+money(packCost):"—";
   $("#oMeta").textContent=metaLocal(meta);
-  $("#oMetaS").textContent=usd(mS); $("#oMetaM").textContent=usd(mM); $("#oMetaU").textContent=usd(mU);
+  $("#oMetaS").textContent=paidS>0?usd(mS):t("mt.free"); $("#oMetaM").textContent=usd(mM); $("#oMetaU").textContent=usd(mU);
   $("#oTotal").textContent=(lang==="pt"?"≈ ":"")+money(planCost+packCost+meta*fx);
   var ec=$("#esCta"); if(ec) ec.setAttribute("href",signupUrl(planId));
   var w=$("#oWarn");

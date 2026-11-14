@@ -1,0 +1,12 @@
+{
+  "name": "kontaroai-site",
+  "private": true,
+  "description": "Kontaro marketing site (static). See README.md.",
+  "scripts": {
+    "build": "node build.js",
+    "seo-check": "node scripts/seo-check.js --render",
+    "serve": "node scripts/serve.js 8080",
+    "blog-images": "node scripts/blog-images.js",
+    "indexnow": "node scripts/indexnow.js"
+  }
+}

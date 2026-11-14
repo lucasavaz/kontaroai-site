@@ -55,11 +55,12 @@ Optional: if `LEAD_ENDPOINT` is set, the form also POSTs `{ name, email, lang, s
 
 ## Blog
 
-The blog lives in `public/` (`/blog/` EN, `/pt-br/blog/` PT, `/es/blog/` ES) and is copied into `dist/` by the build. To add a post, copy an existing post folder, edit it, add it to that language's `index.html` and `feed.xml`, and add it to `POSTS` in `src/index.html` (the homepage and pricing page show hand-picked guides from `POST_PICKS`). Then:
+The blog lives in `public/` (`/blog/` PT, `/en/blog/` EN, `/es/blog/` ES: the same rule as the rest of the site, no prefix for Portuguese) and share images stay in `/blog/og/`. It is copied into `dist/` by the build. To add a post, copy an existing post folder, edit it, add it to that language's `index.html` and `feed.xml`, and add it to `POSTS` in `src/index.html` (the homepage and pricing page show hand-picked guides from `POST_PICKS`). Then:
 
 - keep `<title>` ≤ 60 characters and the description between 140 and 160;
 - keep the hreflang links and point `x-default` to the Portuguese (pt-BR) version (the rule for the whole site: Brazil is the main market);
 - link the new post from at least two related posts, keep the "Ver planos e preços · Calcular o custo mensal" links in the CTA box;
+- old blog URLs (before 2026-11) are 301-redirected by Render; the list is in `redirects.txt`;
 - run `npm run blog-images` to make the WebP versions of the share image (cards use `/blog/og/webp/<name>-640.webp`).
 
 ## SEO checks and search engines

@@ -1,3 +1,6 @@
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/bricolage-grotesque-latin.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/inter-latin.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400 500;font-display:swap;src:url(/fonts/jetbrains-mono-latin.woff2) format("woff2")}
 /* Kontaro blog — shares the landing page tokens and fonts. */
 :root{
   --bg:#F3F5FA; --surface:#FFFFFF; --ink:#0C1526; --muted:#566079; --line:#DCE1EC;
@@ -139,6 +142,9 @@ aside.side{position:relative}
 .cta h2{font-size:26px;margin:0;color:#fff}
 .cta p{margin:0;opacity:.92}
 .cta .btn{background:#fff;color:#0F1D1A;justify-self:start}
+.prose .cta p{color:#fff}
+.cta .cta-links{font-size:15px}
+.cta .cta-links a{color:#fff;text-underline-offset:3px}
 .related{padding-block:20px 72px}
 .related h2{font-size:26px;margin-bottom:18px}
 footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:14px}

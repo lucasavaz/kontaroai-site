@@ -5,7 +5,7 @@
 //   npm run indexnow                       -> pages whose sitemap <lastmod> is today (UTC)
 //   npm run indexnow -- --since=2026-11-01 -> pages changed on or after that date
 //   npm run indexnow -- --all              -> every page in the sitemap
-//   npm run indexnow -- https://kontaro.ai/precos/ https://kontaro.ai/blog/   -> just these pages
+//   npm run indexnow -- https://kontaro.ai/precos/ https://kontaro.ai/en/blog/   -> just these pages
 //   add --dry-run to see the list without sending anything
 //
 // The key is the <32 hex characters>.txt file in public/ (deployed at https://kontaro.ai/<key>.txt).

@@ -3,7 +3,8 @@
 //   Static checks (always): every sitemap URL exists and is self-canonical and indexable, titles and
 //   descriptions (length, duplicates), html lang / og:locale / hreflang agree, x-default rule, og:image
 //   exists and is 1200x630, JSON-LD parses, blog posts are linked from a listing and from 2+ posts,
-//   internal links point to pages that exist, images have width/height.
+//   internal links point to pages that exist, images have width/height, the URL prefix matches the
+//   page language (none = pt-BR, /en/, /es/).
 //   --render: also opens every page in Chromium at 1280px and 390px and reports console errors and
 //   horizontal overflow (needs Playwright).
 const fs=require('fs'),path=require('path');
@@ -38,6 +39,10 @@ for(const f of allHtml){
   if(!desc) warn(u,'no meta description'); else { if(desc.length<120||desc.length>160) warn(u,`description ${desc.length} chars`); if(!noindex)(descs[desc]=descs[desc]||[]).push(u); }
   const lang=attr(h,/<html[^>]* lang="([^"]+)"/),loc=attr(h,/<meta property="og:locale" content="([^"]+)"/);
   if(LOCALE[lang]!==loc) warn(u,`html lang ${lang} vs og:locale ${loc}`);
+  // One URL rule for the whole site: no prefix = pt-BR, /en/ = English, /es/ = Spanish (legal pages are English-only).
+  {const rel=u.slice(SITE.length),want=/^\/en\//.test(rel)?'en':/^\/es\//.test(rel)?'es':/^\/(privacy|terms)\//.test(rel)?'en':'pt-BR';
+   if(lang!==want) warn(u,`html lang ${lang} but the URL prefix means ${want}`);}
+  if(/(href|src)="(https:\/\/kontaro\.ai)?\/pt-br\//.test(h)) warn(u,'links to an old /pt-br/ URL');
   if(!noindex){
     const alts=[...h.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map(m=>[m[1],m[2]]);
     if(alts.length){

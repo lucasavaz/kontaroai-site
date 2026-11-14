@@ -5,7 +5,7 @@ A fast, static, multilingual marketing site (Portuguese, English, Spanish). It h
 ## Structure
 
 - `src/index.html`: the single source. All copy is in the `I18N` object, and the animated demos are in `DEMO` and `SHEET`.
-- `i18n-meta.json`: page titles and descriptions for search engines.
+- `i18n-meta.json`: the search title (≤ 60 characters) and description (140–160 characters) of every page in every language. The build fails if the page script would show a different title.
 - `build.js`: pre-renders `/`, `/en/` and `/es/` with hreflang, canonical, Open Graph, JSON-LD, a sitemap, robots.txt and share images.
 - `dist/`: the build output. Deploy this folder.
 
@@ -55,7 +55,21 @@ Optional: if `LEAD_ENDPOINT` is set, the form also POSTs `{ name, email, lang, s
 
 ## Blog
 
-The blog lives in `public/` (`/blog/` EN, `/pt-br/blog/` PT, `/es/blog/` ES) and is copied into `dist/` by the build. To add a post, copy an existing post folder, edit it, add it to that language's `index.html` and `feed.xml`, and add it to `POSTS` in `src/index.html` to feature it on the homepage.
+The blog lives in `public/` (`/blog/` EN, `/pt-br/blog/` PT, `/es/blog/` ES) and is copied into `dist/` by the build. To add a post, copy an existing post folder, edit it, add it to that language's `index.html` and `feed.xml`, and add it to `POSTS` in `src/index.html` (the homepage and pricing page show hand-picked guides from `POST_PICKS`). Then:
+
+- keep `<title>` ≤ 60 characters and the description between 140 and 160;
+- keep the hreflang links and point `x-default` to the Portuguese (pt-BR) version (the rule for the whole site: Brazil is the main market);
+- link the new post from at least two related posts, keep the "Ver planos e preços · Calcular o custo mensal" links in the CTA box;
+- run `npm run blog-images` to make the WebP versions of the share image (cards use `/blog/og/webp/<name>-640.webp`).
+
+## SEO checks and search engines
+
+- `npm run build` then `npm run seo-check`: checks every page (sitemap, canonical, noindex, titles and descriptions, hreflang/x-default, html lang vs og:locale, og:image 1200×630, JSON-LD, internal links, blog links, 404 page) and opens each one in Chromium at 1280 px and 390 px for console errors and sideways scrolling. It should end with `0 problem(s)`.
+- `npm run serve`: serves `dist/` at http://localhost:8080 like the host does (including the 404 page).
+- The sitemap only lists indexable pages. Sign-up and login pages are `noindex`. `lastmod` is the article's `dateModified`, the newest article (blog index), "Last updated" (legal pages) or the last commit of `src/index.html`/`i18n-meta.json` (app pages).
+- Structured data: Organization (one shared `@id`), WebSite, SoftwareApplication with offers read from `PLANS` (so prices always match the page), BreadcrumbList, BlogPosting and FAQPage only where the questions are on the page. No ratings or reviews.
+- **IndexNow (Bing and others):** after a deploy is live, run `npm run indexnow` (pages whose `lastmod` is today), `npm run indexnow -- --since=2026-11-01`, or `npm run indexnow -- --all`. Add `--dry-run` to only list them. The key file is `public/b2ffec183d8884e252047816cfc3c540.txt`; don't delete it.
+- **Google Search Console:** verify the domain with a DNS TXT record (preferred). If you ever need the HTML-tag method instead, add the `<meta name="google-site-verification" ...>` line to `head()` in `build.js`.
 
 ## Pricing explainer and calculator
 

@@ -537,6 +537,65 @@ body[data-page="pricing"] #pricing .sec-head{display:none}
 .auth-alt{font-size:14px;color:var(--muted);text-align:center}.auth-alt a{font-weight:600;color:var(--accent);display:inline-flex;align-items:center;min-height:44px}
 .secure{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:16px;font-size:12.5px;color:var(--muted)}.secure svg{width:14px;height:14px}
 body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display:none!important}
+/* ===== v5: About page ===== */
+.ab-hero{padding-block:clamp(40px,6vw,80px) clamp(56px,8vw,96px);position:relative;overflow:hidden}
+.ab-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--line) 1.2px,transparent 1.2px);background-size:26px 26px;mask-image:radial-gradient(ellipse 70% 60% at 75% 40%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 75% 40%,#000 20%,transparent 75%);pointer-events:none}
+.ab-hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center;position:relative}
+.ab-hero h1{font-size:clamp(38px,5.4vw,70px);font-weight:800;margin:0 0 22px}
+.ab-hero h1 .eyebrow{display:flex;font-weight:400;line-height:1.4;letter-spacing:.08em;margin-bottom:18px}
+.ab-hero h1 .h1-main{display:block}
+.ab-hero h1 em{font-style:normal;color:var(--accent);background:linear-gradient(var(--signal),var(--signal)) left bottom/100% .12em no-repeat;padding-bottom:.04em}
+@media (max-width:960px){.ab-hero .wrap{grid-template-columns:1fr}}
+.ab-chat{margin:0;background:var(--chat-bg);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow),0 40px 80px -30px rgba(47,82,245,.3);max-width:440px;width:100%;justify-self:center}
+.ab-chat-body{display:flex;flex-direction:column;gap:8px;padding:16px 14px 18px}
+.ab-chat .msg{animation:none;font-size:14px}
+.ab-chat figcaption{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;padding:0 0 14px}
+.ab-band{background:var(--surface);border-block:1px solid var(--line)}
+.ab-story{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,5vw,64px);align-items:start}
+.ab-story .sec-head{margin-bottom:0;position:sticky;top:96px}
+@media (max-width:900px){.ab-story{grid-template-columns:1fr}.ab-story .sec-head{position:static}}
+.ab-prose{display:grid;gap:18px;font-size:clamp(17px,1.5vw,18.5px);line-height:1.7;max-width:62ch}
+.ab-prose p:first-child::first-letter{font:800 3.1em/.9 var(--f-display);float:left;margin:.06em .1em 0 0;color:var(--accent)}
+.ab-job{margin:clamp(36px,5vw,56px) 0;padding:clamp(24px,4vw,44px);border-radius:24px;background:var(--ink);color:var(--bg);position:relative;overflow:hidden}
+.ab-job::after{content:"";position:absolute;right:-70px;bottom:-70px;width:240px;height:240px;border-radius:50%;border:44px solid color-mix(in srgb,var(--bg) 8%,transparent);pointer-events:none}
+.ab-job-k{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--signal)}
+.ab-job p{font:700 clamp(22px,3vw,34px)/1.25 var(--f-display);letter-spacing:-.015em;margin-top:14px;max-width:34ch;position:relative;z-index:1;text-wrap:pretty}
+.ab-k{font:500 11.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.ab-dims .feat{background:var(--bg)}
+.ab-forces{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+@media (max-width:820px){.ab-forces{grid-template-columns:1fr}}
+.ab-force{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,30px);display:grid;gap:10px;border-top:4px solid var(--line)}
+.ab-force h3{font-size:clamp(20px,2.2vw,24px);font-weight:700}
+.ab-force>p{color:var(--muted);font-size:15.5px}
+.ab-force.push{border-top-color:var(--signal)}.ab-force.push .ab-k{color:color-mix(in srgb,var(--signal) 68%,var(--ink))}
+.ab-force.pull{border-top-color:var(--ok)}.ab-force.pull .ab-k{color:color-mix(in srgb,var(--ok) 72%,var(--ink))}
+#abPosts .ptag{color:color-mix(in srgb,var(--signal) 68%,var(--ink))}
+.ab-force.fear{border-top-color:var(--accent)}
+.ab-force.habit{border-top-color:var(--ink)}.ab-force.habit .ab-k{color:var(--muted)}
+.ab-answer{margin-top:8px;padding:16px;border-radius:14px;background:var(--sunk);display:grid;gap:10px;font-size:15px}
+.ab-answer b{font:700 15px var(--f-display)}
+.ab-loss{margin-top:clamp(32px,4vw,48px);font:700 clamp(22px,2.8vw,30px)/1.3 var(--f-display);letter-spacing:-.01em;max-width:40ch;padding-left:20px;border-left:4px solid var(--signal);text-wrap:balance}
+.ab-prin{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;counter-reset:p}
+.ab-prin li{border-top:2px solid var(--ink);padding-top:18px;display:grid;gap:8px;align-content:start;counter-increment:p}
+.ab-prin li::before{content:"0" counter(p);font:500 13px var(--f-mono);color:color-mix(in srgb,var(--signal) 68%,var(--ink))}
+.ab-prin h3{font-size:20px;font-weight:700;line-height:1.2}
+.ab-prin p{color:var(--muted);font-size:15px}
+.ab-team .eyebrow{color:color-mix(in srgb,var(--bg) 70%,var(--accent))}
+.ab-team h2{margin-top:14px}
+.ab-team p+p{margin-top:12px}
+.ab-fine{font-size:12.5px;opacity:.6!important;margin-top:22px!important}
+.ab-read{display:grid;gap:18px}
+.ab-calc{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 24px;background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+.ab-calc .ptag{flex-basis:100%;color:var(--accent)}
+.ab-calc h3{font-size:clamp(20px,2.4vw,26px)}
+.ab-calc p{flex:1 1 320px;color:var(--ink);opacity:.8}
+.ab-calc .more{margin-top:0}
+.ab-more{margin-top:22px;color:var(--muted)}
+.ab-more a{font-weight:600;color:var(--accent);text-decoration:none}
+body[data-page="about"] #start .cta h2{font-size:clamp(30px,4.4vw,52px)}
+/* Header: 7 links + language switch + 2 buttons only fit above ~1100px (Spanish labels are longest); below that, use the menu button. */
+@media (max-width:1240px){.nav-links{gap:18px;margin-left:6px}.nav .wrap{gap:14px}}
+@media (max-width:1100px){.nav-links{display:none}.menu-btn{display:grid}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -560,6 +619,7 @@ body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display
       <a data-go="pricing" href="/en/pricing/" data-i18n="nav.pricing">Pricing</a>
       <a href="/en/blog/" data-blog="" data-i18n="nav.blog">Blog</a>
       <a data-go="faq" href="/en/faq/" data-i18n="nav.faq">FAQ</a>
+      <a data-go="about" href="/en/about/" target="_blank" rel="noopener" data-i18n="foot.about">About Us</a>
     </nav>
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Language" translate="no">
@@ -574,12 +634,12 @@ body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display
   </div>
 </header>
 <nav class="mnav" id="mnav" aria-label="Mobile" hidden="">
-  <a data-go="home" data-hash="ask" href="/en/#ask" data-i18n="nav.ai">AI</a><a data-go="home" data-hash="how" href="/en/#how" data-i18n="nav.how">How it works</a><a data-go="home" data-hash="compare" href="/en/#compare" data-i18n="nav.compare">Compare</a><a data-go="pricing" href="/en/pricing/" data-i18n="nav.pricing">Pricing</a><a data-go="pricing" data-hash="billing" href="/en/pricing/#billing" data-i18n="bl.eyebrow">How billing works</a><a href="/en/blog/" data-blog="" data-i18n="nav.blog">Blog</a><a data-go="faq" href="/en/faq/" data-i18n="nav.faq">FAQ</a><a data-go="login" href="/en/login/" data-i18n="nav.login">Log in</a>
+  <a data-go="home" data-hash="ask" href="/en/#ask" data-i18n="nav.ai">AI</a><a data-go="home" data-hash="how" href="/en/#how" data-i18n="nav.how">How it works</a><a data-go="home" data-hash="compare" href="/en/#compare" data-i18n="nav.compare">Compare</a><a data-go="pricing" href="/en/pricing/" data-i18n="nav.pricing">Pricing</a><a data-go="pricing" data-hash="billing" href="/en/pricing/#billing" data-i18n="bl.eyebrow">How billing works</a><a href="/en/blog/" data-blog="" data-i18n="nav.blog">Blog</a><a data-go="faq" href="/en/faq/" data-i18n="nav.faq">FAQ</a><a data-go="about" href="/en/about/" target="_blank" rel="noopener" data-i18n="foot.about">About Us</a><a data-go="login" href="/en/login/" data-i18n="nav.login">Log in</a>
   <a class="btn btn-primary" data-go="signup" href="/en/signup/" data-i18n="nav.cta">Start free</a>
 </nav>
 
 <main id="top">
-<section id="pagehead" class="pagehead" data-pages="pricing faq plan about contact">
+<section id="pagehead" class="pagehead" data-pages="pricing faq plan contact">
   <div class="wrap">
     <a class="back" id="phBack" data-go="pricing" hidden="" data-i18n="ph.back" href="/en/pricing/">← All plans</a>
     <span class="eyebrow" id="phE">FAQ</span>
@@ -1042,23 +1102,153 @@ curl https://api.kontaro.ai/v1/messages \
   </div>
 </section>
 
-<section id="about" data-pages="about" style="padding-top:0" hidden="">
+<!-- ABOUT PAGE (/sobre/, /en/about/, /es/sobre-nosotros/). Copy lives in I18N under "ab.*". Team facts: only what the owner provided (S&P 500, HBS, MIT); no names, photos or numbers. -->
+<section id="about" class="ab-hero" data-pages="about" hidden="">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow" data-i18n="ab.eyebrow">What we do</span><h2 data-i18n="ab.h2">Everything your team needs to talk with customers</h2></div>
-    <div class="grid3">
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"></path></svg></span><h3 data-i18n="ab.f1">One inbox for the whole team</h3><p data-i18n="ab.f1d">WhatsApp and Instagram in one place, with each customer's history. Everyone knows who's handling each conversation.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-8-8 18-2-8-8-2z"></path></svg></span><h3 data-i18n="ab.f2">Approved campaigns, clear costs</h3><p data-i18n="ab.f2d">Send campaigns with message templates approved by Meta. Before sending, you see who will receive them and the estimated cost.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path></svg></span><h3 data-i18n="ab.f3">AI assistants</h3><p data-i18n="ab.f3d">The AI answers with your business's information and hands the conversation to your team when it needs a person.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg></span><h3 data-i18n="ab.f4">Contacts and history (CRM)</h3><p data-i18n="ab.f4d">Every customer with their conversations and details, so you can serve and sell with context.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"></path><path d="m9 12 2 2 4-4"></path></svg></span><h3 data-i18n="ab.f5">Official WhatsApp API</h3><p data-i18n="ab.f5d">Built on Meta's official WhatsApp Business Platform, not on unofficial apps.</p></div>
-      <div class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v2M12 16v2"></path></svg></span><h3 data-i18n="ab.f6">No surprise pricing</h3><p data-i18n="ab.f6d">A fixed monthly plan price. Meta fees follow Meta's official rates, with no Kontaro markup.</p></div>
+    <div>
+      <div><span class="eyebrow" id="abE" data-i18n="ab.e">About Us</span> <span class="h1-main" data-i18n-html="ab.h1">“Hi, is this still available?” 9:07 p.m. <em>Someone will answer.</em></span></div>
+      <p class="lead" data-i18n="ab.lead">Kontaro brings WhatsApp, Instagram and your website chat into one inbox. An AI replies in seconds, drafts answers for your team to approve and calls in a person when the conversation needs one. Built for small and mid-sized businesses that sell through conversations and can't leave customers waiting.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" data-go="signup" href="/en/signup/" data-i18n="nav.cta">Start free</a>
+        <a class="btn btn-ghost" data-go="contact" href="/en/contact/" data-i18n="ab.talk">Talk to us</a>
+      </div>
+      <p class="hero-micro" data-i18n="ab.micro">14 days with Growth plan features · No credit card · Nothing is charged automatically</p>
     </div>
-    <div class="pd" style="margin-top:28px">
-      <div class="pd-box"><h3 data-i18n="ab.who.h">Who it's for</h3>
-        <ul class="pd-list"><li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.who1">Businesses that sell to and serve customers on WhatsApp and Instagram.</span></li><li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.who2">Teams that share one number and need to stay organized.</span></li><li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.who3">Companies with several teams or locations in one account.</span></li></ul></div>
-      <div class="pd-box"><h3 data-i18n="ab.talk.h">Want to know more?</h3><p data-i18n="ab.talk.d">Talk to us, or try it free for 14 days with no credit card.</p>
-        <div class="ct-actions"><a class="btn btn-ghost" data-go="contact" href="/en/contact/" data-i18n="foot.talk">Let's Talk</a><a class="btn btn-primary" data-go="signup" href="/en/signup/" data-i18n="nav.cta">Start free</a></div></div>
+    <figure class="ab-chat" translate="no">
+      <div class="chat-top"><span class="avatar">L</span><span><b data-i18n="ab.chat.biz">Lumi Store</b><small data-i18n="chat.online">AI on · replies instantly</small></span></div>
+      <div class="ab-chat-body">
+        <span class="msg sys" data-i18n="ab.chat.day">Tuesday · store closed</span>
+        <div class="msg in"><span data-i18n="ab.chat.m1">hi, is this still available?</span><span class="meta">21:07</span></div>
+        <div class="msg out"><span class="ai">KONTARO AI</span><span data-i18n="ab.chat.m2">Hi! Yes, it is. The tan sandals are still in stock in 6, 7 and 8. What size do you wear?</span><span class="meta">21:07</span></div>
+        <div class="msg in"><span data-i18n="ab.chat.m3">8! can you hold a pair for me?</span><span class="meta">21:08</span></div>
+        <div class="msg out"><span class="ai">KONTARO AI</span><span data-i18n="ab.chat.m4">Done, a pair in size 8 is on hold under your name. Bia will confirm pickup with you tomorrow. We open at 9.</span><span class="meta">21:08</span></div>
+        <span class="msg sys" data-i18n="ab.chat.sys">Summary sent to the team</span>
+      </div>
+      <figcaption data-i18n="ab.chat.cap">Illustrative example</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="ab-why" class="ab-band" data-pages="about" hidden="">
+  <div class="wrap">
+    <div class="ab-story">
+      <div class="sec-head">
+        <span class="eyebrow" data-i18n="ab.why.e">Why we exist</span>
+        <h2 data-i18n="ab.why.h2">Why Kontaro exists: no customer left without an answer</h2>
+      </div>
+      <div class="ab-prose">
+        <p data-i18n="ab.why.p1">Picture a neighborhood store on an ordinary Tuesday. It's 9:07 p.m., the doors are locked and the store phone is charging on the counter. A message comes in: “hi, is this still available?” Then a one-minute voice note. Then a shipping question on Instagram. Nobody sees any of it until 9 the next morning, when the owner works through the backlog and finds out the 9:07 customer already bought somewhere else.</p>
+        <p data-i18n="ab.why.p2">Nobody there was careless. The setup is the problem: one phone shared by three people, conversations scattered across three apps and no way to tell who already replied to whom. During the day, the team answers the same twenty questions. At night, nobody answers anything.</p>
+        <p data-i18n="ab.why.p3">When business owners come to us, they aren't shopping for “customer service software”. They want to fix a very specific situation, one that fits in a sentence:</p>
+      </div>
     </div>
+    <blockquote class="ab-job">
+      <span class="ab-job-k" data-i18n="ab.job.k">The job businesses hire Kontaro to do</span>
+      <p data-i18n="ab.job.q">“When customers reach me on WhatsApp, Instagram or my website, help me answer every one of them quickly and well, so I sell more without building a call center and without losing the personal touch.”</p>
+    </blockquote>
+    <div class="grid3 ab-dims">
+      <div class="feat"><span class="ab-k" data-i18n="ab.d1.k">What has to work</span><h3 data-i18n="ab.d1.h">Every message answered, with the right information</h3><p data-i18n="ab.d1.p">Prices, lead times, shipping and opening hours answered in seconds on all three channels, including nights, Sundays and holidays. With the customer's history right there, so nobody has to ask twice.</p></div>
+      <div class="feat"><span class="ab-k" data-i18n="ab.d2.k">How it should feel</span><h3 data-i18n="ab.d2.h">Switching off without guilt</h3><p data-i18n="ab.d2.p">Going to lunch without taking the phone. Going to bed without the feeling that a sale is going cold in a drawer. Knowing that if something goes off script, someone on the team gets called in.</p></div>
+      <div class="feat"><span class="ab-k" data-i18n="ab.d3.k">How you want to be seen</span><h3 data-i18n="ab.d3.h">The business that answers</h3><p data-i18n="ab.d3.p">To customers, a business that pays attention and replies like a person. To the team, the one who got things organized, not the one chasing replies in the group chat at 10 p.m.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ab-forces" data-pages="about" hidden="">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ab.f.e">What makes people switch</span>
+      <h2 data-i18n="ab.f.h2">What pushes, pulls and holds back businesses thinking about AI customer service</h2>
+      <p class="lead" data-i18n="ab.f.sub">Changing how you handle customers is never just about the tool. There's today's mess, the pull of something better, the fear of getting it wrong and the comfort of what you know. We take all four seriously.</p>
+    </div>
+    <div class="ab-forces">
+      <div class="ab-force push"><span class="ab-k" data-i18n="ab.f1.k">The push</span><h3 data-i18n="ab.f1.h">Today's mess</h3><p data-i18n="ab.f1.p">A conversation lost among a hundred others. One phone for the whole team. A customer waiting two hours for a price that was on the price list. Two people replying to the same customer while another gets no reply at all.</p></div>
+      <div class="ab-force pull"><span class="ab-k" data-i18n="ab.f2.k">The pull</span><h3 data-i18n="ab.f2.h">A better way</h3><p data-i18n="ab.f2.p">Replies in seconds, at any hour. Each customer's history in one place, with one owner per conversation. A team free to focus on the people who are close to buying or genuinely need help.</p></div>
+      <div class="ab-force fear"><span class="ab-k" data-i18n="ab.f3.k">The anxiety</span><h3 data-i18n="ab.f3.h">“What if the AI says something wrong?”</h3><p data-i18n="ab.f3.p">It's the fairest question of all. What if it sounds like a robot? What if it makes up a price? What if the number gets banned? We don't ask you to trust it blindly.</p>
+        <div class="ab-answer"><b data-i18n="ab.ans">How we handle it</b>
+          <ul class="pd-list">
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f3.a1">The AI only answers from what you taught it: your website, catalog, spreadsheets and policies. You test everything before going live.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f3.a2">It can just write drafts for someone on your team to approve before they're sent.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f3.a3">Anyone on the team can take over a conversation with one tap. When the AI doesn't know, it tells the customer and hands off, with a summary.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f3.a4">Everything runs on Meta's official WhatsApp Business Platform. No unofficial apps putting your number at risk.</span></li>
+          </ul></div></div>
+      <div class="ab-force habit"><span class="ab-k" data-i18n="ab.f4.k">The habit</span><h3 data-i18n="ab.f4.h">“It works, more or less”</h3><p data-i18n="ab.f4.p">The current way is familiar, and change takes effort. Almost everyone thinks: “we're getting by.” But “more or less” has a cost, and it's charged quietly.</p>
+        <div class="ab-answer"><b data-i18n="ab.ans">How we handle it</b>
+          <ul class="pd-list">
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f4.a1">Connecting is guided screen by screen. Most businesses are answering customers the same afternoon.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f4.a2">You can start with drafts only and let the AI reply on its own gradually, one topic at a time.</span></li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="ab.f4.a3">No contract and no cancellation fee. If it isn't right for you, export your contacts and conversations and go.</span></li>
+          </ul></div></div>
+    </div>
+    <p class="ab-loss" data-i18n="ab.loss">Every unanswered message is a customer asking someone else the same question. That's what we work to prevent, every day.</p>
+  </div>
+</section>
+
+<section id="ab-beliefs" class="ab-band" data-pages="about" hidden="">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ab.b.e">What we believe</span>
+      <h2 data-i18n="ab.b.h2">What we believe about AI customer service on WhatsApp</h2>
+    </div>
+    <ol class="ab-prin">
+      <li><h3 data-i18n="ab.b1.h">Speed is a form of respect.</h3><p data-i18n="ab.b1.p">Someone asking at 9 p.m. isn't asking for a favor. Replying quickly tells them their time matters.</p></li>
+      <li><h3 data-i18n="ab.b2.h">AI does the repetitive work. People handle the relationship.</h3><p data-i18n="ab.b2.p">Opening hours, list prices and shipping are machine work. Complaints, negotiations and discounts are people work.</p></li>
+      <li><h3 data-i18n="ab.b3.h">Official API only. No shortcuts.</h3><p data-i18n="ab.b3.p">Unofficial apps are the main reason numbers get banned. Your business number is too valuable to gamble with.</p></li>
+      <li><h3 data-i18n="ab.b4.h">Pricing you can explain in one sentence.</h3><p data-i18n="ab.b4.p">A fixed monthly plan price. Meta's fees are shown as they are, at Meta's official rates, with no Kontaro markup.</p></li>
+      <li><h3 data-i18n="ab.b5.h">Your data stays yours.</h3><p data-i18n="ab.b5.p">Export or delete contacts and conversations whenever you like. Your customers' messages don't train AI for other customers.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="ab-team" data-pages="about" hidden="">
+  <div class="wrap">
+    <div class="trust ab-team">
+      <div>
+        <span class="eyebrow" data-i18n="ab.t.e">Who's behind Kontaro</span>
+        <h2 data-i18n="ab.t.h2">Big-company discipline for businesses without a big team</h2>
+        <p data-i18n="ab.t.p1">Kontaro was built by a team of executives with years of leadership experience at S&amp;P 500 companies, and education at Harvard Business School and MIT.</p>
+        <p data-i18n="ab.t.p2">At those companies we learned that serving customers well at scale isn't about luck or heroics. It comes down to process, measuring the right things and replying fast. Large companies pay a lot for that structure. A store, clinic or real estate office with five people usually can't. Kontaro exists to bring that discipline to them, without consultants and without a long implementation project.</p>
+      </div>
+      <div>
+        <div class="trust-grid">
+          <div><b data-i18n="ab.t1.h">Process</b><span data-i18n="ab.t1.p">Every conversation has an owner, and the AI knows when to hand off to a person.</span></div>
+          <div><b data-i18n="ab.t2.h">Metrics</b><span data-i18n="ab.t2.p">First response time, SLA and a queue of who needs attention, always in view.</span></div>
+          <div><b data-i18n="ab.t3.h">Response time</b><span data-i18n="ab.t3.p">Seconds, not hours. After business hours too.</span></div>
+          <div><b data-i18n="ab.t4.h">Honesty</b><span data-i18n="ab.t4.p">Clear costs before you send a campaign, and no promises the product can't keep.</span></div>
+        </div>
+        <p class="ab-fine" data-i18n="ab.t.fine">Harvard Business School, MIT and the S&amp;P 500 are mentioned only to describe the team's education and professional experience. These institutions and companies are not affiliated with Kontaro and do not endorse it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ab-read" data-pages="about" style="padding-top:0" hidden="">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ab.r.e">Before you decide</span>
+      <h2 data-i18n="ab.r.h2">Guides worth reading, even if you never use Kontaro</h2>
+      <p class="lead" data-i18n="ab.r.sub">We wrote these for anyone who serves customers on WhatsApp. They're free, need no sign-up and show the math.</p>
+    </div>
+    <div class="ab-read">
+      <a class="post ab-calc" data-go="pricing" data-hash="billing" href="/en/pricing/#billing"><span class="ptag" data-i18n="ab.r.calc.k">Free calculator</span><h3 data-i18n="ab.r.calc.h">How much would you pay Meta each month?</h3><p data-i18n="ab.r.calc.p">Enter how many conversations and campaigns you handle per month and see the estimated Meta fees and plan cost, before creating any account.</p><span class="more" data-i18n="ab.r.calc.more">Estimate my cost →</span></a>
+      <div class="posts" id="abPosts"></div>
+    </div>
+  </div>
+</section>
+
+<section id="ab-faq" class="ab-band" data-pages="about" hidden="">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ab.q.e">FAQ</span>
+      <h2 data-i18n="ab.q.h2">Frequently asked questions about Kontaro</h2>
+    </div>
+    <div class="faq" id="abFaq">
+      <details open=""><summary data-i18n="ab.q1">Who is behind Kontaro?</summary><p data-i18n="ab.a1">A team of executives with years of leadership experience at S&amp;P 500 companies, and education at Harvard Business School and MIT. The company is Kontaro Inc., based in Miami, in the United States, and the product is built for businesses that sell on WhatsApp, in Brazil and around the world.</p></details>
+      <details><summary data-i18n="ab.q2">Does Kontaro use the official WhatsApp API?</summary><p data-i18n="ab.a2">Yes. Kontaro runs on Meta's official WhatsApp Business Platform, not on unofficial apps, which are the main cause of banned numbers. Campaigns only go out with WhatsApp-approved templates, and anyone who asks to leave a list stops receiving right away. On the Scale plan, you can connect multiple numbers to one account.</p></details>
+      <details><summary data-i18n="ab.q3">Will the AI replace my team?</summary><p data-i18n="ab.a3">That's not the idea. The AI answers the questions that keep coming up, like opening hours, list prices and shipping, and it can be set to only write drafts for someone to approve. When a conversation needs a person, it goes to your team with a summary, and anyone can take over with one tap. Your team stops copying and pasting answers and spends that time on customers who are close to buying.</p></details>
+      <details><summary data-i18n="ab.q4">Where is my data?</summary><p data-i18n="ab.a4">Kontaro Inc. is based in the United States, and our providers may process data there and in other countries, with the safeguards the law requires, such as standard contractual clauses for data from Brazil or the EU. We use encryption in transit and access controls. We don't sell data, AI providers don't use your messages to train their models, and you can export or delete contacts and conversations whenever you like.</p></details>
+    </div>
+    <p class="ab-more"><span data-i18n="ab.q.more">Still have a question?</span> <a data-go="contact" href="/en/contact/" data-i18n="ab.talk">Talk to us</a> · <a data-go="faq" href="/en/faq/" data-i18n="ct.faq">See the FAQ</a></p>
   </div>
 </section>
 
@@ -1804,7 +1994,7 @@ Object.assign(I18N.pt,{
  "ph.pricing.e":"Preços","ph.pricing.h":"Planos simples. Custos claros.","ph.pricing.p":"Escolha o plano, veja exatamente o que está incluído e calcule quanto vai pagar, já contando as tarifas da Meta.",
  "ph.faq.e":"Dúvidas","ph.faq.h":"Perguntas frequentes","ph.faq.p":"Tudo sobre como o Kontaro funciona: começo, preços, IA, WhatsApp e seus dados. Não encontrou? Escreva para talk@kontaro.ai.",
  "ph.plan.e":"Plano","ph.back":"← Todos os planos",
- "foot.about":"Sobre nós","foot.talk":"Vamos conversar","ph.about.e":"Sobre nós","ph.about.h":"Atendimento e vendas no WhatsApp e no Instagram, num só lugar.","ph.about.p":"O Kontaro é uma plataforma de mensagens para empresas que vendem e atendem clientes pelo WhatsApp e pelo Instagram. Funciona sobre a API oficial do WhatsApp Business, da Meta.","ab.eyebrow":"O que fazemos","ab.h2":"Tudo o que sua equipe precisa para conversar com clientes","ab.f1":"Uma caixa de entrada para a equipe","ab.f1d":"WhatsApp e Instagram no mesmo lugar, com o histórico de cada cliente. Todo mundo sabe quem está cuidando de cada conversa.","ab.f2":"Campanhas aprovadas, com custo claro","ab.f2d":"Envie campanhas com modelos de mensagem aprovados pela Meta. Antes de enviar, você vê quem vai receber e o custo estimado.","ab.f3":"Assistentes de IA","ab.f3d":"A IA responde com as informações do seu negócio e passa a conversa para a equipe quando o assunto pede uma pessoa.","ab.f4":"Contatos e histórico (CRM)","ab.f4d":"Cada cliente com suas conversas e informações, para atender e vender com contexto.","ab.f5":"API oficial do WhatsApp","ab.f5d":"Construído sobre a plataforma oficial do WhatsApp Business, da Meta, e não sobre aplicativos não oficiais.","ab.f6":"Preço sem surpresa","ab.f6d":"Plano com preço fixo por mês. As tarifas da Meta seguem a tabela oficial, sem margem do Kontaro.","ab.who.h":"Para quem é","ab.who1":"Negócios que vendem e atendem clientes pelo WhatsApp e pelo Instagram.","ab.who2":"Equipes que dividem o mesmo número e precisam se organizar.","ab.who3":"Empresas com várias equipes ou unidades na mesma conta.","ab.talk.h":"Quer saber mais?","ab.talk.d":"Fale com a gente ou teste grátis por 14 dias, sem cartão de crédito.","ph.contact.e":"Vamos conversar","ph.contact.h":"Fale com a gente","ph.contact.p":"Tem uma dúvida, quer conhecer o Kontaro ou precisa de um plano sob medida? Escreva para nós.","ct.mail.h":"E-mail","ct.mail.d":"Conte um pouco sobre o seu negócio e o que você precisa. Respondemos por e-mail.","ct.mail.btn":"Enviar e-mail","ct.app.h":"Quer testar agora?","ct.app.d":"Crie sua conta grátis ou entre na sua conta.","ct.social.h":"Redes sociais","ct.addr.h":"Endereço","ct.faq":"Ver perguntas frequentes",
+ "foot.about":"Sobre nós","foot.talk":"Vamos conversar","ph.about.e":"Sobre nós","ph.contact.e":"Vamos conversar","ph.contact.h":"Fale com a gente","ph.contact.p":"Tem uma dúvida, quer conhecer o Kontaro ou precisa de um plano sob medida? Escreva para nós.","ct.mail.h":"E-mail","ct.mail.d":"Conte um pouco sobre o seu negócio e o que você precisa. Respondemos por e-mail.","ct.mail.btn":"Enviar e-mail","ct.app.h":"Quer testar agora?","ct.app.d":"Crie sua conta grátis ou entre na sua conta.","ct.social.h":"Redes sociais","ct.addr.h":"Endereço","ct.faq":"Ver perguntas frequentes",
  "pl.details":"Ver detalhes do plano","pl.ideal":"Ideal para","pl.inc":"O que está incluído","pl.extra":"O que pode ser cobrado à parte",
  "pl.extra1":"Tarifas da Meta por mensagem entregue, sem margem do Kontaro.","pl.extra2":"Pacotes extras de IA, só se você quiser.","pl.extra3":"Impostos do seu país, quando houver.","pl.extraLink":"Entenda a cobrança e calcule →",
  "pl.others":"Outros planos","pl.trial":"14 dias grátis com os recursos do Crescimento. Sem cartão.",
@@ -1828,7 +2018,7 @@ Object.assign(I18N.en,{
  "ph.pricing.e":"Pricing","ph.pricing.h":"Simple plans. Clear costs.","ph.pricing.p":"Pick a plan, see exactly what's included and estimate what you'll pay, Meta fees included.",
  "ph.faq.e":"FAQ","ph.faq.h":"Frequently asked questions","ph.faq.p":"Everything about how Kontaro works: getting started, pricing, AI, WhatsApp and your data. Can't find it? Email talk@kontaro.ai.",
  "ph.plan.e":"Plan","ph.back":"← All plans",
- "foot.about":"About Us","foot.talk":"Let's Talk","ph.about.e":"About Us","ph.about.h":"Sales and customer service on WhatsApp and Instagram, in one place.","ph.about.p":"Kontaro is a messaging platform for businesses that sell to and serve customers on WhatsApp and Instagram. It runs on Meta's official WhatsApp Business Platform.","ab.eyebrow":"What we do","ab.h2":"Everything your team needs to talk with customers","ab.f1":"One inbox for the whole team","ab.f1d":"WhatsApp and Instagram in one place, with each customer's history. Everyone knows who's handling each conversation.","ab.f2":"Approved campaigns, clear costs","ab.f2d":"Send campaigns with message templates approved by Meta. Before sending, you see who will receive them and the estimated cost.","ab.f3":"AI assistants","ab.f3d":"The AI answers with your business's information and hands the conversation to your team when it needs a person.","ab.f4":"Contacts and history (CRM)","ab.f4d":"Every customer with their conversations and details, so you can serve and sell with context.","ab.f5":"Official WhatsApp API","ab.f5d":"Built on Meta's official WhatsApp Business Platform, not on unofficial apps.","ab.f6":"No surprise pricing","ab.f6d":"A fixed monthly plan price. Meta fees follow Meta's official rates, with no Kontaro markup.","ab.who.h":"Who it's for","ab.who1":"Businesses that sell to and serve customers on WhatsApp and Instagram.","ab.who2":"Teams that share one number and need to stay organized.","ab.who3":"Companies with several teams or locations in one account.","ab.talk.h":"Want to know more?","ab.talk.d":"Talk to us, or try it free for 14 days with no credit card.","ph.contact.e":"Let's Talk","ph.contact.h":"Get in touch","ph.contact.p":"Have a question, want to get to know Kontaro or need a custom plan? Write to us.","ct.mail.h":"Email","ct.mail.d":"Tell us a bit about your business and what you need. We reply by email.","ct.mail.btn":"Send an email","ct.app.h":"Want to try it now?","ct.app.d":"Create a free account or log in to yours.","ct.social.h":"Social media","ct.addr.h":"Address","ct.faq":"See the FAQ",
+ "foot.about":"About Us","foot.talk":"Let's Talk","ph.about.e":"About Us","ph.contact.e":"Let's Talk","ph.contact.h":"Get in touch","ph.contact.p":"Have a question, want to get to know Kontaro or need a custom plan? Write to us.","ct.mail.h":"Email","ct.mail.d":"Tell us a bit about your business and what you need. We reply by email.","ct.mail.btn":"Send an email","ct.app.h":"Want to try it now?","ct.app.d":"Create a free account or log in to yours.","ct.social.h":"Social media","ct.addr.h":"Address","ct.faq":"See the FAQ",
  "pl.details":"See plan details","pl.ideal":"Ideal for","pl.inc":"What's included","pl.extra":"What may be billed separately",
  "pl.extra1":"Meta fees per delivered message, with no Kontaro markup.","pl.extra2":"Extra AI packs, only if you want them.","pl.extra3":"Taxes in your country, where applicable.","pl.extraLink":"Understand billing and estimate →",
  "pl.others":"Other plans","pl.trial":"14 days free with Growth features. No card.",
@@ -1852,7 +2042,7 @@ Object.assign(I18N.es,{
  "ph.pricing.e":"Precios","ph.pricing.h":"Planes simples. Costos claros.","ph.pricing.p":"Elige un plan, mira exactamente qué incluye y calcula cuánto pagarás, con las tarifas de Meta incluidas.",
  "ph.faq.e":"Preguntas","ph.faq.h":"Preguntas frecuentes","ph.faq.p":"Todo sobre cómo funciona Kontaro: primeros pasos, precios, IA, WhatsApp y tus datos. ¿No lo encuentras? Escribe a talk@kontaro.ai.",
  "ph.plan.e":"Plan","ph.back":"← Todos los planes",
- "foot.about":"Sobre nosotros","foot.talk":"Hablemos","ph.about.e":"Sobre nosotros","ph.about.h":"Ventas y atención en WhatsApp e Instagram, en un solo lugar.","ph.about.p":"Kontaro es una plataforma de mensajería para empresas que venden y atienden a sus clientes por WhatsApp e Instagram. Funciona sobre la API oficial de WhatsApp Business, de Meta.","ab.eyebrow":"Qué hacemos","ab.h2":"Todo lo que tu equipo necesita para conversar con clientes","ab.f1":"Una bandeja de entrada para el equipo","ab.f1d":"WhatsApp e Instagram en un mismo lugar, con el historial de cada cliente. Todos saben quién atiende cada conversación.","ab.f2":"Campañas aprobadas, con costos claros","ab.f2d":"Envía campañas con plantillas de mensaje aprobadas por Meta. Antes de enviar, ves quién las recibirá y el costo estimado.","ab.f3":"Asistentes de IA","ab.f3d":"La IA responde con la información de tu negocio y pasa la conversación a tu equipo cuando hace falta una persona.","ab.f4":"Contactos e historial (CRM)","ab.f4d":"Cada cliente con sus conversaciones y datos, para atender y vender con contexto.","ab.f5":"API oficial de WhatsApp","ab.f5d":"Construido sobre la plataforma oficial de WhatsApp Business, de Meta, y no sobre aplicaciones no oficiales.","ab.f6":"Precios sin sorpresas","ab.f6d":"Plan con precio fijo mensual. Las tarifas de Meta siguen la tabla oficial, sin margen de Kontaro.","ab.who.h":"Para quién es","ab.who1":"Negocios que venden y atienden a sus clientes por WhatsApp e Instagram.","ab.who2":"Equipos que comparten un mismo número y necesitan organizarse.","ab.who3":"Empresas con varios equipos o sucursales en una misma cuenta.","ab.talk.h":"¿Quieres saber más?","ab.talk.d":"Habla con nosotros o pruébalo gratis por 14 días, sin tarjeta de crédito.","ph.contact.e":"Hablemos","ph.contact.h":"Contáctanos","ph.contact.p":"¿Tienes una pregunta, quieres conocer Kontaro o necesitas un plan a medida? Escríbenos.","ct.mail.h":"Correo electrónico","ct.mail.d":"Cuéntanos un poco sobre tu negocio y lo que necesitas. Respondemos por correo.","ct.mail.btn":"Enviar un correo","ct.app.h":"¿Quieres probarlo ahora?","ct.app.d":"Crea tu cuenta gratis o inicia sesión en la tuya.","ct.social.h":"Redes sociales","ct.addr.h":"Dirección","ct.faq":"Ver preguntas frecuentes",
+ "foot.about":"Sobre nosotros","foot.talk":"Hablemos","ph.about.e":"Sobre nosotros","ph.contact.e":"Hablemos","ph.contact.h":"Contáctanos","ph.contact.p":"¿Tienes una pregunta, quieres conocer Kontaro o necesitas un plan a medida? Escríbenos.","ct.mail.h":"Correo electrónico","ct.mail.d":"Cuéntanos un poco sobre tu negocio y lo que necesitas. Respondemos por correo.","ct.mail.btn":"Enviar un correo","ct.app.h":"¿Quieres probarlo ahora?","ct.app.d":"Crea tu cuenta gratis o inicia sesión en la tuya.","ct.social.h":"Redes sociales","ct.addr.h":"Dirección","ct.faq":"Ver preguntas frecuentes",
  "pl.details":"Ver detalles del plan","pl.ideal":"Ideal para","pl.inc":"Qué incluye","pl.extra":"Qué se puede cobrar aparte",
  "pl.extra1":"Tarifas de Meta por mensaje entregado, sin margen de Kontaro.","pl.extra2":"Paquetes extra de IA, solo si los quieres.","pl.extra3":"Impuestos de tu país, cuando correspondan.","pl.extraLink":"Entiende el cobro y calcula →",
  "pl.others":"Otros planes","pl.trial":"14 días gratis con las funciones de Crecimiento. Sin tarjeta.",
@@ -1873,6 +2063,270 @@ Object.assign(I18N.es,{
  "au.appSignup":"Crear mi cuenta gratis","au.appLogin":"Ir a mi panel","au.secure":"Conexión segura · tus datos protegidos"
 });
 
+/* ===== About page copy (/sobre/, /en/about/, /es/sobre-nosotros/) =====
+   Written natively in pt-BR, then adapted (not translated) to en and es.
+   Team: use ONLY the facts the owner gave (S&P 500 leadership, Harvard Business School, MIT). No names, photos, numbers, logos or quotes. */
+Object.assign(I18N.pt,{
+ "ab.e":"Sobre nós",
+ "ab.h1":"“Oi, ainda tem?” chegou às 21h07. <em>Alguém vai responder.</em>",
+ "ab.lead":"O Kontaro junta WhatsApp, Instagram e o chat do seu site numa caixa de entrada só. Uma IA responde em segundos, prepara rascunhos para a equipe aprovar e chama uma pessoa quando o assunto pede. Feito para pequenas e médias empresas que vendem conversando e não podem deixar cliente esperando.",
+ "ab.talk":"Fale com a gente",
+ "ab.micro":"14 dias com os recursos do plano Crescimento · Sem cartão · Nada é cobrado automaticamente",
+ "ab.chat.biz":"Loja Lumi","ab.chat.day":"Terça · loja fechada",
+ "ab.chat.m1":"oi, ainda tem?",
+ "ab.chat.m2":"Oi! Tem sim. A sandália caramelo ainda tem 36, 37 e 38. Qual é o seu número?",
+ "ab.chat.m3":"38! dá pra separar?",
+ "ab.chat.m4":"Separei uma 38 no seu nome. Amanhã a Bia confirma a retirada com você, a loja abre às 9h.",
+ "ab.chat.sys":"Resumo enviado para a equipe",
+ "ab.chat.cap":"Exemplo ilustrativo",
+ "ab.why.e":"Por que existimos",
+ "ab.why.h2":"Por que o Kontaro existe: nenhum cliente sem resposta",
+ "ab.why.p1":"Pense numa loja de bairro numa terça qualquer. São 21h07, a porta já fechou e o celular da loja está carregando em cima do balcão. Chega um “oi, ainda tem?”. Depois um áudio de um minuto. Depois uma pergunta sobre frete no Instagram. Ninguém vê nada até as 9h do dia seguinte, quando a dona responde na ordem que consegue e descobre que a cliente das 21h07 já comprou em outro lugar.",
+ "ab.why.p2":"Ninguém ali foi descuidado. O problema é o arranjo: um aparelho dividido entre três pessoas, conversas espalhadas em três aplicativos e nenhum jeito de saber quem já respondeu quem. Durante o dia, a equipe responde as mesmas vinte perguntas. À noite, ninguém responde nada.",
+ "ab.why.p3":"Quando um dono de negócio chega até nós, ele não está procurando “um software de atendimento”. Ele quer resolver uma situação bem concreta, que cabe numa frase:",
+ "ab.job.k":"O trabalho para o qual o Kontaro é contratado",
+ "ab.job.q":"“Quando um cliente me chama no WhatsApp, no Instagram ou no site, quero responder cada um rápido e bem, para vender mais sem montar uma central de atendimento e sem perder o jeito pessoal de atender.”",
+ "ab.d1.k":"O que precisa funcionar","ab.d1.h":"Toda mensagem respondida, com a informação certa",
+ "ab.d1.p":"Preço, prazo, frete e horário respondidos em segundos nos três canais, inclusive à noite, no domingo e no feriado. Com o histórico do cliente à vista, para ninguém perguntar duas vezes.",
+ "ab.d2.k":"O que a pessoa quer sentir","ab.d2.h":"Desligar sem culpa",
+ "ab.d2.p":"Ir almoçar sem levar o celular junto. Dormir sem a sensação de que tem venda esfriando na gaveta. Saber que, se algo sair do roteiro, alguém da equipe vai ser chamado.",
+ "ab.d3.k":"Como quer ser visto","ab.d3.h":"O negócio que responde",
+ "ab.d3.p":"Para o cliente, uma empresa atenta, que responde como gente. Para a equipe, alguém que organizou a casa, e não quem cobra resposta no grupo às 22h.",
+ "ab.f.e":"O que faz alguém mudar",
+ "ab.f.h2":"O que empurra, o que puxa e o que segura quem pensa em usar IA no atendimento",
+ "ab.f.sub":"Trocar o jeito de atender nunca é só uma questão de ferramenta. Tem a bagunça de hoje, a vontade de algo melhor, o medo de errar e o conforto do conhecido. Levamos as quatro coisas a sério.",
+ "ab.f1.k":"O empurrão","ab.f1.h":"A bagunça de hoje",
+ "ab.f1.p":"Conversa perdida no meio de outras cem. Um celular para a equipe toda. Cliente esperando duas horas por um preço que estava na tabela. Duas pessoas respondendo o mesmo cliente enquanto outro fica sem resposta nenhuma.",
+ "ab.f2.k":"A atração","ab.f2.h":"O jeito novo",
+ "ab.f2.p":"Resposta em segundos, a qualquer hora. O histórico de cada cliente num lugar só, com um responsável por conversa. A equipe livre para quem está perto de comprar ou precisa de ajuda de verdade.",
+ "ab.f3.k":"A ansiedade","ab.f3.h":"“E se a IA falar besteira?”",
+ "ab.f3.p":"É a dúvida mais justa de todas. E se soar como robô? E se inventar um preço? E se o número for bloqueado? Não pedimos que você confie no escuro.",
+ "ab.ans":"Como respondemos",
+ "ab.f3.a1":"A IA só responde com o que você ensinou: site, catálogo, planilhas e políticas. Você testa tudo antes de ativar.",
+ "ab.f3.a2":"Ela pode só escrever rascunhos para alguém da equipe aprovar antes de enviar.",
+ "ab.f3.a3":"Qualquer pessoa assume a conversa com um toque. Quando a IA não sabe, ela avisa o cliente e passa a vez, com um resumo.",
+ "ab.f3.a4":"Tudo roda na API oficial do WhatsApp Business, da Meta. Nada de aplicativo pirata arriscando o seu número.",
+ "ab.f4.k":"O hábito","ab.f4.h":"O “funciona mais ou menos”",
+ "ab.f4.p":"O jeito atual é conhecido, e mudar dá trabalho. Quase todo mundo pensa: “do jeito que está, a gente vai levando”. Só que esse “mais ou menos” cobra caro e em silêncio.",
+ "ab.f4.a1":"A conexão é guiada tela por tela. A maioria das empresas já está atendendo na mesma tarde.",
+ "ab.f4.a2":"Você pode começar só com rascunhos e deixar a IA responder sozinha aos poucos, assunto por assunto.",
+ "ab.f4.a3":"Sem fidelidade e sem multa. Se não servir, você exporta seus contatos e conversas e vai embora.",
+ "ab.loss":"Cada mensagem sem resposta é um cliente perguntando a mesma coisa para outra pessoa. É isso que tentamos evitar, todos os dias.",
+ "ab.b.e":"No que acreditamos",
+ "ab.b.h2":"O que acreditamos sobre atendimento com IA no WhatsApp",
+ "ab.b1.h":"Rapidez é uma forma de respeito.",
+ "ab.b1.p":"Quem pergunta às 21h não está pedindo favor. Responder logo diz que o tempo dele importa.",
+ "ab.b2.h":"A IA faz o repetitivo. Gente cuida da relação.",
+ "ab.b2.p":"Horário, preço de tabela e frete são trabalho de máquina. Reclamação, negociação e desconto são trabalho de gente.",
+ "ab.b3.h":"Só API oficial. Nada de gambiarra.",
+ "ab.b3.p":"Aplicativos não oficiais são a principal causa de números bloqueados. O número do seu negócio vale demais para correr esse risco.",
+ "ab.b4.h":"Preço que se explica numa frase.",
+ "ab.b4.p":"Plano com valor fixo por mês. As tarifas da Meta aparecem como são, pela tabela oficial, sem margem do Kontaro.",
+ "ab.b5.h":"Seus dados continuam seus.",
+ "ab.b5.p":"Você exporta ou apaga contatos e conversas quando quiser. As mensagens dos seus clientes não treinam IA para outros clientes.",
+ "ab.t.e":"Quem está por trás",
+ "ab.t.h2":"Disciplina de empresa grande para quem não tem uma equipe grande",
+ "ab.t.p1":"O Kontaro foi criado por um time de executivos com anos de experiência de liderança em empresas do S&P 500 e formação na Harvard Business School e no MIT.",
+ "ab.t.p2":"Nessas empresas, aprendemos que atender bem em escala não depende de sorte nem de heroísmo. Depende de processo, de medir as coisas certas e de responder rápido. Empresas grandes pagam caro por essa estrutura. A loja, a clínica ou a imobiliária com cinco pessoas normalmente não pode. O Kontaro existe para levar essa disciplina até elas, sem consultoria e sem projeto longo de implantação.",
+ "ab.t1.h":"Processo","ab.t1.p":"Cada conversa tem um responsável, e a IA sabe a hora de passar a vez para uma pessoa.",
+ "ab.t2.h":"Métricas","ab.t2.p":"Tempo de primeira resposta, SLA e a fila de quem precisa de atenção, sempre à vista.",
+ "ab.t3.h":"Tempo de resposta","ab.t3.p":"Segundos, não horas. Também fora do horário comercial.",
+ "ab.t4.h":"Honestidade","ab.t4.p":"Custos claros antes de enviar uma campanha e nenhuma promessa que o produto não cumpre.",
+ "ab.t.fine":"Harvard Business School, MIT e S&P 500 são citados apenas para descrever a formação e a experiência profissional da equipe. Essas instituições e empresas não têm relação com o Kontaro nem o endossam.",
+ "ab.r.e":"Antes de decidir",
+ "ab.r.h2":"Leituras que ajudam, mesmo que você nunca use o Kontaro",
+ "ab.r.sub":"Escrevemos estes guias para quem atende pelo WhatsApp. São gratuitos, sem cadastro, e trazem a conta feita.",
+ "ab.r.calc.k":"Calculadora gratuita","ab.r.calc.h":"Quanto você pagaria à Meta por mês?",
+ "ab.r.calc.p":"Informe quantas conversas e campanhas você faz por mês e veja o custo estimado da Meta e do plano, antes de criar qualquer conta.",
+ "ab.r.calc.more":"Calcular meu custo →",
+ "ab.q.e":"Dúvidas","ab.q.h2":"Perguntas frequentes sobre o Kontaro",
+ "ab.q1":"Quem está por trás do Kontaro?",
+ "ab.a1":"Um time de executivos com anos de experiência de liderança em empresas do S&P 500 e formação na Harvard Business School e no MIT. A empresa é a Kontaro Inc., com endereço em Miami, nos Estados Unidos, e o produto é feito para quem vende pelo WhatsApp, no Brasil e no mundo.",
+ "ab.q2":"O Kontaro usa a API oficial do WhatsApp?",
+ "ab.a2":"Sim. O Kontaro funciona sobre a plataforma oficial do WhatsApp Business, da Meta, e não sobre aplicativos não oficiais, que são a principal causa de bloqueio de números. Campanhas saem só com modelos aprovados pelo WhatsApp, e quem pede para sair da lista para de receber na hora. No plano Escala, você conecta vários números na mesma conta.",
+ "ab.q3":"A IA vai substituir a minha equipe?",
+ "ab.a3":"Não é essa a ideia. A IA responde as perguntas que se repetem, como horário, preço de tabela e frete, e pode só escrever rascunhos para alguém aprovar. Quando o assunto pede uma pessoa, a conversa vai para a equipe com um resumo, e qualquer um assume com um toque. A equipe para de copiar e colar respostas e passa a cuidar de quem está perto de comprar.",
+ "ab.q4":"Onde ficam os meus dados?",
+ "ab.a4":"A Kontaro Inc. fica nos Estados Unidos, e nossos fornecedores podem processar dados lá e em outros países, com as salvaguardas que a lei exige, como cláusulas contratuais padrão para dados vindos do Brasil. Usamos criptografia em trânsito e controle de acesso. Não vendemos dados, os provedores de IA não usam suas mensagens para treinar modelos, e você exporta ou apaga contatos e conversas quando quiser.",
+ "ab.q.more":"Ficou alguma dúvida?",
+ "ab.cta.h":"A próxima mensagem das 21h07 já pode ter resposta.",
+ "ab.cta.p":"Crie sua conta com nome e e-mail, conecte seu WhatsApp e converse com a IA antes de deixá-la falar com os clientes. São 14 dias com os recursos do plano Crescimento, sem cartão."
+});
+Object.assign(I18N.en,{
+ "ab.e":"About Us",
+ "ab.h1":"“Hi, is this still available?” 9:07 p.m. <em>Someone will answer.</em>",
+ "ab.lead":"Kontaro brings WhatsApp, Instagram and your website chat into one inbox. An AI replies in seconds, drafts answers for your team to approve and calls in a person when the conversation needs one. Built for small and mid-sized businesses that sell through conversations and can't leave customers waiting.",
+ "ab.talk":"Talk to us",
+ "ab.micro":"14 days with Growth plan features · No credit card · Nothing is charged automatically",
+ "ab.chat.biz":"Lumi Store","ab.chat.day":"Tuesday · store closed",
+ "ab.chat.m1":"hi, is this still available?",
+ "ab.chat.m2":"Hi! Yes, it is. The tan sandals are still in stock in 6, 7 and 8. What size do you wear?",
+ "ab.chat.m3":"8! can you hold a pair for me?",
+ "ab.chat.m4":"Done, a pair in size 8 is on hold under your name. Bia will confirm pickup with you tomorrow. We open at 9.",
+ "ab.chat.sys":"Summary sent to the team",
+ "ab.chat.cap":"Illustrative example",
+ "ab.why.e":"Why we exist",
+ "ab.why.h2":"Why Kontaro exists: no customer left without an answer",
+ "ab.why.p1":"Picture a neighborhood store on an ordinary Tuesday. It's 9:07 p.m., the doors are locked and the store phone is charging on the counter. A message comes in: “hi, is this still available?” Then a one-minute voice note. Then a shipping question on Instagram. Nobody sees any of it until 9 the next morning, when the owner works through the backlog and finds out the 9:07 customer already bought somewhere else.",
+ "ab.why.p2":"Nobody there was careless. The setup is the problem: one phone shared by three people, conversations scattered across three apps and no way to tell who already replied to whom. During the day, the team answers the same twenty questions. At night, nobody answers anything.",
+ "ab.why.p3":"When business owners come to us, they aren't shopping for “customer service software”. They want to fix a very specific situation, one that fits in a sentence:",
+ "ab.job.k":"The job businesses hire Kontaro to do",
+ "ab.job.q":"“When customers reach me on WhatsApp, Instagram or my website, help me answer every one of them quickly and well, so I sell more without building a call center and without losing the personal touch.”",
+ "ab.d1.k":"What has to work","ab.d1.h":"Every message answered, with the right information",
+ "ab.d1.p":"Prices, lead times, shipping and opening hours answered in seconds on all three channels, including nights, Sundays and holidays. With the customer's history right there, so nobody has to ask twice.",
+ "ab.d2.k":"How it should feel","ab.d2.h":"Switching off without guilt",
+ "ab.d2.p":"Going to lunch without taking the phone. Going to bed without the feeling that a sale is going cold in a drawer. Knowing that if something goes off script, someone on the team gets called in.",
+ "ab.d3.k":"How you want to be seen","ab.d3.h":"The business that answers",
+ "ab.d3.p":"To customers, a business that pays attention and replies like a person. To the team, the one who got things organized, not the one chasing replies in the group chat at 10 p.m.",
+ "ab.f.e":"What makes people switch",
+ "ab.f.h2":"What pushes, pulls and holds back businesses thinking about AI customer service",
+ "ab.f.sub":"Changing how you handle customers is never just about the tool. There's today's mess, the pull of something better, the fear of getting it wrong and the comfort of what you know. We take all four seriously.",
+ "ab.f1.k":"The push","ab.f1.h":"Today's mess",
+ "ab.f1.p":"A conversation lost among a hundred others. One phone for the whole team. A customer waiting two hours for a price that was on the price list. Two people replying to the same customer while another gets no reply at all.",
+ "ab.f2.k":"The pull","ab.f2.h":"A better way",
+ "ab.f2.p":"Replies in seconds, at any hour. Each customer's history in one place, with one owner per conversation. A team free to focus on the people who are close to buying or genuinely need help.",
+ "ab.f3.k":"The anxiety","ab.f3.h":"“What if the AI says something wrong?”",
+ "ab.f3.p":"It's the fairest question of all. What if it sounds like a robot? What if it makes up a price? What if the number gets banned? We don't ask you to trust it blindly.",
+ "ab.ans":"How we handle it",
+ "ab.f3.a1":"The AI only answers from what you taught it: your website, catalog, spreadsheets and policies. You test everything before going live.",
+ "ab.f3.a2":"It can just write drafts for someone on your team to approve before they're sent.",
+ "ab.f3.a3":"Anyone on the team can take over a conversation with one tap. When the AI doesn't know, it tells the customer and hands off, with a summary.",
+ "ab.f3.a4":"Everything runs on Meta's official WhatsApp Business Platform. No unofficial apps putting your number at risk.",
+ "ab.f4.k":"The habit","ab.f4.h":"“It works, more or less”",
+ "ab.f4.p":"The current way is familiar, and change takes effort. Almost everyone thinks: “we're getting by.” But “more or less” has a cost, and it's charged quietly.",
+ "ab.f4.a1":"Connecting is guided screen by screen. Most businesses are answering customers the same afternoon.",
+ "ab.f4.a2":"You can start with drafts only and let the AI reply on its own gradually, one topic at a time.",
+ "ab.f4.a3":"No contract and no cancellation fee. If it isn't right for you, export your contacts and conversations and go.",
+ "ab.loss":"Every unanswered message is a customer asking someone else the same question. That's what we work to prevent, every day.",
+ "ab.b.e":"What we believe",
+ "ab.b.h2":"What we believe about AI customer service on WhatsApp",
+ "ab.b1.h":"Speed is a form of respect.",
+ "ab.b1.p":"Someone asking at 9 p.m. isn't asking for a favor. Replying quickly tells them their time matters.",
+ "ab.b2.h":"AI does the repetitive work. People handle the relationship.",
+ "ab.b2.p":"Opening hours, list prices and shipping are machine work. Complaints, negotiations and discounts are people work.",
+ "ab.b3.h":"Official API only. No shortcuts.",
+ "ab.b3.p":"Unofficial apps are the main reason numbers get banned. Your business number is too valuable to gamble with.",
+ "ab.b4.h":"Pricing you can explain in one sentence.",
+ "ab.b4.p":"A fixed monthly plan price. Meta's fees are shown as they are, at Meta's official rates, with no Kontaro markup.",
+ "ab.b5.h":"Your data stays yours.",
+ "ab.b5.p":"Export or delete contacts and conversations whenever you like. Your customers' messages don't train AI for other customers.",
+ "ab.t.e":"Who's behind Kontaro",
+ "ab.t.h2":"Big-company discipline for businesses without a big team",
+ "ab.t.p1":"Kontaro was built by a team of executives with years of leadership experience at S&P 500 companies, and education at Harvard Business School and MIT.",
+ "ab.t.p2":"At those companies we learned that serving customers well at scale isn't about luck or heroics. It comes down to process, measuring the right things and replying fast. Large companies pay a lot for that structure. A store, clinic or real estate office with five people usually can't. Kontaro exists to bring that discipline to them, without consultants and without a long implementation project.",
+ "ab.t1.h":"Process","ab.t1.p":"Every conversation has an owner, and the AI knows when to hand off to a person.",
+ "ab.t2.h":"Metrics","ab.t2.p":"First response time, SLA and a queue of who needs attention, always in view.",
+ "ab.t3.h":"Response time","ab.t3.p":"Seconds, not hours. After business hours too.",
+ "ab.t4.h":"Honesty","ab.t4.p":"Clear costs before you send a campaign, and no promises the product can't keep.",
+ "ab.t.fine":"Harvard Business School, MIT and the S&P 500 are mentioned only to describe the team's education and professional experience. These institutions and companies are not affiliated with Kontaro and do not endorse it.",
+ "ab.r.e":"Before you decide",
+ "ab.r.h2":"Guides worth reading, even if you never use Kontaro",
+ "ab.r.sub":"We wrote these for anyone who serves customers on WhatsApp. They're free, need no sign-up and show the math.",
+ "ab.r.calc.k":"Free calculator","ab.r.calc.h":"How much would you pay Meta each month?",
+ "ab.r.calc.p":"Enter how many conversations and campaigns you handle per month and see the estimated Meta fees and plan cost, before creating any account.",
+ "ab.r.calc.more":"Estimate my cost →",
+ "ab.q.e":"FAQ","ab.q.h2":"Frequently asked questions about Kontaro",
+ "ab.q1":"Who is behind Kontaro?",
+ "ab.a1":"A team of executives with years of leadership experience at S&P 500 companies, and education at Harvard Business School and MIT. The company is Kontaro Inc., based in Miami, in the United States, and the product is built for businesses that sell on WhatsApp, in Brazil and around the world.",
+ "ab.q2":"Does Kontaro use the official WhatsApp API?",
+ "ab.a2":"Yes. Kontaro runs on Meta's official WhatsApp Business Platform, not on unofficial apps, which are the main cause of banned numbers. Campaigns only go out with WhatsApp-approved templates, and anyone who asks to leave a list stops receiving right away. On the Scale plan, you can connect multiple numbers to one account.",
+ "ab.q3":"Will the AI replace my team?",
+ "ab.a3":"That's not the idea. The AI answers the questions that keep coming up, like opening hours, list prices and shipping, and it can be set to only write drafts for someone to approve. When a conversation needs a person, it goes to your team with a summary, and anyone can take over with one tap. Your team stops copying and pasting answers and spends that time on customers who are close to buying.",
+ "ab.q4":"Where is my data?",
+ "ab.a4":"Kontaro Inc. is based in the United States, and our providers may process data there and in other countries, with the safeguards the law requires, such as standard contractual clauses for data from Brazil or the EU. We use encryption in transit and access controls. We don't sell data, AI providers don't use your messages to train their models, and you can export or delete contacts and conversations whenever you like.",
+ "ab.q.more":"Still have a question?",
+ "ab.cta.h":"The next 9:07 p.m. message can get an answer.",
+ "ab.cta.p":"Create your account with your name and email, connect WhatsApp and chat with the AI yourself before it talks to customers. You get 14 days with Growth plan features, no credit card."
+});
+Object.assign(I18N.es,{
+ "ab.e":"Sobre nosotros",
+ "ab.h1":"“Hola, ¿todavía hay?” llegó a las 21:07. <em>Alguien va a responder.</em>",
+ "ab.lead":"Kontaro reúne WhatsApp, Instagram y el chat de tu sitio web en una sola bandeja. Una IA responde en segundos, prepara borradores para que tu equipo los apruebe y llama a una persona cuando la conversación lo necesita. Hecho para pequeñas y medianas empresas que venden conversando y no pueden dejar a un cliente esperando.",
+ "ab.talk":"Habla con nosotros",
+ "ab.micro":"14 días con las funciones del plan Crecimiento · Sin tarjeta · No se cobra nada automáticamente",
+ "ab.chat.biz":"Tienda Lumi","ab.chat.day":"Martes · tienda cerrada",
+ "ab.chat.m1":"hola, ¿todavía hay?",
+ "ab.chat.m2":"¡Hola! Sí, todavía hay. La sandalia color caramelo queda en 36, 37 y 38. ¿Qué número usas?",
+ "ab.chat.m3":"¡38! ¿me la puedes apartar?",
+ "ab.chat.m4":"Listo, aparté una 38 a tu nombre. Mañana Bia te confirma el retiro. Abrimos a las 9.",
+ "ab.chat.sys":"Resumen enviado al equipo",
+ "ab.chat.cap":"Ejemplo ilustrativo",
+ "ab.why.e":"Por qué existimos",
+ "ab.why.h2":"Por qué existe Kontaro: ningún cliente sin respuesta",
+ "ab.why.p1":"Imagina una tienda de barrio un martes cualquiera. Son las 21:07, la puerta ya cerró y el celular de la tienda se está cargando sobre el mostrador. Llega un “hola, ¿todavía hay?”. Después, un audio de un minuto. Después, una pregunta por el envío en Instagram. Nadie ve nada hasta las 9 del día siguiente, cuando la dueña responde como puede y descubre que la clienta de las 21:07 ya compró en otro lado.",
+ "ab.why.p2":"Nadie fue descuidado. El problema es cómo está armado todo: un teléfono compartido entre tres personas, conversaciones repartidas en tres aplicaciones y ninguna forma de saber quién ya le respondió a quién. De día, el equipo contesta las mismas veinte preguntas. De noche, nadie contesta nada.",
+ "ab.why.p3":"Cuando un dueño de negocio llega a nosotros, no está buscando “un software de atención”. Quiere resolver una situación muy concreta, que cabe en una frase:",
+ "ab.job.k":"El trabajo para el que contratan a Kontaro",
+ "ab.job.q":"“Cuando un cliente me escribe por WhatsApp, Instagram o mi sitio web, quiero responderle a cada uno rápido y bien, para vender más sin montar un call center y sin perder el trato personal.”",
+ "ab.d1.k":"Lo que tiene que funcionar","ab.d1.h":"Cada mensaje respondido, con la información correcta",
+ "ab.d1.p":"Precios, plazos, envíos y horarios respondidos en segundos en los tres canales, también de noche, los domingos y los feriados. Con el historial del cliente a la vista, para que nadie tenga que preguntar dos veces.",
+ "ab.d2.k":"Lo que quieres sentir","ab.d2.h":"Desconectarte sin culpa",
+ "ab.d2.p":"Salir a almorzar sin llevar el celular. Irte a dormir sin la sensación de que hay una venta enfriándose en un cajón. Saber que, si algo se sale del guion, alguien del equipo va a enterarse.",
+ "ab.d3.k":"Cómo quieres que te vean","ab.d3.h":"El negocio que responde",
+ "ab.d3.p":"Para el cliente, una empresa atenta que responde como una persona. Para el equipo, quien puso orden, y no quien exige respuestas en el grupo a las 22:00.",
+ "ab.f.e":"Qué hace que alguien cambie",
+ "ab.f.h2":"Lo que empuja, lo que atrae y lo que frena a quien piensa en usar IA en la atención",
+ "ab.f.sub":"Cambiar la forma de atender nunca es solo una cuestión de herramienta. Está el desorden de hoy, las ganas de algo mejor, el miedo a equivocarse y la comodidad de lo conocido. Nos tomamos en serio las cuatro cosas.",
+ "ab.f1.k":"El empujón","ab.f1.h":"El desorden de hoy",
+ "ab.f1.p":"Una conversación perdida entre otras cien. Un celular para todo el equipo. Un cliente esperando dos horas por un precio que estaba en la lista. Dos personas respondiendo al mismo cliente mientras otro no recibe respuesta.",
+ "ab.f2.k":"La atracción","ab.f2.h":"La forma nueva",
+ "ab.f2.p":"Respuestas en segundos, a cualquier hora. El historial de cada cliente en un solo lugar, con un responsable por conversación. Un equipo libre para quien está cerca de comprar o de verdad necesita ayuda.",
+ "ab.f3.k":"La ansiedad","ab.f3.h":"“¿Y si la IA dice cualquier cosa?”",
+ "ab.f3.p":"Es la duda más justa. ¿Y si suena a robot? ¿Y si inventa un precio? ¿Y si bloquean el número? No te pedimos que confíes a ciegas.",
+ "ab.ans":"Cómo lo resolvemos",
+ "ab.f3.a1":"La IA solo responde con lo que le enseñaste: tu sitio, catálogo, hojas de cálculo y políticas. Pruebas todo antes de activarla.",
+ "ab.f3.a2":"Puede limitarse a escribir borradores para que alguien del equipo los apruebe antes de enviarlos.",
+ "ab.f3.a3":"Cualquier persona toma la conversación con un toque. Cuando la IA no sabe algo, se lo dice al cliente y pasa el turno, con un resumen.",
+ "ab.f3.a4":"Todo funciona sobre la API oficial de WhatsApp Business, de Meta. Nada de apps no oficiales que ponen en riesgo tu número.",
+ "ab.f4.k":"El hábito","ab.f4.h":"El “funciona más o menos”",
+ "ab.f4.p":"La forma actual es conocida y cambiar cuesta. Casi todos piensan: “así como está, nos arreglamos”. Pero ese “más o menos” se cobra caro, y en silencio.",
+ "ab.f4.a1":"La conexión es guiada pantalla por pantalla. La mayoría de las empresas ya está atendiendo esa misma tarde.",
+ "ab.f4.a2":"Puedes empezar solo con borradores y dejar que la IA responda sola de a poco, tema por tema.",
+ "ab.f4.a3":"Sin permanencia ni penalidad. Si no te sirve, exportas tus contactos y conversaciones y te vas.",
+ "ab.loss":"Cada mensaje sin respuesta es un cliente haciéndole la misma pregunta a otro. Eso es lo que intentamos evitar, todos los días.",
+ "ab.b.e":"En qué creemos",
+ "ab.b.h2":"Lo que creemos sobre la atención con IA en WhatsApp",
+ "ab.b1.h":"La rapidez es una forma de respeto.",
+ "ab.b1.p":"Quien pregunta a las 21:00 no está pidiendo un favor. Responder pronto le dice que su tiempo importa.",
+ "ab.b2.h":"La IA hace lo repetitivo. Las personas cuidan la relación.",
+ "ab.b2.p":"Horarios, precios de lista y envíos son trabajo de máquina. Reclamos, negociaciones y descuentos son trabajo de personas.",
+ "ab.b3.h":"Solo API oficial. Sin atajos.",
+ "ab.b3.p":"Las apps no oficiales son la principal causa de números bloqueados. El número de tu negocio vale demasiado para arriesgarlo.",
+ "ab.b4.h":"Precios que se explican en una frase.",
+ "ab.b4.p":"Un plan con precio fijo mensual. Las tarifas de Meta se muestran tal como son, según la tabla oficial, sin margen de Kontaro.",
+ "ab.b5.h":"Tus datos siguen siendo tuyos.",
+ "ab.b5.p":"Exportas o borras contactos y conversaciones cuando quieras. Los mensajes de tus clientes no entrenan IA para otros clientes.",
+ "ab.t.e":"Quién está detrás",
+ "ab.t.h2":"Disciplina de gran empresa para negocios sin un gran equipo",
+ "ab.t.p1":"Kontaro fue creado por un equipo de ejecutivos con años de experiencia de liderazgo en empresas del S&P 500 y formación en Harvard Business School y el MIT.",
+ "ab.t.p2":"En esas empresas aprendimos que atender bien a escala no depende de la suerte ni del heroísmo. Depende de procesos, de medir lo correcto y de responder rápido. Las grandes empresas pagan mucho por esa estructura. La tienda, la clínica o la inmobiliaria con cinco personas normalmente no puede. Kontaro existe para llevarles esa disciplina, sin consultoría y sin un proyecto largo de implementación.",
+ "ab.t1.h":"Procesos","ab.t1.p":"Cada conversación tiene un responsable, y la IA sabe cuándo pasarle el turno a una persona.",
+ "ab.t2.h":"Métricas","ab.t2.p":"Tiempo de primera respuesta, SLA y la fila de quién necesita atención, siempre a la vista.",
+ "ab.t3.h":"Tiempo de respuesta","ab.t3.p":"Segundos, no horas. También fuera del horario comercial.",
+ "ab.t4.h":"Honestidad","ab.t4.p":"Costos claros antes de enviar una campaña y ninguna promesa que el producto no cumpla.",
+ "ab.t.fine":"Harvard Business School, el MIT y el S&P 500 se mencionan solo para describir la formación y la experiencia profesional del equipo. Estas instituciones y empresas no tienen relación con Kontaro ni lo respaldan.",
+ "ab.r.e":"Antes de decidir",
+ "ab.r.h2":"Lecturas que ayudan, aunque nunca uses Kontaro",
+ "ab.r.sub":"Escribimos estas guías para quien atiende por WhatsApp. Son gratis, sin registro, y traen la cuenta hecha.",
+ "ab.r.calc.k":"Calculadora gratuita","ab.r.calc.h":"¿Cuánto le pagarías a Meta cada mes?",
+ "ab.r.calc.p":"Indica cuántas conversaciones y campañas manejas al mes y mira el costo estimado de Meta y del plan, antes de crear una cuenta.",
+ "ab.r.calc.more":"Calcular mi costo →",
+ "ab.q.e":"Preguntas","ab.q.h2":"Preguntas frecuentes sobre Kontaro",
+ "ab.q1":"¿Quién está detrás de Kontaro?",
+ "ab.a1":"Un equipo de ejecutivos con años de experiencia de liderazgo en empresas del S&P 500 y formación en Harvard Business School y el MIT. La empresa es Kontaro Inc., con sede en Miami, Estados Unidos, y el producto está hecho para quien vende por WhatsApp, en Brasil y en el resto del mundo.",
+ "ab.q2":"¿Kontaro usa la API oficial de WhatsApp?",
+ "ab.a2":"Sí. Kontaro funciona sobre la plataforma oficial de WhatsApp Business, de Meta, y no sobre apps no oficiales, que son la principal causa de números bloqueados. Las campañas solo salen con plantillas aprobadas por WhatsApp, y quien pide salir de una lista deja de recibir al instante. En el plan Escala puedes conectar varios números en la misma cuenta.",
+ "ab.q3":"¿La IA va a reemplazar a mi equipo?",
+ "ab.a3":"Esa no es la idea. La IA responde las preguntas que se repiten, como horarios, precios de lista y envíos, y puede limitarse a escribir borradores para que alguien los apruebe. Cuando la conversación necesita una persona, pasa al equipo con un resumen, y cualquiera la toma con un toque. Tu equipo deja de copiar y pegar respuestas y dedica ese tiempo a quien está cerca de comprar.",
+ "ab.q4":"¿Dónde están mis datos?",
+ "ab.a4":"Kontaro Inc. tiene sede en Estados Unidos, y nuestros proveedores pueden procesar datos allí y en otros países, con las salvaguardas que exige la ley, como cláusulas contractuales tipo para datos que vienen de Brasil o de la UE. Usamos cifrado en tránsito y controles de acceso. No vendemos datos, los proveedores de IA no usan tus mensajes para entrenar sus modelos, y puedes exportar o borrar contactos y conversaciones cuando quieras.",
+ "ab.q.more":"¿Te quedó alguna duda?",
+ "ab.cta.h":"El próximo mensaje de las 21:07 ya puede tener respuesta.",
+ "ab.cta.p":"Crea tu cuenta con tu nombre y correo, conecta tu WhatsApp y conversa tú con la IA antes de dejarla hablar con tus clientes. Son 14 días con las funciones del plan Crecimiento, sin tarjeta."
+});
+var ABOUT_PICKS={pt:["/blog/quanto-custa-api-oficial-whatsapp/","/blog/ia-ou-atendente-humano/","/blog/tempo-de-resposta-ao-lead/"],
+ en:["/en/blog/whatsapp-business-api-cost/","/en/blog/ai-or-human-agent-when-to-hand-off/","/en/blog/speed-to-lead-response-time/"],
+ es:["/es/blog/cuanto-cuesta-api-oficial-whatsapp/","/es/blog/ia-o-agente-humano/","/es/blog/tiempo-de-respuesta-al-lead/"]};
 var IDEAL={
  pt:{starter:["Lojas e prestadores de serviço que estão começando no WhatsApp","Quem perde vendas por demorar a responder","Equipes de 1 ou 2 pessoas"],
      growth:["Empresas que querem vender mais com IA todos os dias","Equipes de até 5 pessoas atendendo no mesmo número","Quem faz campanhas a partir de planilhas"],
@@ -1997,6 +2451,13 @@ function renderPosts(){
   $$("[data-blog]").forEach(function(a){a.setAttribute("href",P.hub)});
 }
 
+/* About page: hand-picked guides (same cards as the blog teaser) and an About-specific closing CTA. */
+function renderAbout(){
+  if(KPAGE.id!=="about") return;
+  var P=POSTS[lang], L=ABOUT_PICKS[lang].map(function(u){return P.list.filter(function(p){return p[0]===u})[0]}).filter(Boolean);
+  $("#abPosts").innerHTML=L.map(function(p){return '<a class="post" href="'+p[0]+'"><span class="ptag">'+esc(p[1])+' · '+p[4]+' '+esc(t("blog.min"))+'</span><h3>'+esc(p[2])+'</h3><p>'+esc(p[3])+'</p><span class="more">'+esc(t("blog.read"))+' →</span></a>'}).join("");
+  $("#start .cta h2").textContent=t("ab.cta.h"); $("#start .cta h2+p").textContent=t("ab.cta.p");
+}
 function applyLang(l){
   lang=I18N[l]?l:"pt";
   document.documentElement.lang = lang==="pt"?"pt-BR":lang;
@@ -2010,7 +2471,7 @@ function applyLang(l){
   var em=$("#leadEmail"); if(em) em.setAttribute("placeholder",lang==="pt"?"voce@empresa.com":lang==="es"?"tu@empresa.com":"you@company.com");
   $("#bizName").textContent=DEMO[lang].biz;
   applyPage();
-  renderPlans(); renderFaq(); renderPosts(); renderCompare(); renderMetaTable(); setupEstimator();
+  renderPlans(); renderFaq(); renderPosts(); renderAbout(); renderCompare(); renderMetaTable(); setupEstimator();
   if(KPAGE.id==="home"){ renderSheet(); startHero(); runAsk(currentQ); startAdmin(); startOutbox(); }
 }
 function goSignup(extra){
@@ -2292,7 +2753,7 @@ function applyPage(){
   $$("[data-pages]").forEach(function(el){ el.hidden=el.getAttribute("data-pages").split(" ").indexOf(KPAGE.id)<0; });
   $$("[data-go]").forEach(function(a){ var p=a.getAttribute("data-go"); a.setAttribute("href", p==="signup"&&a.hasAttribute("data-plan")?signupUrl(a.getAttribute("data-plan")):link(p,a.getAttribute("data-hash"),a.getAttribute("data-plan"))); });
   $$(".lang a").forEach(function(a){ var l=a.getAttribute("data-lang"); a.setAttribute("href",urlFor(l,KPAGE.id,KPAGE.plan)); });
-  var titles={pricing:"ph.pricing.e",faq:"ph.faq.e",signup:"au.create",login:"au.login",about:"ph.about.e",contact:"ph.contact.e"}, descs={pricing:"ph.pricing.p",faq:"ph.faq.p",signup:"au.su.p",login:"au.li.p",about:"ph.about.p",contact:"ph.contact.p"};
+  var titles={pricing:"ph.pricing.e",faq:"ph.faq.e",signup:"au.create",login:"au.login",about:"ph.about.e",contact:"ph.contact.e"}, descs={pricing:"ph.pricing.p",faq:"ph.faq.p",signup:"au.su.p",login:"au.li.p",about:"ab.lead",contact:"ph.contact.p"};
   var md=$('meta[name="description"]');
   if(KPAGE.id==="plan"){ var P=PLAN_TXT[lang][KPAGE.plan]; document.title=(lang==="en"?P.n+" plan":t("ph.plan.e")+" "+P.n)+" · Kontaro"; if(md) md.setAttribute("content",P.f+" "+t("pl.trial")); }
   else if(KPAGE.id!=="home"){ document.title=t(titles[KPAGE.id])+" · Kontaro"; if(md) md.setAttribute("content",t(descs[KPAGE.id])); }
@@ -2300,7 +2761,7 @@ function applyPage(){
   var S=window.KONTARO_SEO; if(S&&S.lang===lang&&S.page===KPAGE.id&&(S.plan||null)===(KPAGE.plan||null)){ document.title=S.title; if(md) md.setAttribute("content",S.desc); }
   /* page header */
   var ph=$("#pagehead");
-  if(KPAGE.id==="pricing"||KPAGE.id==="faq"||KPAGE.id==="about"||KPAGE.id==="contact"){ $("#phE").textContent=t("ph."+KPAGE.id+".e"); $("#phH").textContent=t("ph."+KPAGE.id+".h"); $("#phP").textContent=t("ph."+KPAGE.id+".p"); $("#phBack").hidden=true; }
+  if(KPAGE.id==="pricing"||KPAGE.id==="faq"||KPAGE.id==="contact"){ $("#phE").textContent=t("ph."+KPAGE.id+".e"); $("#phH").textContent=t("ph."+KPAGE.id+".h"); $("#phP").textContent=t("ph."+KPAGE.id+".p"); $("#phBack").hidden=true; }
   if(KPAGE.id==="plan"){ var Q=PLAN_TXT[lang][KPAGE.plan]; $("#phE").textContent=t("ph.plan.e"); $("#phH").textContent=Q.n; $("#phP").textContent=Q.f; $("#phBack").hidden=false; }
   /* on the FAQ page the page header replaces the section title */
   var fh=$("#faq .sec-head"); if(fh) fh.hidden=KPAGE.id==="faq"||KPAGE.id==="plan"||KPAGE.id==="pricing";

@@ -535,8 +535,9 @@ body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display
 .ab-force{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,30px);display:grid;gap:10px;border-top:4px solid var(--line)}
 .ab-force h3{font-size:clamp(20px,2.2vw,24px);font-weight:700}
 .ab-force>p{color:var(--muted);font-size:15.5px}
-.ab-force.push{border-top-color:var(--signal)}.ab-force.push .ab-k{color:var(--signal)}
-.ab-force.pull{border-top-color:var(--ok)}.ab-force.pull .ab-k{color:var(--ok)}
+.ab-force.push{border-top-color:var(--signal)}.ab-force.push .ab-k{color:color-mix(in srgb,var(--signal) 68%,var(--ink))}
+.ab-force.pull{border-top-color:var(--ok)}.ab-force.pull .ab-k{color:color-mix(in srgb,var(--ok) 72%,var(--ink))}
+#abPosts .ptag{color:color-mix(in srgb,var(--signal) 68%,var(--ink))}
 .ab-force.fear{border-top-color:var(--accent)}
 .ab-force.habit{border-top-color:var(--ink)}.ab-force.habit .ab-k{color:var(--muted)}
 .ab-answer{margin-top:8px;padding:16px;border-radius:14px;background:var(--sunk);display:grid;gap:10px;font-size:15px}
@@ -544,7 +545,7 @@ body[data-page="signup"] .sticky-cta,body[data-page="login"] .sticky-cta{display
 .ab-loss{margin-top:clamp(32px,4vw,48px);font:700 clamp(22px,2.8vw,30px)/1.3 var(--f-display);letter-spacing:-.01em;max-width:40ch;padding-left:20px;border-left:4px solid var(--signal);text-wrap:balance}
 .ab-prin{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;counter-reset:p}
 .ab-prin li{border-top:2px solid var(--ink);padding-top:18px;display:grid;gap:8px;align-content:start;counter-increment:p}
-.ab-prin li::before{content:"0" counter(p);font:500 13px var(--f-mono);color:var(--signal)}
+.ab-prin li::before{content:"0" counter(p);font:500 13px var(--f-mono);color:color-mix(in srgb,var(--signal) 68%,var(--ink))}
 .ab-prin h3{font-size:20px;font-weight:700;line-height:1.2}
 .ab-prin p{color:var(--muted);font-size:15px}
 .ab-team .eyebrow{color:color-mix(in srgb,var(--bg) 70%,var(--accent))}

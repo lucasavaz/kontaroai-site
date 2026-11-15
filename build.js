@@ -55,7 +55,10 @@ function jsonLd(L,pg,url,title,desc,h1,planNames){
   const offer=id=>{const price=PRICES[id][L.code==='pt'?'brl':'usd'];return {"@type":"Offer","name":planNames[id],"url":`${SITE}/${dirFor(L.code,{id:'plan',plan:id})}`,"price":price,"priceCurrency":cur,
     "priceSpecification":{"@type":"UnitPriceSpecification","price":price,"priceCurrency":cur,"billingDuration":"P1M","unitText":"MONTH"},"availability":"https://schema.org/InStock"};};
   if(pg.id==='home') g.push({"@type":"WebSite","@id":SITE+"/#website","url":SITE+"/","name":"Kontaro","inLanguage":["pt-BR","en","es"],"publisher":{"@id":SITE+"/#org"}});
-  g.push({"@type":"WebPage","@id":url+"#webpage","url":url,"name":title,"description":desc,"inLanguage":L.hl,"isPartOf":{"@id":SITE+"/#website"},"about":{"@id":SITE+"/#software"}});
+  // The About page describes the company (AboutPage about the shared Organization); every other page is about the product.
+  g.push(pg.id==='about'
+    ?{"@type":"AboutPage","@id":url+"#webpage","url":url,"name":title,"description":desc,"inLanguage":L.hl,"isPartOf":{"@id":SITE+"/#website"},"about":{"@id":SITE+"/#org"},"mainEntity":{"@id":SITE+"/#org"}}
+    :{"@type":"WebPage","@id":url+"#webpage","url":url,"name":title,"description":desc,"inLanguage":L.hl,"isPartOf":{"@id":SITE+"/#website"},"about":{"@id":SITE+"/#software"}});
   if(['home','pricing','plan'].includes(pg.id)) g.push({"@type":"SoftwareApplication","@id":SITE+"/#software","name":"Kontaro","applicationCategory":"BusinessApplication","operatingSystem":"Web",
     "url":SITE+"/"+PAGES[L.code].home,"description":T[L.code].home.desc,"publisher":{"@id":SITE+"/#org"},
     "offers":pg.id==='plan'?offer(pg.plan):Object.keys(PRICES).map(offer)});
@@ -120,13 +123,13 @@ ${LANGS.filter(x=>x!==L).map(x=>`<meta property="og:locale:alternate" content="$
         document.querySelectorAll('.float').forEach(f=>f.classList.add('dim'));
         // One <h1> per page: headings inside sections hidden on this page become plain <div>s (same id/class).
         document.querySelectorAll('[data-pages][hidden] h1').forEach(h=>{const d=document.createElement('div');for(const at of h.attributes)d.setAttribute(at.name,at.value);d.innerHTML=h.innerHTML;h.replaceWith(d);});
-        if(['home','faq','pricing'].includes(pid)){
-          const qa=[...document.querySelectorAll('#faqList details')].map(d=>({"@type":"Question","name":d.querySelector('summary').textContent,"acceptedAnswer":{"@type":"Answer","text":d.querySelector('p').textContent}}));
+        if(['home','faq','pricing','about'].includes(pid)){
+          const qa=[...document.querySelectorAll(pid==='about'?'#abFaq details':'#faqList details')].map(d=>({"@type":"Question","name":d.querySelector('summary').textContent,"acceptedAnswer":{"@type":"Answer","text":d.querySelector('p').textContent}}));
           const sc=document.createElement('script'); sc.type='application/ld+json'; sc.textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":qa}); document.head.appendChild(sc);
         }
         const vis=s=>{const e=document.querySelector(s);return e&&!e.closest('[hidden]')?e.textContent.trim():'';};
         return {html:'<!doctype html>\n'+document.documentElement.outerHTML,title:document.title,desc:(document.querySelector('meta[name="description"]')||{}).content||'',
-          crumb:vis('#phE')||vis('#auth h1')||document.title};
+          crumb:vis('#phE')||vis('#abE')||vis('#auth h1')||document.title};
       },pg.id);
       const M=T[L.code][metaKey(pg)];
       if(r.title!==M.title||r.desc!==M.desc) throw new Error(`Page script changed the title/description of ${dirFor(L.code,pg)}: ${r.title}`);

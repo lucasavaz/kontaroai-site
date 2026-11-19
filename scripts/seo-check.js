@@ -39,8 +39,9 @@ for(const f of allHtml){
   if(!desc) warn(u,'no meta description'); else { if(desc.length<120||desc.length>160) warn(u,`description ${desc.length} chars`); if(!noindex)(descs[desc]=descs[desc]||[]).push(u); }
   const lang=attr(h,/<html[^>]* lang="([^"]+)"/),loc=attr(h,/<meta property="og:locale" content="([^"]+)"/);
   if(LOCALE[lang]!==loc) warn(u,`html lang ${lang} vs og:locale ${loc}`);
-  // One URL rule for the whole site: no prefix = pt-BR, /en/ = English, /es/ = Spanish (legal pages are English-only).
-  {const rel=u.slice(SITE.length),want=/^\/en\//.test(rel)?'en':/^\/es\//.test(rel)?'es':/^\/(privacy|terms)\//.test(rel)?'en':'pt-BR';
+  // One URL rule for the whole site: no prefix = pt-BR, /en/ = English, /es/ = Spanish. Exceptions: the English legal/app-store pages at the root
+  // (/privacy/, /terms/, /support/, /account-deletion/, and the /about/ redirect), whose Portuguese versions are /privacidade/, /suporte/, /excluir-conta/.
+  {const rel=u.slice(SITE.length),want=/^\/en\//.test(rel)?'en':/^\/es\//.test(rel)?'es':/^\/(privacy|terms|support|account-deletion|about)\//.test(rel)?'en':'pt-BR';
    if(lang!==want) warn(u,`html lang ${lang} but the URL prefix means ${want}`);}
   if(/(href|src)="(https:\/\/kontaro\.ai)?\/pt-br\//.test(h)) warn(u,'links to an old /pt-br/ URL');
   if(!noindex){

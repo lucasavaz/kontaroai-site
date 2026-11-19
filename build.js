@@ -160,11 +160,12 @@ ${LANGS.filter(x=>x!==L).map(x=>`<meta property="og:locale:alternate" content="$
     LANGS.map(x=>[x.hl,`${SITE}/${dirFor(x.code,pg)}`]).concat([['x-default',`${SITE}/${dirFor('pt',pg)}`]]))));
   // Hand-written pages in public/: lastmod = dateModified in the page (articles), newest article (blog index), "Last updated" (legal).
   const pubPages=require('child_process').execSync('find '+JSON.stringify(dist)+' -name index.html').toString().trim().split('\n')
-    .filter(f=>/\/(blog|terms|privacy)\//.test(f)).sort();
+    .filter(f=>/\/(blog|terms|privacy|privacidade|support|suporte|account-deletion|excluir-conta|about)\//.test(f)).sort();
+  const PT_MONTHS={janeiro:'January',fevereiro:'February','março':'March',abril:'April',maio:'May',junho:'June',julho:'July',agosto:'August',setembro:'September',outubro:'October',novembro:'November',dezembro:'December'};
   const months={January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};
   const info=f=>{const h=read(f),loc=SITE+'/'+path.relative(dist,path.dirname(f)).split(path.sep).join('/')+'/';
     const mod=(h.match(/<meta property="article:modified_time" content="(\d{4}-\d\d-\d\d)/)||[])[1];
-    const upd=h.match(/Last updated: (\w+) (\d+), (\d{4})/);
+    const upd=h.match(/Last updated: (\w+) (\d+), (\d{4})/)||(m=>m&&[m[0],PT_MONTHS[m[2]],m[1],m[3]])(h.match(/Última atualização: (\d+) de ([a-zç]+) de (\d{4})/));
     return {f,h,loc,noindex:/<meta name="robots" content="[^"]*noindex/.test(h),
       date:mod||(upd?`${upd[3]}-${String(months[upd[1]]).padStart(2,'0')}-${upd[2].padStart(2,'0')}`:null),
       alts:[...h.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)].map(m=>[m[1],m[2]])};};

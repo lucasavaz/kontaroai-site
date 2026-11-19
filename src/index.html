@@ -1273,7 +1273,7 @@ curl https://api.kontaro.ai/v1/messages \
     <div><h2 class="fh" data-i18n="foot.product"></h2><ul>
       <li><a data-go="home" data-hash="ask" href="#ask" data-i18n="nav.ai"></a></li><li><a data-go="home" data-hash="how" href="#how" data-i18n="nav.how"></a></li><li><a data-go="home" data-hash="compare" href="#compare" data-i18n="nav.compare"></a></li><li><a data-go="pricing" href="#pricing" data-i18n="nav.pricing"></a></li><li><a data-go="pricing" data-hash="billing" href="#billing" data-i18n="bl.eyebrow"></a></li><li><a data-go="faq" href="#faq" data-i18n="nav.faq"></a></li></ul></div>
     <div><h2 class="fh" data-i18n="foot.company"></h2><ul>
-      <li><a href="/blog/" data-blog data-i18n="nav.blog"></a></li><li><a href="/privacy/" data-i18n="foot.privacy"></a></li><li><a href="/terms/" data-i18n="foot.terms"></a></li><li><a data-go="about" href="/sobre/" target="_blank" rel="noopener" data-i18n="foot.about"></a></li><li><a data-go="contact" href="/fale-conosco/" target="_blank" rel="noopener" data-i18n="foot.talk"></a></li><li><a data-go="login" href="/entrar/" data-i18n="nav.login"></a></li></ul></div>
+      <li><a href="/blog/" data-blog data-i18n="nav.blog"></a></li><li><a href="/privacy/" data-legal="privacy" data-i18n="foot.privacy"></a></li><li><a href="/terms/" data-i18n="foot.terms"></a></li><li><a href="/support/" data-legal="support" data-i18n="foot.support"></a></li><li><a href="/account-deletion/" data-legal="deletion" data-i18n="foot.deletion"></a></li><li><a data-go="about" href="/sobre/" target="_blank" rel="noopener" data-i18n="foot.about"></a></li><li><a data-go="contact" href="/fale-conosco/" target="_blank" rel="noopener" data-i18n="foot.talk"></a></li><li><a data-go="login" href="/entrar/" data-i18n="nav.login"></a></li></ul></div>
     <div><h2 class="fh" data-i18n="foot.contact"></h2>
       <address translate="no"><b>Kontaro Inc.</b><br>830 Brickell Plaza<br>Miami, FL 33131<br>United States<br><a href="mailto:talk@kontaro.ai">talk@kontaro.ai</a></address></div>
     <div class="foot-base"><span translate="no">© 2026 Kontaro Inc.</span><span data-i18n="foot.made"></span></div>
@@ -1365,7 +1365,7 @@ pt:{
  "cta.name":"Seu nome","cta.email":"Seu e-mail","cta.btn":"Criar minha conta grátis","cta.micro":"14 dias grátis · Sem cartão · Cancele quando quiser","cta.have":"Já tem conta?",
  "cta.err":"Escreva seu nome e um e-mail válido.","cta.go":"Tudo certo! Levando você para criar a conta…",
  "foot.tag":"Atendimento com IA no WhatsApp oficial, para empresas de qualquer tamanho.","foot.product":"Produto","foot.company":"Empresa","foot.contact":"Contato",
- "foot.privacy":"Privacidade","foot.terms":"Termos","foot.made":"Feito para quem vende pelo WhatsApp, no Brasil e no mundo."
+ "foot.privacy":"Privacidade","foot.terms":"Termos","foot.support":"Suporte","foot.deletion":"Excluir conta","foot.made":"Feito para quem vende pelo WhatsApp, no Brasil e no mundo."
 },
 en:{
  "meta.title":"Kontaro · AI customer service on official WhatsApp",
@@ -1448,7 +1448,7 @@ en:{
  "cta.name":"Your name","cta.email":"Your email","cta.btn":"Create my free account","cta.micro":"14 days free · No card · Cancel anytime","cta.have":"Already have an account?",
  "cta.err":"Please enter your name and a valid email.","cta.go":"All set! Taking you to create your account…",
  "foot.tag":"AI customer service on official WhatsApp, for businesses of any size.","foot.product":"Product","foot.company":"Company","foot.contact":"Contact",
- "foot.privacy":"Privacy","foot.terms":"Terms","foot.made":"Made for businesses that sell on WhatsApp, everywhere."
+ "foot.privacy":"Privacy","foot.terms":"Terms","foot.support":"Support","foot.deletion":"Account deletion","foot.made":"Made for businesses that sell on WhatsApp, everywhere."
 },
 es:{
  "meta.title":"Kontaro · Atención con IA en WhatsApp oficial",
@@ -1531,7 +1531,7 @@ es:{
  "cta.name":"Tu nombre","cta.email":"Tu correo","cta.btn":"Crear mi cuenta gratis","cta.micro":"14 días gratis · Sin tarjeta · Cancela cuando quieras","cta.have":"¿Ya tienes cuenta?",
  "cta.err":"Escribe tu nombre y un correo válido.","cta.go":"¡Listo! Te llevamos a crear tu cuenta…",
  "foot.tag":"Atención con IA en WhatsApp oficial, para empresas de cualquier tamaño.","foot.product":"Producto","foot.company":"Empresa","foot.contact":"Contacto",
- "foot.privacy":"Privacidad","foot.terms":"Términos","foot.made":"Hecho para quienes venden por WhatsApp, en todo el mundo."
+ "foot.privacy":"Privacidad","foot.terms":"Términos","foot.support":"Soporte","foot.deletion":"Eliminar cuenta","foot.made":"Hecho para quienes venden por WhatsApp, en todo el mundo."
 }};
 
 /* Pricing (proposal: confirm before going live). Yearly = 10 x monthly, shown per month. */
@@ -2417,6 +2417,9 @@ function renderPosts(){
   var h2=$("#blog h2"); if(h2) h2.textContent=t(KPAGE&&KPAGE.id==="pricing"?"blog.h2p":"blog.h2");
   $("#posts").innerHTML=L.slice(0,3).map(function(p){return '<a class="post" href="'+p[0]+'"><span class="ptag">'+esc(p[1])+' · '+p[4]+' '+esc(t("blog.min"))+'</span><h3>'+esc(p[2])+'</h3><p>'+esc(p[3])+'</p><span class="more">'+esc(t("blog.read"))+' →</span></a>'}).join("");
   $$("[data-blog]").forEach(function(a){a.setAttribute("href",P.hub)});
+  /* Privacy, Support and Account deletion have a Portuguese version; other languages use the English pages. */
+  var LEGAL={privacy:["/privacidade/","/privacy/"],support:["/suporte/","/support/"],deletion:["/excluir-conta/","/account-deletion/"]};
+  $$("[data-legal]").forEach(function(a){var u=LEGAL[a.getAttribute("data-legal")];if(u)a.setAttribute("href",lang==="pt"?u[0]:u[1])});
 }
 
 /* About page: hand-picked guides (same cards as the blog teaser) and an About-specific closing CTA. */

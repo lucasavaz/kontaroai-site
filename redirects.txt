@@ -42,3 +42,4 @@
 /blog/whatsapp-sales-pipeline-stages/ /en/blog/whatsapp-sales-pipeline-stages/
 /blog/whatsapp-template-rejected/ /en/blog/whatsapp-template-rejected/
 /blog/win-back-inactive-customers-whatsapp/ /en/blog/win-back-inactive-customers-whatsapp/
+/about /en/about/

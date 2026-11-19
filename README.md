@@ -38,6 +38,10 @@ Alternatively, run the build on your own computer and upload `dist/` to any stat
 | Login | /entrar/ | /en/login/ | /es/iniciar-sesion/ |
 | About Us | /sobre/ | /en/about/ | /es/sobre-nosotros/ |
 | Let's Talk (contact) | /fale-conosco/ | /en/contact/ | /es/contacto/ |
+| Support (hand-written, `public/`) | /suporte/ | /support/ | (English) |
+| Account deletion (hand-written) | /excluir-conta/ | /account-deletion/ | (English) |
+| Privacy Policy (hand-written) | /privacidade/ | /privacy/ | (English) |
+| Terms of Service (hand-written) | (English) | /terms/ | (English) |
 
 All pages come from `src/index.html` (sections are shown per page with `data-pages`); `build.js` pre-renders each one. The homepage keeps every section. URL maps live in `PAGES`/`PLAN_SLUG` (index.html) and `build.js`; keep them in sync.
 
@@ -79,6 +83,9 @@ The "How billing works" section (`#billing`) explains the three parts of a custo
 The FAQ answer "Why does Meta charge for replies to customers?" also describes Meta's rules (message categories, 1,000 free service messages per number per month since 2026-10-01). Check it at the same time.
 
 ## Legal pages
+
+The iOS/Android apps (`ai.kontaro.app`) link to `/privacy`, `/terms`, `/support` and `/account-deletion`, and Apple and Google check these pages during review. Keep those English pages at the root (no `/en/` prefix) so the plain addresses work without redirects. Their Portuguese versions are `/privacidade/`, `/suporte/` and `/excluir-conta/`; when you change one language, change the other too. `/about/` is a small page that forwards to `/en/about/` (the matching Render 301 rule is in `redirects.txt`).
+
 
 `/terms/` and `/privacy/` are English DRAFTS with a visible "Draft" note. Have a lawyer review them (US/Florida, Brazil LGPD, EU GDPR), confirm governing law, then remove the `.draft` paragraph in `public/terms/index.html` and `public/privacy/index.html`.
 
